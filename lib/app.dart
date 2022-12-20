@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:glossary_app/data/repositories/glossary_service.dart';
 import 'package:glossary_app/ui/drawer_pages/drawer_page.dart';
 import 'package:glossary_app/ui/screens/footer.dart';
 import 'package:glossary_app/ui/widgets/glossary_ui.dart';
@@ -21,8 +20,6 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   late WebViewController _webViewController;
-
-  final ApiServices _client = ApiServices();
 
   @override
   Widget build(BuildContext context) {

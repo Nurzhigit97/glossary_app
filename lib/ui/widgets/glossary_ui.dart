@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:glossary_app/data/models/glossary_model.dart';
-import 'package:glossary_app/data/repositories/glossary_service.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:glossary_app/cubits/glossary_cubit.dart';
 import 'package:glossary_app/ui/screens/detail.dart';
 
 class GlossaryUi extends StatefulWidget {
@@ -11,48 +11,46 @@ class GlossaryUi extends StatefulWidget {
 }
 
 class _GlossaryUiState extends State<GlossaryUi> {
-  final ApiServices _client = ApiServices();
+  @override
+  void initState() {
+    final fetch = context.read<GlossaryCubit>();
+    fetch.fetchGlossary();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _client.getGlossary(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          List<GlossaryModel>? userInfo = snapshot.data;
-
-          if (userInfo != null) {
-            return SizedBox(
-              height: MediaQuery.of(context).size.height / 1.4,
-              child: ListView.builder(
-                primary: false,
-                itemCount: userInfo.length,
-                itemBuilder: ((context, index) => Column(
-                      children: [
-                        InkWell(
-                          onTap: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => DetailScreen(
-                                e: userInfo[index],
-                              ),
-                            ),
-                          ),
-                          child: Card(
-                            elevation: 4,
-                            margin: const EdgeInsets.symmetric(vertical: 3),
-                            child: ListTile(
-                              title: Text('${userInfo[index].title}'),
-                            ),
-                          ),
-                        ),
-                      ],
-                    )),
+    return BlocBuilder<GlossaryCubit, GlossaryState>(
+        builder: ((context, state) {
+      if (state is ErrorGlossaryState) {
+        return Center(
+          child: Text(
+            '${state.errMsg}',
+            style: TextStyle(fontSize: 20, color: Colors.red),
+          ),
+        );
+      }
+      if (state is LoadedGlossaryState) {
+        return InkWell(
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => DetailScreen(
+                e: state.glossary,
               ),
-            );
-          }
-        }
-        return const CircularProgressIndicator();
-      },
-    );
+            ),
+          ),
+          child: Card(
+            elevation: 4,
+            margin: const EdgeInsets.symmetric(vertical: 3),
+            child: ListTile(
+              title: Text('${state.glossary.title}'),
+            ),
+          ),
+        );
+      }
+      return Center(
+        child: LinearProgressIndicator(),
+      );
+    }));
   }
 }

@@ -1,7 +1,7 @@
 class GlossaryModel {
-  int? id;
-  String? title;
-  String? description;
+  final int? id;
+  final String? title;
+  final String? description;
 
   GlossaryModel({
     this.id,

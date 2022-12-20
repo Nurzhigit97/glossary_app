@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:glossary_app/data/models/glossary_model.dart';
-import 'package:glossary_app/data/repositories/glossary_service.dart';
 
 class DetailScreen extends StatefulWidget {
   const DetailScreen({Key? key, required this.e}) : super(key: key);
