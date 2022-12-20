@@ -1,15 +1,15 @@
 class GlossaryModel {
-  final int? id;
+  final int id;
   final String? title;
   final String? description;
 
   GlossaryModel({
-    this.id,
+    required this.id,
     this.title,
     this.description,
   });
 
-  factory GlossaryModel.fromJson(Map<String, dynamic> json) {
+  factory GlossaryModel.fromJson(json) {
     return GlossaryModel(
       id: json['id'],
       title: json['title'],
