@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 class GlossaryModel {
   final int id;
   final String? title;
@@ -8,4 +7,20 @@ class GlossaryModel {
     this.title,
     this.description,
   });
+
+  factory GlossaryModel.fromJson(Map<String, dynamic> json) {
+    return GlossaryModel(
+      id: json['id'],
+      title: json['title'],
+      description: json['description'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = this.id;
+    data['title'] = this.title;
+    data['description'] = this.description;
+    return data;
+  }
 }

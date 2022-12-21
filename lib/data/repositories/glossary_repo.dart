@@ -13,20 +13,9 @@ class GlossaryRepo {
 //   //!real device http://192.168.43.127:8000/
 
   Future<List<GlossaryModel>> getAll() async {
-    final url = Uri.parse(endpoint);
-    final response = await http.get(url);
-    if (response.statusCode == 200) {
-      final json = jsonDecode(utf8.decode(response.bodyBytes)) as List;
-      final result = json.map((e) {
-        return GlossaryModel(
-          id: e['id'],
-          title: e['title'],
-          description: e['discraption'],
-        );
-      }).toList();
-      return result;
-    } else {
-      throw "Error in fetch: ${response.statusCode}";
-    }
+    Response response = await _dio.get(endpoint);
+
+    final data = await response.data as List;
+    return data.map((x) => GlossaryModel.fromJson(x)).toList();
   }
 }
