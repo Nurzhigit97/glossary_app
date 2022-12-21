@@ -53,12 +53,8 @@ class _AppState extends State<App> {
                 margin: EdgeInsets.only(left: 10, top: 5, right: 10),
                 child: Column(
                   children: [
-                    //! Search page
-                    SearchGlossary(),
                     //! title app
                     TitleApp(),
-                    //! sort btns
-                    SortBtns(),
                     //! UI from glossaries
                     GlossaryUi(),
                   ],
