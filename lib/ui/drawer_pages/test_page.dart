@@ -21,6 +21,7 @@ class _TestPageState extends State<TestPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Тест на знание'),
+        backgroundColor: Colors.black,
       ),
       body: Column(
         children: [

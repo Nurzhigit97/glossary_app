@@ -1,67 +1,91 @@
-import 'dart:developer';
-
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:glossary_app/ui/drawer_pages/drawer_page.dart';
-import 'package:glossary_app/ui/screens/footer.dart';
-import 'package:glossary_app/ui/widgets/glossary_ui.dart';
-import 'package:glossary_app/ui/widgets/search_glossary.dart';
-import 'package:glossary_app/ui/widgets/sort_btns.dart';
-import 'package:glossary_app/ui/widgets/title_app.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:glossary_app/home_page.dart';
+import 'package:glossary_app/cubits/Glossary_cubit.dart';
+import 'package:glossary_app/data/repositories/glossary_repo.dart';
+import 'package:glossary_app/ui/drawer_pages/about_page.dart';
+import 'package:glossary_app/ui/drawer_pages/test_page.dart';
 
-enum MenuOptions { clearCash, clearCookies }
+final _dio = Dio();
 
 class App extends StatefulWidget {
-  const App({super.key});
+  App({super.key});
 
   @override
   State<App> createState() => _AppState();
 }
 
 class _AppState extends State<App> {
-  late WebViewController _webViewController;
+  GlossaryRepo _glossaryRepo = GlossaryRepo(_dio);
+  int _selectedIndex = 0;
 
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  List<Widget> _widgetOptions = <Widget>[
+    HomePage(),
+    SafeArea(
+      child: Text(
+        'Index 1: Favourite',
+      ),
+    ),
+    SafeArea(
+      child: Text(
+        'Index 2: Add',
+      ),
+    ),
+    AboutPage(),
+    TestPage(),
+  ];
   @override
   Widget build(BuildContext context) {
-    //! on Tap to smartphone back
-    return WillPopScope(
-      onWillPop: () async {
-        //! can't go out from app
-        if (await _webViewController.canGoBack()) {
-          _webViewController.goBack();
-        } else {
-          log('Нет записи в истории');
-        }
-        return false;
-      },
-      child: SafeArea(
-        child: Scaffold(
-          endDrawer: DrawerPage(),
-          appBar: AppBar(
-            centerTitle: true,
-            backgroundColor: Colors.black,
-            title: Image.asset(
-              'assets/logoGlossary.png',
-              width: 200,
-            ),
-          ),
-
-          //!
-          body: ListView(
-            children: [
-              Container(
-                margin: EdgeInsets.only(left: 10, top: 5, right: 10),
-                child: Column(
-                  children: [
-                    //! title app
-                    TitleApp(),
-                    //! UI from glossaries
-                    GlossaryUi(),
-                  ],
-                ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => GlossaryCubit(_glossaryRepo),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: Scaffold(
+          body: _widgetOptions.elementAt(_selectedIndex),
+          bottomNavigationBar: BottomNavigationBar(
+            showUnselectedLabels: false,
+            type: BottomNavigationBarType.fixed,
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Главная',
               ),
-              Footer(),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.favorite_border),
+                label: 'Избранные',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.add_box_rounded),
+                label: 'Добавить',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.panorama_wide_angle_select_outlined,
+                ),
+                label: 'О проекте',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.text_snippet_rounded),
+                label: 'Тест',
+              ),
             ],
+            currentIndex: _selectedIndex,
+            onTap: _onItemTapped,
           ),
         ),
       ),

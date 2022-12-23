@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:glossary_app/cubits/Glossary_cubit.dart';
 
-class SearchGlossary extends StatefulWidget {
-  const SearchGlossary({Key? key}) : super(key: key);
+//! I dont create StateFul or stateLess, create only function because it cant find true(right) context
+search(BuildContext context) {
+  final resData = context.read<GlossaryCubit>();
 
-  @override
-  _SearchGlossaryState createState() => _SearchGlossaryState();
+  return Padding(
+    padding: const EdgeInsets.only(bottom: 10),
+    child: TextField(
+      controller: textEditingController,
+      onChanged: (value) {
+        resData.fetchGlossary(textEditingController.text);
+      },
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.only(left: 10),
+        hintText: 'Поиск...',
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5),
+        ),
+      ),
+    ),
+  );
 }
 
 TextEditingController textEditingController = TextEditingController();
-
-class _SearchGlossaryState extends State<SearchGlossary> {
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      onEditingComplete: () {
-        setState(() {});
-      },
-      controller: textEditingController,
-      decoration: InputDecoration(
-        hintText: 'Поиск...',
-        border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.zero)),
-      ),
-    );
-  }
-}
