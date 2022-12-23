@@ -26,6 +26,7 @@ class _AddGlossaryState extends State<AddGlossary> {
               Container(
                 child: Image(
                   image: AssetImage('assets/addGlossary.png'),
+                  width: 300,
                 ),
               ),
               SizedBox(
