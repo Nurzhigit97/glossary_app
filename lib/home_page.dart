@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:glossary_app/ui/drawer_pages/drawer_page.dart';
 import 'package:glossary_app/ui/widgets/glossary_ui.dart';
 import 'package:glossary_app/ui/widgets/search_glossary.dart';
 
@@ -9,7 +8,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: DrawerPage(),
+      // endDrawer: DrawerPage(),
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.black,

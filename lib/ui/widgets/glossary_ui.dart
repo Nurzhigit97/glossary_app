@@ -50,6 +50,10 @@ class _GlossaryUiState extends State<GlossaryUi> {
                     elevation: 4,
                     margin: const EdgeInsets.symmetric(vertical: 3),
                     child: ListTile(
+                      trailing: IconButton(
+                        onPressed: () {},
+                        icon: Icon(Icons.favorite_border),
+                      ),
                       title: Text('${glossary.title}'),
                     ),
                   ),

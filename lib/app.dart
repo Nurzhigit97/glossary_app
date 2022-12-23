@@ -5,6 +5,8 @@ import 'package:glossary_app/home_page.dart';
 import 'package:glossary_app/cubits/Glossary_cubit.dart';
 import 'package:glossary_app/data/repositories/glossary_repo.dart';
 import 'package:glossary_app/ui/drawer_pages/about_page.dart';
+import 'package:glossary_app/ui/drawer_pages/add_glossary.dart';
+import 'package:glossary_app/ui/drawer_pages/favourite_page.dart';
 import 'package:glossary_app/ui/drawer_pages/test_page.dart';
 
 final _dio = Dio();
@@ -28,16 +30,8 @@ class _AppState extends State<App> {
 
   List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    SafeArea(
-      child: Text(
-        'Index 1: Favourite',
-      ),
-    ),
-    SafeArea(
-      child: Text(
-        'Index 2: Add',
-      ),
-    ),
+    FavouritePage(),
+    AddGlossary(),
     AboutPage(),
     TestPage(),
   ];
@@ -75,12 +69,12 @@ class _AppState extends State<App> {
               ),
               BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.panorama_wide_angle_select_outlined,
+                  Icons.text_snippet_outlined,
                 ),
                 label: 'О проекте',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.text_snippet_rounded),
+                icon: Icon(Icons.checklist_outlined),
                 label: 'Тест',
               ),
             ],

@@ -20,6 +20,7 @@ class _TestPageState extends State<TestPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text('Тест на знание'),
         backgroundColor: Colors.black,
       ),
