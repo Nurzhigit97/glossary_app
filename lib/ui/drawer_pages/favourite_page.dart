@@ -61,7 +61,6 @@ class _FavouritePageState extends State<FavouritePage> {
                             margin: const EdgeInsets.symmetric(vertical: 3),
                             child: ListTile(
                               title: Text('${glossary.title}'),
-                              trailing: Icon(Icons.favorite_outline_sharp),
                             ),
                           ),
                         );

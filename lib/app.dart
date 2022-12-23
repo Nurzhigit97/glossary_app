@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/home_page.dart';
 import 'package:glossary_app/cubits/Glossary_cubit.dart';
 import 'package:glossary_app/data/repositories/glossary_repo.dart';
+import 'package:glossary_app/ui/bottomNavBar/bottom_nav_bar.dart';
 import 'package:glossary_app/ui/drawer_pages/about_page.dart';
 import 'package:glossary_app/ui/drawer_pages/add_glossary.dart';
 import 'package:glossary_app/ui/drawer_pages/favourite_page.dart';
@@ -18,23 +19,24 @@ class App extends StatefulWidget {
   State<App> createState() => _AppState();
 }
 
+List<Widget> _widgetOptions = <Widget>[
+  HomePage(),
+  FavouritePage(),
+  AddGlossary(),
+  AboutPage(),
+  TestPage(),
+];
+
 class _AppState extends State<App> {
   GlossaryRepo _glossaryRepo = GlossaryRepo(_dio);
-  int _selectedIndex = 0;
+  int selectedIndex = 0;
 
-  void _onItemTapped(int index) {
+  void onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+      selectedIndex = index;
     });
   }
 
-  List<Widget> _widgetOptions = <Widget>[
-    HomePage(),
-    FavouritePage(),
-    AddGlossary(),
-    AboutPage(),
-    TestPage(),
-  ];
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -50,38 +52,15 @@ class _AppState extends State<App> {
           primarySwatch: Colors.blue,
         ),
         home: Scaffold(
-          body: _widgetOptions.elementAt(_selectedIndex),
-          bottomNavigationBar: BottomNavigationBar(
-            showUnselectedLabels: false,
-            type: BottomNavigationBarType.fixed,
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Главная',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.favorite_border),
-                label: 'Избранные',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.add_box_rounded),
-                label: 'Добавить',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.text_snippet_outlined,
-                ),
-                label: 'О проекте',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.checklist_outlined),
-                label: 'Тест',
-              ),
-            ],
-            currentIndex: _selectedIndex,
-            onTap: _onItemTapped,
+          body: _widgetOptions.elementAt(selectedIndex),
+          bottomNavigationBar: BottomNavBar(
+            selectedIndex: selectedIndex,
+            onTapBtn: onItemTapped,
           ),
         ),
+        routes: {
+          '/favouritePage': (context) => FavouritePage(),
+        },
       ),
     );
   }

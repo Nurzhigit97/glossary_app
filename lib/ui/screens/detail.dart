@@ -15,14 +15,17 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.black,
-          title: Text('${e.title}'),
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.favorite_border),
-            ),
-          ]),
+        backgroundColor: Colors.black,
+        title: Text('${e.title}'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed('/favouritePage');
+            },
+            icon: Icon(Icons.favorite_border),
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.all(10),
