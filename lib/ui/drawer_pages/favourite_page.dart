@@ -44,36 +44,28 @@ class _FavouritePageState extends State<FavouritePage> {
                 if (state is LoadedGlossaryState) {
                   final data = state.glossary;
                   return Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GridView.builder(
-                        itemCount: data.length,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
-                        ),
-                        itemBuilder: (context, index) {
-                          final glossary = data[index];
-                          return InkWell(
-                            onTap: () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => DetailScreen(
-                                  e: glossary,
-                                ),
+                    child: ListView.builder(
+                      itemCount: data.length,
+                      itemBuilder: (context, index) {
+                        final glossary = data[index];
+                        return InkWell(
+                          onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => DetailScreen(
+                                e: glossary,
                               ),
                             ),
-                            child: Card(
-                              elevation: 4,
-                              margin: const EdgeInsets.symmetric(vertical: 3),
-                              child: ListTile(
-                                title: Text('${glossary.title}'),
-                              ),
+                          ),
+                          child: Card(
+                            elevation: 4,
+                            margin: const EdgeInsets.symmetric(vertical: 3),
+                            child: ListTile(
+                              title: Text('${glossary.title}'),
+                              trailing: Icon(Icons.favorite_outline_sharp),
                             ),
-                          );
-                        },
-                      ),
+                          ),
+                        );
+                      },
                     ),
                   );
                 }
