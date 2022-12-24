@@ -1,10 +1,10 @@
+import 'package:custom_top_navigator/custom_navigation.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/home_page.dart';
 import 'package:glossary_app/cubits/Glossary_cubit.dart';
 import 'package:glossary_app/data/repositories/glossary_repo.dart';
-import 'package:glossary_app/ui/bottomNavBar/bottom_nav_bar.dart';
 import 'package:glossary_app/ui/drawer_pages/about_page.dart';
 import 'package:glossary_app/ui/drawer_pages/add_glossary.dart';
 import 'package:glossary_app/ui/drawer_pages/favourite_page.dart';
@@ -19,23 +19,20 @@ class App extends StatefulWidget {
   State<App> createState() => _AppState();
 }
 
-List<Widget> _widgetOptions = <Widget>[
-  HomePage(),
-  FavouritePage(),
-  AddGlossary(),
-  AboutPage(),
-  TestPage(),
-];
-
 class _AppState extends State<App> {
   GlossaryRepo _glossaryRepo = GlossaryRepo(_dio);
   int selectedIndex = 0;
+  final List<Widget> _children = [
+    HomePage(),
+    FavouritePage(),
+    AddGlossary(),
+    AboutPage(),
+    TestPage(),
+  ];
+  Widget _page = HomePage();
+  int _currentIndex = 0;
 
-  void onItemTapped(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
-  }
+  GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +49,20 @@ class _AppState extends State<App> {
           primarySwatch: Colors.blue,
         ),
         home: Scaffold(
-          body: _widgetOptions.elementAt(selectedIndex),
-          bottomNavigationBar: BottomNavBar(
-            selectedIndex: selectedIndex,
-            onTapBtn: onItemTapped,
+          bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            items: _items,
+            onTap: (index) {
+              navigatorKey.currentState?.maybePop();
+              setState(() => _page = _children[index]);
+              _currentIndex = index;
+            },
+            currentIndex: _currentIndex,
+          ),
+          body: CustomTopNavigator(
+            navigatorKey: navigatorKey,
+            home: _page,
+            pageRoute: PageRoutes.materialPageRoute,
           ),
         ),
         routes: {
@@ -64,4 +71,29 @@ class _AppState extends State<App> {
       ),
     );
   }
+
+  final _items = [
+    BottomNavigationBarItem(
+      icon: Icon(Icons.home),
+      label: 'Главная',
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.favorite_border),
+      label: 'Избранные',
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.add_box_rounded),
+      label: 'Добавить',
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(
+        Icons.text_snippet_outlined,
+      ),
+      label: 'О проекте',
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.checklist_outlined),
+      label: 'Тест',
+    ),
+  ];
 }
