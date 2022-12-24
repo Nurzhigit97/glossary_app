@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/cubits/Glossary_cubit.dart';
 import 'package:glossary_app/cubits/glossary_state.dart';
 import 'package:glossary_app/ui/screens/detail.dart';
-import 'package:glossary_app/ui/widgets/glossary_ui.dart';
 
 class FavouritePage extends StatefulWidget {
   const FavouritePage({Key? key}) : super(key: key);
@@ -14,18 +13,11 @@ class FavouritePage extends StatefulWidget {
 
 class _FavouritePageState extends State<FavouritePage> {
   @override
-  void initState() {
-    final resData = context.read<GlossaryCubit>();
-    resData.fetchGlossary('');
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.black,
+        backgroundColor: Color.fromARGB(255, 22, 82, 131),
         title: Text('Избранные'),
       ),
       body: Container(

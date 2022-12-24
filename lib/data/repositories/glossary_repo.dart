@@ -5,7 +5,9 @@ class GlossaryRepo {
   Dio _dio;
 
   GlossaryRepo(this._dio);
-  String endpoint = 'http://192.168.43.127:8000/api/glossary/view/all/';
+  // String endpoint = 'http://192.168.43.127:8000/api/glossary/view/all/';
+  String endpoint =
+      'http://192.168.43.127:8000/api/favouriteGlossary/view/all/';
 //   //! for emulator http://10.0.2.2:8000/
 //   //!real device http://192.168.43.127:8000/
 

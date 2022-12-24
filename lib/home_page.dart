@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
       // endDrawer: DrawerPage(),
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.black,
+        backgroundColor: Color.fromARGB(255, 0, 0, 0),
         title: Image.asset(
           'assets/logoGlossary.png',
           width: 200,

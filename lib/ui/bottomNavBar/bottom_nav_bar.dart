@@ -45,8 +45,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
       ],
       currentIndex: widget.selectedIndex,
       onTap: widget.onTapBtn,
-      selectedFontSize: 0.0,
-      unselectedFontSize: 0.0,
     );
   }
 }

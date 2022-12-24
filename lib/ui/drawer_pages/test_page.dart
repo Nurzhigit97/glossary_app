@@ -22,7 +22,7 @@ class _TestPageState extends State<TestPage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text('Тест на знание'),
-        backgroundColor: Colors.black,
+        backgroundColor: Color.fromARGB(255, 22, 82, 131),
       ),
       body: Column(
         children: [
