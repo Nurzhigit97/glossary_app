@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:glossary_app/home_page.dart';
+import 'package:glossary_app/ui/screens/home_page.dart';
 import 'package:glossary_app/ui/drawer_pages/about_page.dart';
 import 'package:glossary_app/ui/drawer_pages/add_glossary.dart';
 import 'package:glossary_app/ui/drawer_pages/favourite_page.dart';
