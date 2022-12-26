@@ -7,7 +7,8 @@ class AddGlossary extends StatefulWidget {
   _AddGlossaryState createState() => _AddGlossaryState();
 }
 
-TextEditingController textEditingController = TextEditingController();
+TextEditingController titleController = TextEditingController();
+TextEditingController descriptionController = TextEditingController();
 
 class _AddGlossaryState extends State<AddGlossary> {
   @override
@@ -33,7 +34,7 @@ class _AddGlossaryState extends State<AddGlossary> {
                 height: 10,
               ),
               TextField(
-                controller: textEditingController,
+                controller: titleController,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.only(left: 10),
                   hintText: 'Глоссарий...',
@@ -46,7 +47,7 @@ class _AddGlossaryState extends State<AddGlossary> {
                 height: 10,
               ),
               TextField(
-                controller: textEditingController,
+                controller: descriptionController,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.only(left: 10),
                   hintText: 'Значение...',
