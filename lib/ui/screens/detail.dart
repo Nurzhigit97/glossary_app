@@ -1,10 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:glossary_app/cubits/favouriteGlossaries/isfavourite_cubit.dart';
 
 import 'package:glossary_app/data/models/glossary_model.dart';
 
 class DetailScreen extends StatelessWidget {
-  const DetailScreen({
+  DetailScreen({
     Key? key,
     required this.e,
   }) : super(key: key);
@@ -20,9 +22,16 @@ class DetailScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.of(context).pushNamed('/favouritePage');
+              context.read<IsFavouriteCubit>().toggleGlossaryFavourites(
+                  id: e.id,
+                  title: e.title,
+                  description: e.description,
+                  isFavourite: e.isFavourite);
             },
-            icon: Icon(Icons.favorite_border),
+            icon: Icon(Icons.favorite,
+                color: e.isFavourite != true
+                    ? Color.fromARGB(255, 255, 255, 255)
+                    : Colors.red),
           ),
         ],
       ),

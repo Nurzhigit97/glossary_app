@@ -7,7 +7,7 @@ import 'package:glossary_app/ui/drawer_pages/test_page.dart';
 
 class TabNavigatorRoutes {
   static const String root = '/';
-  static const String detail = '/detail';
+  static const String favourite = '/favouritePage';
 }
 
 class TabNavigator extends StatelessWidget {
@@ -29,6 +29,7 @@ class TabNavigator extends StatelessWidget {
     else if (tabItem == "Page5") child = TestPage();
 
     return Navigator(
+      initialRoute: '/',
       key: navigatorKey,
       onGenerateRoute: (routeSettings) {
         return MaterialPageRoute(builder: (_) => child);

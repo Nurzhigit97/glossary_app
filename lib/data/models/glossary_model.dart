@@ -1,11 +1,13 @@
 class GlossaryModel {
   final int id;
-  final String? title;
-  final String? description;
+  late final String? title;
+  late final String? description;
+  final bool? isFavourite;
   GlossaryModel({
     required this.id,
     this.title,
     this.description,
+    this.isFavourite,
   });
 
   factory GlossaryModel.fromJson(Map<String, dynamic> json) {
@@ -13,6 +15,7 @@ class GlossaryModel {
       id: json['id'],
       title: json['title'],
       description: json['description'],
+      isFavourite: json['isFavourite'],
     );
   }
 
@@ -21,6 +24,7 @@ class GlossaryModel {
     data['id'] = this.id;
     data['title'] = this.title;
     data['description'] = this.description;
+    data['isFavourite'] = this.isFavourite;
     return data;
   }
 }

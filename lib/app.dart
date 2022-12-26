@@ -2,6 +2,8 @@ import 'package:custom_top_navigator/custom_navigation.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:glossary_app/custombottomNavBarSettings/tab_navigator.dart';
+import 'package:glossary_app/cubits/favouriteGlossaries/isfavourite_cubit.dart';
 import 'package:glossary_app/home_page.dart';
 import 'package:glossary_app/cubits/Glossary_cubit.dart';
 import 'package:glossary_app/data/repositories/glossary_repo.dart';
@@ -41,6 +43,9 @@ class _AppState extends State<App> {
         BlocProvider(
           create: (_) => GlossaryCubit(_glossaryRepo),
         ),
+        BlocProvider(
+          create: (_) => IsFavouriteCubit(_glossaryRepo),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -65,8 +70,9 @@ class _AppState extends State<App> {
             pageRoute: PageRoutes.materialPageRoute,
           ),
         ),
+        initialRoute: TabNavigatorRoutes.root,
         routes: {
-          '/favouritePage': (context) => FavouritePage(),
+          TabNavigatorRoutes.favourite: (context) => FavouritePage(),
         },
       ),
     );

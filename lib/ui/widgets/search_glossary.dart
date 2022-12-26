@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/cubits/Glossary_cubit.dart';
 
 //! I dont create StateFul or stateLess, create only function because it cant find true(right) context
+
 search(BuildContext context) {
   final resData = context.read<GlossaryCubit>();
 

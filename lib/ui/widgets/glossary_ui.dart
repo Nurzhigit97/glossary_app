@@ -38,6 +38,7 @@ class _GlossaryUiState extends State<GlossaryUi> {
               itemCount: data.length,
               itemBuilder: (context, index) {
                 final glossary = data[index];
+
                 return InkWell(
                   onTap: () => Navigator.of(context).push(
                     MaterialPageRoute(
