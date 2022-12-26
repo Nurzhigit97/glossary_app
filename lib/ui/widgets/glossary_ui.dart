@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/cubits/Glossary_cubit.dart';
 import 'package:glossary_app/cubits/glossary_state.dart';
-import 'package:glossary_app/ui/widgets/glossary_view.dart';
+import 'package:glossary_app/ui/globalWidgets/method_highlight.dart';
+import 'package:glossary_app/ui/globalWidgets/glossary_view.dart';
 
 class GlossaryUi extends StatefulWidget {
   const GlossaryUi({Key? key}) : super(key: key);
@@ -36,7 +37,9 @@ class _GlossaryUiState extends State<GlossaryUi> {
             child: Column(
               children: [
                 Expanded(
-                  child: GlossaryView.buildList(state.glossary),
+                  child: GlossaryView.buildList(
+                      data: state.glossary,
+                      highlightOccurrences: highlightOccurrences),
                 ),
               ],
             ),

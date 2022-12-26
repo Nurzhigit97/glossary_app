@@ -21,7 +21,7 @@ class HomePage extends StatelessWidget {
         margin: EdgeInsets.only(left: 10, top: 15, right: 10),
         child: Column(
           children: [
-            search(context),
+            SearchGlossary().search(context),
             // sortBtns(context),
             // TitleApp(),
             GlossaryUi(),
