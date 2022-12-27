@@ -23,7 +23,7 @@ class IsFavouriteCubit extends Cubit<IsfavouriteState> {
     emit(IsfavouriteLoading());
 
     try {
-      final response = await _repository.updateisFavourite(
+      final response = await _repository.updateFavourite(
           id: id,
           title: title,
           description: description,

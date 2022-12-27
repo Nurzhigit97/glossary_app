@@ -1,8 +1,6 @@
-import 'package:custom_top_navigator/custom_navigation.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:glossary_app/resources/custombottomNavBarSettings/tab_navigator.dart';
 import 'package:glossary_app/cubits/favouriteGlossaries/isfavourite_cubit.dart';
 import 'package:glossary_app/ui/screens/home_page.dart';
 import 'package:glossary_app/cubits/Glossary_cubit.dart';
@@ -15,7 +13,8 @@ import 'package:glossary_app/ui/drawer_pages/test_page.dart';
 final _dio = Dio();
 
 class App extends StatefulWidget {
-  App({super.key});
+  final bool? showHome;
+  App({Key? key, this.showHome}) : super(key: key);
 
   @override
   State<App> createState() => _AppState();
@@ -31,10 +30,14 @@ class _AppState extends State<App> {
     AboutPage(),
     TestPage(),
   ];
-  Widget _page = HomePage();
   int _currentIndex = 0;
 
   GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  void _onItemTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,25 +57,19 @@ class _AppState extends State<App> {
           primarySwatch: Colors.blue,
         ),
         home: Scaffold(
+          body: _children.elementAt(_currentIndex),
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
-            items: _items,
-            onTap: (index) {
-              navigatorKey.currentState?.maybePop();
-              setState(() => _page = _children[index]);
-              _currentIndex = index;
-            },
             currentIndex: _currentIndex,
-          ),
-          body: CustomTopNavigator(
-            navigatorKey: navigatorKey,
-            home: _page,
-            pageRoute: PageRoutes.materialPageRoute,
+            backgroundColor: Color.fromARGB(255, 221, 220, 219),
+            selectedItemColor: Colors.blue,
+            onTap: _onItemTapped,
+            items: _items,
           ),
         ),
-        initialRoute: TabNavigatorRoutes.root,
         routes: {
-          TabNavigatorRoutes.favourite: (context) => FavouritePage(),
+          '/app': (context) => App(),
+          '/favourites': (context) => FavouritePage(),
         },
       ),
     );

@@ -50,7 +50,7 @@ class GlossaryRepo {
     }
   }
 
-  Future<List<GlossaryModel>> updateisFavourite(
+  Future<List<GlossaryModel>> updateFavourite(
       {id, title, description, isFavourite}) async {
     try {
       Response response = await _dio.put(

@@ -6,7 +6,6 @@ sortBtns(BuildContext context) {
   final resData = context.read<GlossaryCubit>();
   List<String> alphabet = [
     'Все',
-    '0-9',
     'А',
     'B',
     'C',

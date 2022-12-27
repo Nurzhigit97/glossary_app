@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/cubits/favouriteGlossaries/isfavourite_cubit.dart';
 import 'package:glossary_app/cubits/favouriteGlossaries/isfavourite_state.dart';
-import 'package:glossary_app/ui/globalWidgets/method_highlight.dart';
 import 'package:glossary_app/ui/globalWidgets/glossary_view.dart';
 
 class FavouritePage extends StatefulWidget {
@@ -44,9 +43,9 @@ class _FavouritePageState extends State<FavouritePage> {
                 if (state is IsfavouriteLoaded) {
                   final dataFavourites = state.glossaryFavourite;
                   return Expanded(
-                    child: GlossaryView.buildList(
-                        data: dataFavourites,
-                        highlightOccurrences: highlightOccurrences),
+                    child: GlossaryView.buildListFavourite(
+                      data: dataFavourites,
+                    ),
                   );
                 }
                 return Center(child: LinearProgressIndicator());

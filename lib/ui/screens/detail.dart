@@ -28,10 +28,10 @@ class DetailScreen extends StatelessWidget {
                   description: e.description,
                   isFavourite: e.isFavourite);
             },
-            icon: Icon(Icons.favorite,
+            icon: Icon(Icons.star,
                 color: e.isFavourite != true
                     ? Color.fromARGB(255, 255, 255, 255)
-                    : Colors.red),
+                    : Color.fromARGB(255, 241, 199, 11)),
           ),
         ],
       ),
