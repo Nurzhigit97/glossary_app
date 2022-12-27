@@ -18,6 +18,8 @@ dependencies:
   dio: ^4.0.6
   flutter_bloc: ^8.1.1
   custom_top_navigator: ^0.0.3
+  smooth_page_indicator: ^1.0.0+2
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_launcher_icons: ^0.11.0
@@ -43,3 +45,7 @@ flutter:
     - assets/logoGlossary.png
     - assets/Glossary-of-Banking-Terms-RVR-1.jpg
     - assets/addGlossary.png
+    - assets/introImages/intro1.png
+    - assets/introImages/intro11.png
+    - assets/introImages/intro22.png
+    - assets/introImages/intro33.png
