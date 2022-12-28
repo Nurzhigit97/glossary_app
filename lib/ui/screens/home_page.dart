@@ -20,9 +20,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: BottomPersist.screens.elementAt(_selectedIndex),
-      ),
+      body: BottomPersist.screens.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: BottomPersist.items,

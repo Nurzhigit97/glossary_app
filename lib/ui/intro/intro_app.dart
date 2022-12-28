@@ -15,6 +15,12 @@ class _IntroAppState extends State<IntroApp> {
 
   bool isLastPage = false;
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,

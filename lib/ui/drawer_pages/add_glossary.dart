@@ -14,6 +14,13 @@ TextEditingController descriptionController = TextEditingController();
 
 class _AddGlossaryState extends State<AddGlossary> {
   @override
+  void dispose() {
+    titleController.dispose();
+    descriptionController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
