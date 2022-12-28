@@ -5,9 +5,7 @@ import 'package:glossary_app/cubits/Glossary_cubit.dart';
 import 'package:glossary_app/cubits/favouriteGlossaries/isfavourite_cubit.dart';
 import 'package:glossary_app/data/repositories/glossary_repo.dart';
 import 'package:glossary_app/ui/drawer_pages/history_page.dart';
-import 'package:glossary_app/ui/intro/intro_app.dart';
 import 'package:glossary_app/ui/screens/home_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 //! question its true or not
 final _dio = Dio();

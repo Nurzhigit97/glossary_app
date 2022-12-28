@@ -4,10 +4,9 @@ import 'package:glossary_app/ui/drawer_pages/add_glossary.dart';
 import 'package:glossary_app/ui/drawer_pages/favourite_page.dart';
 import 'package:glossary_app/ui/drawer_pages/test_page.dart';
 import 'package:glossary_app/ui/screens/glossary_screen.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class BottomPersist {
-  static final List<Widget> screens = [
+  static final screens = [
     GlossaryScreen(),
     FavouritePage(),
     AddGlossary(),
@@ -16,27 +15,27 @@ class BottomPersist {
   ];
 
   static final items = [
-    PersistentBottomNavBarItem(
+    BottomNavigationBarItem(
       icon: Icon(Icons.home),
-      title: 'Главная',
+      label: 'Главная',
     ),
-    PersistentBottomNavBarItem(
+    BottomNavigationBarItem(
       icon: Icon(Icons.favorite_border),
-      title: 'Избранные',
+      label: 'Избранные',
     ),
-    PersistentBottomNavBarItem(
+    BottomNavigationBarItem(
       icon: Icon(Icons.add_box_rounded),
-      title: 'Добавить',
+      label: 'Добавить',
     ),
-    PersistentBottomNavBarItem(
+    BottomNavigationBarItem(
       icon: Icon(
         Icons.text_snippet_outlined,
       ),
-      title: 'О проекте',
+      label: 'О проекте',
     ),
-    PersistentBottomNavBarItem(
+    BottomNavigationBarItem(
       icon: Icon(Icons.checklist_outlined),
-      title: 'Тест',
+      label: 'Тест',
     ),
   ];
 }
