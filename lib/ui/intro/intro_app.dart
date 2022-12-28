@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:glossary_app/ui/screens/home_page.dart';
+import 'package:glossary_app/app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -16,152 +16,145 @@ class _IntroAppState extends State<IntroApp> {
   bool isLastPage = false;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: PageView(
-        controller: controller,
-        onPageChanged: (index) {
-          setState(() => isLastPage = index == 2);
-        },
-        children: [
-          buildPage(
-            colorIntro: Color.fromARGB(255, 44, 136, 148),
-            title: 'Добро пожаловать ',
-            subTitle: '',
-            urlImg: 'assets/addGlossary.png',
-          ),
-          Container(
-            color: Color.fromARGB(255, 44, 136, 148),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text(
-                  'Глоссарий',
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                Column(
-                  children: [
-                    TextButton.icon(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                      ),
-                      label: Text(
-                        'Добавление в избранные',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                    TextButton.icon(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.task_outlined,
-                        color: Color.fromARGB(255, 25, 184, 25),
-                      ),
-                      label: Text(
-                        'Пройти тест на знание глоссариев',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                    TextButton.icon(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.search,
-                        color: Color.fromARGB(255, 9, 74, 214),
-                      ),
-                      label: Text(
-                        'Найти интересующие вас глоссарии',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ),
-          Container(
-            color: Color.fromARGB(255, 44, 136, 148),
-          ),
-        ],
-      ),
-      bottomSheet: isLastPage
-          ? Container(
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 44, 136, 148),
-                  minimumSize: const Size.fromHeight(800),
-                ),
-                onPressed: () async {
-                  final prefs = await SharedPreferences.getInstance();
-                  prefs.setBool('showHome', true);
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => HomePage(),
-                    ),
-                  );
-                },
-                child: Text(
-                  'Войти',
-                  style: TextStyle(fontSize: 30),
-                ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Builder(builder: (context) {
+        return Scaffold(
+          body: PageView(
+            controller: controller,
+            onPageChanged: (index) {
+              setState(() => isLastPage = index == 2);
+            },
+            children: [
+              buildPage(
+                colorIntro: Color.fromARGB(255, 44, 136, 148),
+                title: 'Добро пожаловать ',
+                subTitle: '',
+                urlImg: 'assets/addGlossary.png',
               ),
-            )
-          : Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              height: 50,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextButton(
-                    onPressed: () => controller.jumpToPage(2),
-                    child: Text(
-                      'Пропустить',
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 44, 136, 148),
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Center(
-                    child: SmoothPageIndicator(
-                      controller: controller,
-                      count: 3,
-                      effect: WormEffect(
-                        dotWidth: 12,
-                        dotHeight: 12,
-                        spacing: 13,
-                        dotColor: Colors.black26,
-                        activeDotColor: Colors.teal.shade700,
-                      ),
-                      onDotClicked: (index) => controller.animateToPage(index,
-                          duration: Duration(microseconds: 500),
-                          curve: Curves.easeIn),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () => controller.nextPage(
-                      duration: Duration(microseconds: 500),
-                      curve: Curves.easeInOut,
-                    ),
-                    child: Text(
-                      'Далее',
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: Color.fromARGB(255, 44, 136, 148),
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+              buidWidget2(),
+              forEndIntro(),
+            ],
+          ),
+          bottomSheet: isLastPage ? isLast(context) : actionsIntro(),
+        );
+      }),
     );
   }
 
-  buildPage(
+  Container forEndIntro() {
+    return Container(
+      color: Color.fromARGB(255, 44, 136, 148),
+    );
+  }
+
+  Widget actionsIntro() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      height: 50,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          TextButton(
+            onPressed: () => controller.jumpToPage(2),
+            child: Text(
+              'Пропустить',
+              style: TextStyle(
+                  color: Color.fromARGB(255, 44, 136, 148),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          Center(
+            child: SmoothPageIndicator(
+              controller: controller,
+              count: 3,
+              effect: WormEffect(
+                dotWidth: 12,
+                dotHeight: 12,
+                spacing: 13,
+                dotColor: Colors.black26,
+                activeDotColor: Colors.teal.shade700,
+              ),
+              onDotClicked: (index) => controller.animateToPage(index,
+                  duration: Duration(microseconds: 500), curve: Curves.easeIn),
+            ),
+          ),
+          TextButton(
+            onPressed: () => controller.nextPage(
+              duration: Duration(microseconds: 500),
+              curve: Curves.easeInOut,
+            ),
+            child: Text(
+              'Далее',
+              style: TextStyle(
+                  fontSize: 16,
+                  color: Color.fromARGB(255, 44, 136, 148),
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buidWidget2() {
+    return Container(
+      color: Color.fromARGB(255, 44, 136, 148),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Text(
+            'Глоссарий',
+            style: TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+          Column(
+            children: [
+              TextButton.icon(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.star,
+                  color: Colors.amber,
+                ),
+                label: Text(
+                  'Добавление в избранные',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              TextButton.icon(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.task_outlined,
+                  color: Color.fromARGB(255, 25, 184, 25),
+                ),
+                label: Text(
+                  'Пройти тест на знание глоссариев',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              TextButton.icon(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.search,
+                  color: Color.fromARGB(255, 9, 74, 214),
+                ),
+                label: Text(
+                  'Найти интересующие вас глоссарии',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Container buildPage(
           {Color? colorIntro,
           String? title,
           String? urlImg,
@@ -204,4 +197,29 @@ class _IntroAppState extends State<IntroApp> {
           ],
         ),
       );
+
+  Widget isLast(BuildContext context) {
+    return Container(
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Color.fromARGB(255, 44, 136, 148),
+          minimumSize: const Size.fromHeight(800),
+        ),
+        onPressed: () async {
+          final prefs = await SharedPreferences.getInstance();
+          prefs.setBool('showHome', true);
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => App(),
+            ),
+          );
+        },
+        child: Text(
+          'Войти',
+          style: TextStyle(fontSize: 30),
+        ),
+      ),
+    );
+  }
 }
