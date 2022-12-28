@@ -37,34 +37,4 @@ class GlossaryView {
       },
     );
   }
-
-  static Widget buildListFavourite({List<GlossaryModel>? data}) {
-    final getSearchValue = SearchGlossary.textEditingController.text;
-
-    print(getSearchValue);
-    return ListView.builder(
-      itemCount: data!.length,
-      itemBuilder: (context, index) {
-        final glossary = data[index];
-        return InkWell(
-          onTap: () => Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => DetailScreen(
-                e: glossary,
-              ),
-            ),
-          ),
-          child: Card(
-            elevation: 4,
-            margin: const EdgeInsets.symmetric(vertical: 3),
-            child: ListTile(
-              title: Text(
-                glossary.title.toString(),
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
 }

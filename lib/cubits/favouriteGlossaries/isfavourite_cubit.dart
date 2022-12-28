@@ -18,8 +18,7 @@ class IsFavouriteCubit extends Cubit<IsfavouriteState> {
     }
   }
 
-  Future<void> toggleGlossaryFavourites(
-      {id, title, description, isFavourite}) async {
+  Future toggleGlossaryFavourites({id, title, description, isFavourite}) async {
     emit(IsfavouriteLoading());
 
     try {

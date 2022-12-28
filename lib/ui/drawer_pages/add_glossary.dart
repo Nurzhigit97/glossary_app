@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:glossary_app/ui/intro/intro_app.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AddGlossary extends StatefulWidget {
   const AddGlossary({Key? key}) : super(key: key);
@@ -18,6 +20,20 @@ class _AddGlossaryState extends State<AddGlossary> {
         centerTitle: true,
         backgroundColor: Color.fromARGB(255, 22, 82, 131),
         title: Text('Добавить глоссарий'),
+        actions: [
+          IconButton(
+            onPressed: () async {
+              final prefs = await SharedPreferences.getInstance();
+              prefs.setBool('showHome', false);
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => IntroApp(),
+                ),
+              );
+            },
+            icon: Icon(Icons.logout),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(

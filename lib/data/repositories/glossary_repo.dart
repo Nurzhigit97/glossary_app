@@ -12,7 +12,7 @@ class GlossaryRepo {
 //   //!real device http://192.168.43.127:8000/
 
   Future<List<GlossaryModel>> getAll({String? query}) async {
-    Response response = await _dio.get(endpoint);
+    final response = await _dio.get(endpoint);
     try {
       final data = await response.data as List;
       final resData = data.map((json) => GlossaryModel.fromJson(json));
@@ -36,8 +36,8 @@ class GlossaryRepo {
     }
   }
 
-  Future<List<GlossaryModel>> getFavourites() async {
-    Response response = await _dio.get(endpoint);
+  Future getFavourites() async {
+    final response = await _dio.get(endpoint);
     try {
       final data = await response.data as List;
       final resData = data.map((json) => GlossaryModel.fromJson(json));
@@ -50,10 +50,9 @@ class GlossaryRepo {
     }
   }
 
-  Future<List<GlossaryModel>> updateFavourite(
-      {id, title, description, isFavourite}) async {
+  Future updateFavourite({id, title, description, isFavourite}) async {
     try {
-      Response response = await _dio.put(
+      final response = await _dio.put(
         endpointDetail + '$id/',
         data: {
           'title': title,
