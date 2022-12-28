@@ -30,4 +30,19 @@ class GlossaryCubit extends Cubit<GlossaryState> {
       emit(ErrorGlossaryState(err.toString()));
     }
   }
+
+  Future toggleGlossaryFavourites({id, title, description, isFavourite}) async {
+    emit(LoadingGlossaryState());
+
+    try {
+      final response = await _repository.updateFavourite(
+          id: id,
+          title: title,
+          description: description,
+          isFavourite: isFavourite);
+      emit(LoadedGlossaryState(response));
+    } catch (err) {
+      emit(ErrorGlossaryState(err.toString()));
+    }
+  }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:glossary_app/ui/drawer_pages/drawer_page.dart';
+import 'package:glossary_app/ui/drawer_pages/history_page.dart';
 import 'package:glossary_app/ui/intro/intro_app.dart';
 import 'package:glossary_app/ui/widgets/glossary_ui.dart';
 import 'package:glossary_app/ui/widgets/search_glossary.dart';
@@ -10,7 +12,7 @@ class GlossaryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // drawer: DrawerPage(),
+      drawer: DrawerPage(),
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Color.fromARGB(255, 0, 0, 0),
@@ -32,10 +34,13 @@ class GlossaryScreen extends StatelessWidget {
             icon: Icon(Icons.logout),
           ),
           IconButton(
-            onPressed: () async {
-              final prefs = await SharedPreferences.getInstance();
-              prefs.setBool('showHome', false);
-              Navigator.of(context).pushNamed('/history');
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HistoryPage(),
+                ),
+              );
             },
             icon: Icon(Icons.person),
           ),

@@ -17,7 +17,6 @@ dependencies:
   flutter_native_splash: ^2.2.16
   dio: ^4.0.6
   flutter_bloc: ^8.1.1
-  custom_top_navigator: ^0.0.3
   smooth_page_indicator: ^1.0.0+2
   shared_preferences: ^2.0.15
   persistent_bottom_nav_bar: ^5.0.2

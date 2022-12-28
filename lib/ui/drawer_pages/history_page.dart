@@ -7,6 +7,7 @@ class HistoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 22, 82, 131),
         title: Text('История'),
       ),
       body: Container(
