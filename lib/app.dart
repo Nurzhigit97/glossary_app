@@ -16,13 +16,6 @@ final _dio = Dio();
 class App extends StatelessWidget {
   App({Key? key}) : super(key: key);
   GlossaryRepo _glossaryRepo = GlossaryRepo(_dio);
-  bool showApp = false;
-
-  void getShared() async {
-    final prefs = await SharedPreferences.getInstance();
-    final showHome = prefs.getBool('showHome') ?? false;
-    showApp = showHome;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +30,7 @@ class App extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: showApp ? HomePage() : IntroApp(),
+        home: HomePage(),
         routes: {
           '/history': (context) => HistoryPage(),
         },

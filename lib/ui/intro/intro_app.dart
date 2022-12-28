@@ -12,11 +12,6 @@ class IntroApp extends StatefulWidget {
 
 class _IntroAppState extends State<IntroApp> {
   final controller = PageController();
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
 
   bool isLastPage = false;
   @override
