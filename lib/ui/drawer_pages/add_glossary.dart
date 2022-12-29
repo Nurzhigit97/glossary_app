@@ -9,16 +9,9 @@ class AddGlossary extends StatefulWidget {
   _AddGlossaryState createState() => _AddGlossaryState();
 }
 
-TextEditingController titleController = TextEditingController();
-TextEditingController descriptionController = TextEditingController();
-
 class _AddGlossaryState extends State<AddGlossary> {
-  @override
-  void dispose() {
-    titleController.dispose();
-    descriptionController.dispose();
-    super.dispose();
-  }
+  TextEditingController titleController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -84,5 +77,12 @@ class _AddGlossaryState extends State<AddGlossary> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    titleController.dispose();
+    descriptionController.dispose();
+    super.dispose();
   }
 }

@@ -5,7 +5,7 @@ import 'package:glossary_app/cubits/Glossary_cubit.dart';
 import 'package:glossary_app/cubits/favouriteGlossaries/isfavourite_cubit.dart';
 import 'package:glossary_app/data/repositories/glossary_repo.dart';
 import 'package:glossary_app/ui/drawer_pages/history_page.dart';
-import 'package:glossary_app/ui/screens/home_page.dart';
+import 'package:glossary_app/ui/screens/home_screen.dart';
 
 //! question its true or not
 final _dio = Dio();
@@ -28,9 +28,10 @@ class App extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: HomePage(),
+        initialRoute: HomeScreen.route,
         routes: {
-          '/history': (context) => HistoryPage(),
+          HomeScreen.route: (_) => HomeScreen(),
+          HistoryPage.route: (_) => HistoryPage(),
         },
       ),
     );

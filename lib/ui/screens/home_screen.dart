@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:glossary_app/ui/widgets/bottom_nav_bar_persis.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  static String route = 'homeScreen';
+  HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {

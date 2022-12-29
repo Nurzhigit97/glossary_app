@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/cubits/favouriteGlossaries/isfavourite_cubit.dart';
 import 'package:glossary_app/cubits/favouriteGlossaries/isfavourite_state.dart';
-import 'package:glossary_app/ui/screens/detail.dart';
+import 'package:glossary_app/ui/globalWidgets/glossary_view.dart';
 
 class FavouritePage extends StatefulWidget {
   const FavouritePage({Key? key}) : super(key: key);
@@ -21,8 +21,6 @@ class _FavouritePageState extends State<FavouritePage> {
 
   @override
   Widget build(BuildContext context) {
-    final resData = context.read<IsFavouriteCubit>();
-    resData.fetchGlossaryFavourites();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -45,30 +43,7 @@ class _FavouritePageState extends State<FavouritePage> {
                 if (state is IsfavouriteLoaded) {
                   final dataFavourites = state.glossaryFavourite;
                   return Expanded(
-                    child: ListView.builder(
-                      itemCount: dataFavourites.length,
-                      itemBuilder: (context, index) {
-                        final glossary = dataFavourites[index];
-                        return InkWell(
-                          onTap: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => DetailScreen(
-                                e: glossary,
-                              ),
-                            ),
-                          ),
-                          child: Card(
-                            elevation: 4,
-                            margin: const EdgeInsets.symmetric(vertical: 3),
-                            child: ListTile(
-                              title: Text(
-                                glossary.title.toString(),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
+                    child: GlossaryView.buildList(data: dataFavourites),
                   );
                 }
                 return Center(child: LinearProgressIndicator());

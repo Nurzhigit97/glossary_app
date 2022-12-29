@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:glossary_app/data/models/glossary_model.dart';
-import 'package:glossary_app/ui/screens/detail.dart';
-import 'package:glossary_app/ui/widgets/search_glossary.dart';
+import 'package:glossary_app/ui/screens/detail_screen.dart';
 
 class GlossaryView {
-  static Widget buildList(
-      {List<GlossaryModel>? data, Function? highlightOccurrences}) {
-    final getSearchValue = SearchGlossary.textEditingController.text;
-
-    print(getSearchValue);
+  static Widget buildList({required List<GlossaryModel> data}) {
     return ListView.builder(
-      itemCount: data!.length,
+      itemCount: data.length,
       itemBuilder: (context, index) {
         final glossary = data[index];
         return InkWell(
@@ -22,17 +17,14 @@ class GlossaryView {
             ),
           ),
           child: Card(
-              elevation: 4,
-              margin: const EdgeInsets.symmetric(vertical: 3),
-              child: ListTile(
-                title: RichText(
-                  text: TextSpan(
-                    children: highlightOccurrences!(
-                        source: '${glossary.title}', query: getSearchValue),
-                    style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-                  ),
-                ),
-              )),
+            elevation: 4,
+            margin: const EdgeInsets.symmetric(vertical: 3),
+            child: ListTile(
+              title: Text(
+                glossary.title.toString(),
+              ),
+            ),
+          ),
         );
       },
     );
