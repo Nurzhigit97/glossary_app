@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:glossary_app/ui/intro/intro_app.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AddGlossary extends StatefulWidget {
   const AddGlossary({Key? key}) : super(key: key);

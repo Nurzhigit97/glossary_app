@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:glossary_app/ui/screens/home_screen.dart';
+import 'package:glossary_app/ui/authScreens/sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -19,7 +19,7 @@ class _IntroScreenState extends State<IntroScreen> {
   openHomeScreen() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool('showHome', true);
-    Navigator.pushReplacementNamed(context, HomeScreen.route);
+    Navigator.pushReplacementNamed(context, SignIn.route);
   }
 
   @override

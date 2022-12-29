@@ -14,10 +14,6 @@ class SearchGlossary {
         onChanged: (value) {
           resData.fetchGlossary(textEditingController.text);
         },
-        onEditingComplete: () {
-          FocusScope.of(context).unfocus();
-          textEditingController.clear();
-        },
         decoration: InputDecoration(
           contentPadding: EdgeInsets.only(left: 10),
           hintText: 'Поиск...',
