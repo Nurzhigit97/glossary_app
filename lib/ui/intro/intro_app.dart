@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:glossary_app/app.dart';
+import 'package:glossary_app/ui/screens/home_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class IntroApp extends StatefulWidget {
-  const IntroApp({Key? key}) : super(key: key);
+class IntroScreen extends StatefulWidget {
+  static String route = 'introScreen';
+
+  const IntroScreen({Key? key}) : super(key: key);
 
   @override
-  _IntroAppState createState() => _IntroAppState();
+  _IntroScreenState createState() => _IntroScreenState();
 }
 
-class _IntroAppState extends State<IntroApp> {
+class _IntroScreenState extends State<IntroScreen> {
   final controller = PageController();
 
   bool isLastPage = false;
+  openHomeScreen() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool('showHome', true);
+    Navigator.pushReplacementNamed(context, HomeScreen.route);
+  }
+
   @override
   void dispose() {
     controller.dispose();
@@ -38,19 +46,13 @@ class _IntroAppState extends State<IntroApp> {
                 subTitle: '',
                 urlImg: 'assets/addGlossary.png',
               ),
-              buidWidget2(),
-              forEndIntro(),
+              introPage2(),
+              lastIntro(),
             ],
           ),
           bottomSheet: isLastPage ? isLast(context) : actionsIntro(),
         );
       }),
-    );
-  }
-
-  Container forEndIntro() {
-    return Container(
-      color: Color.fromARGB(255, 44, 136, 148),
     );
   }
 
@@ -104,7 +106,27 @@ class _IntroAppState extends State<IntroApp> {
     );
   }
 
-  Widget buidWidget2() {
+  Widget introPage2() {
+    Widget rowWidgets({required Icon iconInfo, required String text}) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          iconInfo,
+          SizedBox(
+            width: 10,
+          ),
+          Text(
+            text,
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w500,
+              fontSize: 18,
+            ),
+          ),
+        ],
+      );
+    }
+
     return Container(
       color: Color.fromARGB(255, 44, 136, 148),
       child: Column(
@@ -118,42 +140,34 @@ class _IntroAppState extends State<IntroApp> {
               color: Colors.white,
             ),
           ),
-          Column(
-            children: [
-              TextButton.icon(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.star,
-                  color: Colors.amber,
+          Container(
+            height: 170,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                rowWidgets(
+                  iconInfo: Icon(
+                    Icons.star,
+                    color: Colors.amber,
+                  ),
+                  text: 'Добавление в избранные',
                 ),
-                label: Text(
-                  'Добавление в избранные',
-                  style: TextStyle(color: Colors.white),
+                rowWidgets(
+                  iconInfo: Icon(
+                    Icons.task_outlined,
+                    color: Color.fromARGB(255, 19, 201, 34),
+                  ),
+                  text: 'Пройти тест на знание глоссариев',
                 ),
-              ),
-              TextButton.icon(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.task_outlined,
-                  color: Color.fromARGB(255, 25, 184, 25),
+                rowWidgets(
+                  iconInfo: Icon(
+                    Icons.search,
+                    color: Color.fromARGB(255, 13, 50, 214),
+                  ),
+                  text: 'Найти интересующие вас глоссарии',
                 ),
-                label: Text(
-                  'Пройти тест на знание глоссариев',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-              TextButton.icon(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.search,
-                  color: Color.fromARGB(255, 9, 74, 214),
-                ),
-                label: Text(
-                  'Найти интересующие вас глоссарии',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            ],
+              ],
+            ),
           )
         ],
       ),
@@ -204,6 +218,12 @@ class _IntroAppState extends State<IntroApp> {
         ),
       );
 
+  Container lastIntro() {
+    return Container(
+      color: Color.fromARGB(255, 44, 136, 148),
+    );
+  }
+
   Widget isLast(BuildContext context) {
     return Container(
       child: ElevatedButton(
@@ -211,16 +231,7 @@ class _IntroAppState extends State<IntroApp> {
           backgroundColor: Color.fromARGB(255, 44, 136, 148),
           minimumSize: const Size.fromHeight(800),
         ),
-        onPressed: () async {
-          final prefs = await SharedPreferences.getInstance();
-          prefs.setBool('showHome', true);
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => App(),
-            ),
-          );
-        },
+        onPressed: openHomeScreen,
         child: Text(
           'Войти',
           style: TextStyle(fontSize: 30),
