@@ -43,7 +43,11 @@ class _FavouritePageState extends State<FavouritePage> {
                 if (state is IsfavouriteLoaded) {
                   final dataFavourites = state.glossaryFavourite;
                   return Expanded(
-                    child: GlossaryView.buildList(data: dataFavourites),
+                    child: dataFavourites.isEmpty
+                        ? Center(
+                            child: Text('Нету избраннных'),
+                          )
+                        : GlossaryView.buildList(data: dataFavourites),
                   );
                 }
                 return Center(child: LinearProgressIndicator());
