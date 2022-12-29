@@ -20,20 +20,6 @@ class _AddGlossaryState extends State<AddGlossary> {
         centerTitle: true,
         backgroundColor: Color.fromARGB(255, 22, 82, 131),
         title: Text('Добавить глоссарий'),
-        actions: [
-          IconButton(
-            onPressed: () async {
-              final prefs = await SharedPreferences.getInstance();
-              prefs.setBool('showHome', false);
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => IntroScreen(),
-                ),
-              );
-            },
-            icon: Icon(Icons.logout),
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         child: Padding(

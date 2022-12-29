@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:glossary_app/ui/drawer_pages/drawer_page.dart';
 import 'package:glossary_app/ui/drawer_pages/history_page.dart';
-import 'package:glossary_app/ui/intro/intro_app.dart';
 import 'package:glossary_app/ui/widgets/glossary_ui.dart';
 import 'package:glossary_app/ui/widgets/search_glossary.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class GlossaryScreen extends StatelessWidget {
   GlossaryScreen({super.key});
@@ -21,14 +19,14 @@ class GlossaryScreen extends StatelessWidget {
           width: 200,
         ),
         actions: [
-          IconButton(
+          /* IconButton(
             onPressed: () async {
               final prefs = await SharedPreferences.getInstance();
               prefs.setBool('showHome', false);
               Navigator.pushNamed(context, IntroScreen.route);
             },
             icon: Icon(Icons.logout),
-          ),
+          ), */
           IconButton(
             onPressed: () {
               Navigator.pushNamed(context, HistoryPage.route);

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:glossary_app/ui/drawer_pages/about_page.dart';
 import 'package:glossary_app/ui/drawer_pages/history_page.dart';
-import 'package:glossary_app/ui/drawer_pages/test_page.dart';
 
 class DrawerPage extends StatelessWidget {
   const DrawerPage({Key? key}) : super(key: key);
@@ -27,33 +25,9 @@ class DrawerPage extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: const Text('О проекте'),
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => AboutPage(),
-                ),
-              );
-            },
-          ),
-          ListTile(
             title: const Text('История'),
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => HistoryPage(),
-                ),
-              );
-            },
-          ),
-          ListTile(
-            title: const Text('Тест на знание'),
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => TestPage(),
-                ),
-              );
+              Navigator.of(context).pushNamed(HistoryPage.route);
             },
           ),
         ],
