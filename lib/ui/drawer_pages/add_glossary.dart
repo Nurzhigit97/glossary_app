@@ -27,7 +27,7 @@ class _AddGlossaryState extends State<AddGlossary> {
               prefs.setBool('showHome', false);
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (context) => IntroApp(),
+                  builder: (context) => IntroScreen(),
                 ),
               );
             },

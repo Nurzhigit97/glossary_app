@@ -8,6 +8,6 @@ void main() async {
   final prefs = await SharedPreferences.getInstance();
   final showHome = await prefs.getBool('showHome') ?? false;
   runApp(
-    showHome ? App() : IntroApp(),
+    showHome ? App() : IntroScreen(),
   );
 }

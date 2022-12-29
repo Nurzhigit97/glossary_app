@@ -25,22 +25,13 @@ class GlossaryScreen extends StatelessWidget {
             onPressed: () async {
               final prefs = await SharedPreferences.getInstance();
               prefs.setBool('showHome', false);
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => IntroApp(),
-                ),
-              );
+              Navigator.pushNamed(context, IntroScreen.route);
             },
             icon: Icon(Icons.logout),
           ),
           IconButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => HistoryPage(),
-                ),
-              );
+              Navigator.pushNamed(context, HistoryPage.route);
             },
             icon: Icon(Icons.person),
           ),
