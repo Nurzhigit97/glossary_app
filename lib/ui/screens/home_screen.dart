@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:glossary_app/ui/widgets/bottom_nav_bar_persis.dart';
 
 class HomeScreen extends StatefulWidget {
-  static String route = '/homeScreen';
+  static String route = '/';
   HomeScreen({Key? key}) : super(key: key);
 
   @override
