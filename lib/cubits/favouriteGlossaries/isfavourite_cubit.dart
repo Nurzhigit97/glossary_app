@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:glossary_app/cubits/favouriteGlossaries/isfavourite_state.dart';
+import 'package:glossary_app/data/models/glossary_model.dart';
 import 'package:glossary_app/data/repositories/glossary_repo.dart';
 
 class IsFavouriteCubit extends Cubit<IsfavouriteState> {
@@ -7,11 +8,11 @@ class IsFavouriteCubit extends Cubit<IsfavouriteState> {
 
   IsFavouriteCubit(this._repository) : super(IsfavouriteInitial());
 
-  Future<void> fetchGlossaryFavourites() async {
+  Future fetchGlossaryFavourites() async {
     emit(IsfavouriteLoading());
 
     try {
-      final response = await _repository.getFavourites();
+      List<GlossaryModel> response = await _repository.getFavourites();
       emit(IsfavouriteLoaded(response));
     } catch (err) {
       emit(IsfavouriteError(err.toString()));
@@ -22,7 +23,7 @@ class IsFavouriteCubit extends Cubit<IsfavouriteState> {
     emit(IsfavouriteLoading());
 
     try {
-      final response = await _repository.updateFavourite(
+      List<GlossaryModel> response = await _repository.updateFavourite(
           id: id,
           title: title,
           description: description,

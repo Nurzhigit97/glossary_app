@@ -35,7 +35,7 @@ class App extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: showHome ? HomeScreen.route : IntroScreen.route,
         routes: {
-          HomeScreen.route: (_) => HomeScreen(),
+          HomeScreen.route: (context) => HomeScreen(),
           IntroScreen.route: (_) => IntroScreen(),
           HistoryPage.route: (_) => HistoryPage(),
           SignIn.route: (_) => SignIn(),

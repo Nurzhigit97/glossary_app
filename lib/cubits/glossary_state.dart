@@ -7,7 +7,7 @@ class GlossaryInitial extends GlossaryState {}
 class LoadingGlossaryState extends GlossaryState {}
 
 class LoadedGlossaryState extends GlossaryState {
-  final List<GlossaryModel> glossary;
+  List<GlossaryModel> glossary;
   LoadedGlossaryState(this.glossary);
 }
 

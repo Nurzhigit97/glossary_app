@@ -2,12 +2,12 @@ class GlossaryModel {
   final int id;
   late final String? title;
   late final String? description;
-  final bool? isFavourite;
+  final bool isFavourite;
   GlossaryModel({
     required this.id,
     this.title,
     this.description,
-    this.isFavourite,
+    required this.isFavourite,
   });
 
   factory GlossaryModel.fromJson(Map<String, dynamic> json) {
@@ -19,12 +19,10 @@ class GlossaryModel {
     );
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['id'] = this.id;
-    data['title'] = this.title as String;
-    data['description'] = this.description;
-    data['isFavourite'] = this.isFavourite;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'title': title,
+        'description': description,
+        'isFavourite': isFavourite,
+      };
 }

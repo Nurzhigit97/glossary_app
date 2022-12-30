@@ -1,32 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:glossary_app/ui/widgets/bottom_nav_bar_persis.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
-class HomeScreen extends StatefulWidget {
+// ignore: must_be_immutable
+class HomeScreen extends StatelessWidget {
   static String route = '/';
   HomeScreen({Key? key}) : super(key: key);
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() => _selectedIndex = index);
-  }
+  PersistentTabController _controller = PersistentTabController();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BottomPersist.screens.elementAt(_selectedIndex),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: BottomPersist.items,
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue,
-        onTap: _onItemTapped,
-      ),
+    return PersistentTabView(
+      context,
+      controller: _controller,
+      screens: BottomPersist.screens(),
+      items: BottomPersist.items(),
     );
   }
 }

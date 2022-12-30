@@ -5,7 +5,7 @@ import 'package:glossary_app/cubits/favouriteGlossaries/isfavourite_cubit.dart';
 
 import 'package:glossary_app/data/models/glossary_model.dart';
 
-class DetailScreen extends StatelessWidget {
+class DetailScreen extends StatefulWidget {
   DetailScreen({
     Key? key,
     required this.e,
@@ -14,22 +14,28 @@ class DetailScreen extends StatelessWidget {
   final GlossaryModel e;
 
   @override
+  State<DetailScreen> createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends State<DetailScreen> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 22, 82, 131),
-        title: Text('${e.title}'),
+        title: Text('${widget.e.title}'),
         actions: [
           IconButton(
             onPressed: () {
               context.read<IsFavouriteCubit>().toggleGlossaryFavourites(
-                  id: e.id,
-                  title: e.title,
-                  description: e.description,
-                  isFavourite: e.isFavourite);
+                  id: widget.e.id,
+                  title: widget.e.title,
+                  description: widget.e.description,
+                  isFavourite: !widget.e.isFavourite);
+              setState(() {});
             },
             icon: Icon(Icons.star,
-                color: e.isFavourite != true
+                color: widget.e.isFavourite != true
                     ? Color.fromARGB(255, 255, 255, 255)
                     : Color.fromARGB(255, 241, 199, 11)),
           ),
@@ -41,7 +47,7 @@ class DetailScreen extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                '${e.description}',
+                '${widget.e.description}',
                 style: TextStyle(
                   fontSize: 20,
                 ),

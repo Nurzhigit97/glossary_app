@@ -10,7 +10,7 @@ class GlossaryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: DrawerPage(),
+      drawer: drawer(context),
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Color.fromARGB(255, 0, 0, 0),
@@ -76,9 +76,9 @@ class GlossaryScreen extends StatelessWidget {
               ),
               child: const Text('Выйти'),
               onPressed: () async {
+                // final prefs = await SharedPreferences.getInstance();
+                // prefs.setBool('showHome', false);
                 await FirebaseAuth.instance.signOut();
-                /* final prefs = await SharedPreferences.getInstance();
-                prefs.setBool('showHome', false); */
               },
             ),
             ElevatedButton(

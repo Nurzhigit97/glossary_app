@@ -36,32 +36,34 @@ class GlossaryRepo {
     }
   }
 
-  Future getFavourites() async {
-    final response = await _dio.get(endpoint);
+  Future<List<GlossaryModel>> getFavourites() async {
+    Response response = await _dio.get(endpoint);
     try {
       final data = await response.data as List;
       final resData = data.map((json) => GlossaryModel.fromJson(json));
       return resData.where((glossary) {
         final titleLower = glossary.isFavourite;
-        return titleLower!;
+        return titleLower;
       }).toList();
     } catch (e) {
       throw Exception(e);
     }
   }
 
-  Future updateFavourite({id, title, description, isFavourite}) async {
+  Future<List<GlossaryModel>> updateFavourite(
+      {id, title, description, isFavourite}) async {
     try {
-      final response = await _dio.put(
+      Response response = await _dio.put(
         endpointDetail + '$id/',
         data: {
           'title': title,
           'description': description,
-          'isFavourite': !isFavourite,
+          'isFavourite': isFavourite,
         },
       );
       final data = await response.data as List;
-      final resData = data.map((json) => GlossaryModel.fromJson(json)).toList();
+      List<GlossaryModel> resData =
+          data.map((json) => GlossaryModel.fromJson(json)).toList();
       return resData;
     } catch (e) {
       throw Exception(e);

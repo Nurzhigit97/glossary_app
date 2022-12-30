@@ -7,7 +7,7 @@ class IsfavouriteInitial extends IsfavouriteState {}
 class IsfavouriteLoading extends IsfavouriteState {}
 
 class IsfavouriteLoaded extends IsfavouriteState {
-  final List<GlossaryModel> glossaryFavourite;
+  List<GlossaryModel> glossaryFavourite;
   IsfavouriteLoaded(this.glossaryFavourite);
 }
 

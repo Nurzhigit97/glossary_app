@@ -40,6 +40,7 @@ class _FavouritePageState extends State<FavouritePage> {
                     ),
                   );
                 }
+
                 if (state is IsfavouriteLoaded) {
                   final dataFavourites = state.glossaryFavourite;
                   return Expanded(
