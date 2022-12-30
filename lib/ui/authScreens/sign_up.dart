@@ -37,30 +37,6 @@ class _SignUpState extends State<SignUp> {
                   controller: _emailController,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.only(top: 5, left: 10),
-                    hintStyle: TextStyle(color: Colors.black26),
-                    suffixIcon: Icon(Icons.person),
-                    hintText: 'Введите Имя...',
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.blue.shade100,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.blue.shade100,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextField(
-                  controller: _emailController,
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.only(top: 5, left: 10),
                     suffixIcon: Icon(Icons.alternate_email_sharp),
                     hintText: 'Введите email...',
                     hintStyle: TextStyle(color: Colors.black26),
