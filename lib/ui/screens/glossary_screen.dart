@@ -2,10 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:glossary_app/ui/authScreens/sign_in.dart';
 import 'package:glossary_app/ui/drawerScreens/drawer_page.dart';
-import 'package:glossary_app/ui/intro/intro_app.dart';
 import 'package:glossary_app/ui/widgets/glossary_ui.dart';
 import 'package:glossary_app/ui/widgets/search_glossary.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class GlossaryScreen extends StatelessWidget {
   GlossaryScreen({super.key});

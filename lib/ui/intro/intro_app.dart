@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:glossary_app/ui/authScreens/sign_in.dart';
-import 'package:glossary_app/ui/authScreens/sign_up.dart';
 import 'package:glossary_app/ui/screens/home_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -18,44 +16,32 @@ class _IntroScreenState extends State<IntroScreen> {
   final controller = PageController();
 
   bool isLastPage = false;
-  openHomeScreen() async {
+  Future<void> openHomeScreen() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool('showHome', true);
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => HomeScreen()));
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
+    Navigator.pushReplacementNamed(context, HomeScreen.route);
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Builder(builder: (context) {
-        return Scaffold(
-          body: PageView(
-            controller: controller,
-            onPageChanged: (index) {
-              setState(() => isLastPage = index == 2);
-            },
-            children: [
-              buildPage(
-                colorIntro: Color.fromARGB(255, 44, 136, 148),
-                title: 'Добро пожаловать ',
-                subTitle: '',
-                urlImg: 'assets/addGlossary.png',
-              ),
-              introPage2(),
-              lastIntro(),
-            ],
+    return Scaffold(
+      body: PageView(
+        controller: controller,
+        onPageChanged: (index) {
+          setState(() => isLastPage = index == 2);
+        },
+        children: [
+          buildPage(
+            colorIntro: Color.fromARGB(255, 44, 136, 148),
+            title: 'Добро пожаловать ',
+            subTitle: '',
+            urlImg: 'assets/addGlossary.png',
           ),
-          bottomSheet: isLastPage ? isLast(context) : actionsIntro(),
-        );
-      }),
+          introPage2(),
+          lastIntro(),
+        ],
+      ),
+      bottomSheet: isLastPage ? isLast() : actionsIntro(),
     );
   }
 
@@ -227,7 +213,7 @@ class _IntroScreenState extends State<IntroScreen> {
     );
   }
 
-  Widget isLast(BuildContext context) {
+  Widget isLast() {
     return Container(
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(

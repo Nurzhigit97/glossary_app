@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/cubits/Glossary_cubit.dart';
@@ -17,7 +16,8 @@ final _dio = Dio();
 
 // ignore: must_be_immutable
 class App extends StatelessWidget {
-  App({Key? key}) : super(key: key);
+  bool showHome;
+  App(this.showHome, {Key? key}) : super(key: key);
   GlossaryRepo _glossaryRepo = GlossaryRepo(_dio);
 
   @override
@@ -33,7 +33,7 @@ class App extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: HomeScreen.route,
+        initialRoute: showHome ? HomeScreen.route : IntroScreen.route,
         routes: {
           HomeScreen.route: (_) => HomeScreen(),
           IntroScreen.route: (_) => IntroScreen(),
