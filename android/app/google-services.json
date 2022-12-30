@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "288653951853",
-    "project_id": "glossary-733fa",
-    "storage_bucket": "glossary-733fa.appspot.com"
+    "project_number": "242517483565",
+    "project_id": "glossary-1ef04",
+    "storage_bucket": "glossary-1ef04.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:288653951853:android:6a8696f1d6f08e886f1064",
+        "mobilesdk_app_id": "1:242517483565:android:f3fd263d1e372aeb5918a4",
         "android_client_info": {
           "package_name": "com.example.glossary_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "288653951853-t8dajr7jh9cgqb5bb4b1suou8b5ei94e.apps.googleusercontent.com",
+          "client_id": "242517483565-u9hm5snip9lch6o8k4370quqieknsc5d.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDEIWwHoRpmkJ7htBlc5dQi7FC5sdc10WE"
+          "current_key": "AIzaSyB0VDxhymQ5FfBhfzO0doz5VBsr3TScWVc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "288653951853-t8dajr7jh9cgqb5bb4b1suou8b5ei94e.apps.googleusercontent.com",
+              "client_id": "242517483565-u9hm5snip9lch6o8k4370quqieknsc5d.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:glossary_app/ui/authScreens/sign_in.dart';
 import 'package:passwordfield/passwordfield.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
 class SignUp extends StatefulWidget {
   static String route = 'signUp';
@@ -12,8 +13,16 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  firebase_auth.FirebaseAuth firebaseAuth = firebase_auth.FirebaseAuth.instance;
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -38,7 +47,7 @@ class _SignUpState extends State<SignUp> {
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.only(top: 5, left: 10),
                     suffixIcon: Icon(Icons.alternate_email_sharp),
-                    hintText: 'Введите email...',
+                    hintText: 'Введите почту...',
                     hintStyle: TextStyle(color: Colors.black26),
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -65,7 +74,7 @@ class _SignUpState extends State<SignUp> {
                     hintStyle: TextStyle(color: Colors.black26),
                     inputPadding: EdgeInsets.only(top: 5, left: 10),
                   ),
-                  hintText: 'Введите password...',
+                  hintText: 'Введите пароль...',
                   border: PasswordBorder(
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -86,13 +95,13 @@ class _SignUpState extends State<SignUp> {
                     ),
                   ),
                   errorMessage:
-                      'must contain special character either . * @ # \$',
+                      'Должен содержать специальный символ . * @ # \$',
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: register,
                   child: Text('Зарегистрироваться'),
                 ),
                 SizedBox(
@@ -101,7 +110,7 @@ class _SignUpState extends State<SignUp> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Already have an account'),
+                    Text('Уже есть учетная запись'),
                     TextButton(
                       onPressed: () => Navigator.of(context)
                           .pushReplacementNamed(SignIn.route),
@@ -117,10 +126,22 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
+  // Methods
+  Future register() async {
+    try {
+      await firebaseAuth.createUserWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+      Navigator.of(context).pushReplacementNamed(
+        SignIn.route,
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.toString()),
+        ),
+      );
+    }
   }
 }

@@ -20,8 +20,9 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   shared_preferences: ^2.0.15
   passwordfield: ^0.1.0
-  firebase_auth: ^3.4.0
-  fluttertoast: ^8.1.2
+  firebase_core: ^2.4.0
+  firebase_auth: ^4.2.1
+  google_sign_in: ^5.4.2
 
 dev_dependencies:
   flutter_launcher_icons: ^0.11.0

@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:glossary_app/ui/authScreens/sign_in.dart';
 import 'package:glossary_app/ui/drawerScreens/drawer_page.dart';
 import 'package:glossary_app/ui/intro/intro_app.dart';
 import 'package:glossary_app/ui/widgets/glossary_ui.dart';
@@ -21,9 +23,7 @@ class GlossaryScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () async {
-              final prefs = await SharedPreferences.getInstance();
-              prefs.setBool('showHome', false);
-              Navigator.pushNamed(context, IntroScreen.route);
+              _dialogBuilder(context);
             },
             icon: Icon(Icons.person),
           ),
@@ -40,6 +40,61 @@ class GlossaryScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> _dialogBuilder(BuildContext context) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        User? user = FirebaseAuth.instance.currentUser;
+        return AlertDialog(
+          insetPadding: EdgeInsets.only(bottom: 250),
+          actionsAlignment: MainAxisAlignment.spaceEvenly,
+          title: Row(
+            children: [
+              Text(user?.email != null ? '${user?.email}' : 'Авторизоваться'),
+              TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: Theme.of(context).textTheme.labelLarge,
+                ),
+                child: const Text(
+                  'Login',
+                  style: TextStyle(
+                    fontSize: 17,
+                  ),
+                ),
+                onPressed: () async {
+                  Navigator.of(context).pushNamed(SignIn.route);
+                },
+              ),
+            ],
+          ),
+          content: const Text('Welcome to my Glossary App'),
+          actions: <Widget>[
+            ElevatedButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('Выйти'),
+              onPressed: () async {
+                await FirebaseAuth.instance.signOut();
+                /* final prefs = await SharedPreferences.getInstance();
+                prefs.setBool('showHome', false); */
+              },
+            ),
+            ElevatedButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('Закрыть'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

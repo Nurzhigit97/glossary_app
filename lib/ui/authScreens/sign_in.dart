@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:glossary_app/ui/authScreens/sign_up.dart';
 import 'package:glossary_app/ui/screens/home_screen.dart';
 import 'package:passwordfield/passwordfield.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
 class SignIn extends StatefulWidget {
   static String route = 'signIn';
@@ -12,10 +13,18 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  TextEditingController _emailController = TextEditingController(text: 'nur');
-  TextEditingController _passwordController =
-      TextEditingController(text: '111');
-  bool isRegistered = true;
+  firebase_auth.FirebaseAuth firebaseAuth = firebase_auth.FirebaseAuth.instance;
+
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -38,7 +47,7 @@ class _SignInState extends State<SignIn> {
                     hintStyle: TextStyle(color: Colors.black26),
                     contentPadding: EdgeInsets.only(top: 5, left: 10),
                     suffixIcon: Icon(Icons.alternate_email_sharp),
-                    hintText: 'Введите email...',
+                    hintText: 'Введите почту...',
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.blue.shade100,
@@ -64,7 +73,7 @@ class _SignInState extends State<SignIn> {
                     hintStyle: TextStyle(color: Colors.black26),
                     inputPadding: EdgeInsets.only(top: 5, left: 10),
                   ),
-                  hintText: 'Enter password...',
+                  hintText: 'Введите пароль...',
                   border: PasswordBorder(
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -85,19 +94,14 @@ class _SignInState extends State<SignIn> {
                     ),
                   ),
                   errorMessage:
-                      'must contain special character either . * @ # \$',
+                      'Должен содержать специальный символ . * @ # \$',
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    if (_emailController.text.contains('nur') &&
-                        _passwordController.text.contains('111'))
-                      Navigator.of(context)
-                          .pushReplacementNamed(HomeScreen.route);
-                  },
-                  child: Text('Войти'),
+                  onPressed: login,
+                  child: const Text('Войти'),
                 ),
                 Container(
                   child: Stack(
@@ -114,7 +118,7 @@ class _SignInState extends State<SignIn> {
                         child: Padding(
                           padding: const EdgeInsets.all(4.0),
                           child: Text(
-                            'OR',
+                            'Или',
                           ),
                         ),
                       ),
@@ -129,7 +133,7 @@ class _SignInState extends State<SignIn> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Don't Have an Accaunt"),
+                    Text("Если у вас нет учетной записи"),
                     TextButton(
                       onPressed: () => Navigator.of(context)
                           .pushReplacementNamed(SignUp.route),
@@ -140,7 +144,7 @@ class _SignInState extends State<SignIn> {
                 TextButton(
                   onPressed: () =>
                       Navigator.of(context).pushReplacementNamed(SignUp.route),
-                  child: Text('Forgot Password ?'),
+                  child: Text('Забыли пароль?'),
                 ),
               ],
             ),
@@ -150,10 +154,22 @@ class _SignInState extends State<SignIn> {
     );
   }
 
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
+  // Methods
+  Future login() async {
+    try {
+      await firebaseAuth.signInWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+      Navigator.of(context).pushReplacementNamed(
+        HomeScreen.route,
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.toString()),
+        ),
+      );
+    }
   }
 }
