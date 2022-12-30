@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "288653951853",
+    "project_id": "glossary-733fa",
+    "storage_bucket": "glossary-733fa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:288653951853:android:6a8696f1d6f08e886f1064",
+        "android_client_info": {
+          "package_name": "com.example.glossary_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "288653951853-t8dajr7jh9cgqb5bb4b1suou8b5ei94e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEIWwHoRpmkJ7htBlc5dQi7FC5sdc10WE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "288653951853-t8dajr7jh9cgqb5bb4b1suou8b5ei94e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
