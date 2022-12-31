@@ -4,7 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/cubits/Glossary_cubit.dart';
 import 'package:glossary_app/cubits/favouriteGlossaries/isfavourite_cubit.dart';
 import 'package:glossary_app/data/repositories/glossary_repo.dart';
-import 'package:glossary_app/ui/authScreens/registered_user.dart';
+import 'package:glossary_app/ui/authScreens/forgot_password_page.dart';
+import 'package:glossary_app/ui/authScreens/registered_dialog.dart';
 import 'package:glossary_app/ui/authScreens/sign_in.dart';
 import 'package:glossary_app/ui/authScreens/sign_up.dart';
 import 'package:glossary_app/ui/drawerScreens/history_page.dart';
@@ -40,7 +41,8 @@ class App extends StatelessWidget {
           HistoryPage.route: (_) => HistoryPage(),
           SignIn.route: (_) => SignIn(),
           SignUp.route: (_) => SignUp(),
-          RegisteredUser.route: (_) => RegisteredUser(),
+          RegisteredDialog.route: (_) => RegisteredDialog(),
+          ForgotPasswordPage.route: (_) => ForgotPasswordPage(),
         },
       ),
     );

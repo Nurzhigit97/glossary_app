@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:glossary_app/ui/authScreens/forgot_password_page.dart';
 import 'package:glossary_app/ui/authScreens/sign_up.dart';
 import 'package:glossary_app/ui/screens/home_screen.dart';
 import 'package:passwordfield/passwordfield.dart';
@@ -128,12 +130,12 @@ class _SignInState extends State<SignIn> {
                 ElevatedButton.icon(
                   onPressed: () {},
                   icon: Icon(Icons.g_mobiledata_rounded),
-                  label: Text('Sign in with Google'),
+                  label: Text('Авторизация с  Google'),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Если у вас нет учетной записи"),
+                    Text("У вас еще нет учетной записи?"),
                     TextButton(
                       onPressed: () => Navigator.of(context)
                           .pushReplacementNamed(SignUp.route),
@@ -142,8 +144,8 @@ class _SignInState extends State<SignIn> {
                   ],
                 ),
                 TextButton(
-                  onPressed: () =>
-                      Navigator.of(context).pushReplacementNamed(SignUp.route),
+                  onPressed: () => Navigator.of(context, rootNavigator: true)
+                      .pushNamed(ForgotPasswordPage.route),
                   child: Text('Забыли пароль?'),
                 ),
               ],
@@ -164,10 +166,10 @@ class _SignInState extends State<SignIn> {
       Navigator.of(context).pushReplacementNamed(
         HomeScreen.route,
       );
-    } catch (e) {
+    } on FirebaseAuthException catch (err) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(e.toString()),
+          content: Text(err.message.toString()),
         ),
       );
     }

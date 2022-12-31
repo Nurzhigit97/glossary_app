@@ -24,6 +24,7 @@ dependencies:
   firebase_auth: ^4.2.1
   google_sign_in: ^5.4.2
   persistent_bottom_nav_bar: ^5.0.2
+  email_validator: ^2.1.17
 
 dev_dependencies:
   flutter_launcher_icons: ^0.11.0

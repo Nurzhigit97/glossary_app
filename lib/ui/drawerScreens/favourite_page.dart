@@ -1,10 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/cubits/favouriteGlossaries/isfavourite_cubit.dart';
 import 'package:glossary_app/cubits/favouriteGlossaries/isfavourite_state.dart';
-import 'package:glossary_app/cubits/glossary_cubit.dart';
 import 'package:glossary_app/ui/globalWidgets/glossary_view.dart';
 
 class FavouritePage extends StatefulWidget {
