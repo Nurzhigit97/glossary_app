@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:glossary_app/ui/authScreens/forgot_password_page.dart';
 import 'package:glossary_app/ui/authScreens/sign_up.dart';
+import 'package:glossary_app/ui/authScreens/verify_email_screen.dart';
 import 'package:glossary_app/ui/screens/home_screen.dart';
 import 'package:passwordfield/passwordfield.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
@@ -163,8 +164,9 @@ class _SignInState extends State<SignIn> {
         email: _emailController.text,
         password: _passwordController.text,
       );
+
       Navigator.of(context).pushReplacementNamed(
-        HomeScreen.route,
+        VerifyEmailScreen.route,
       );
     } on FirebaseAuthException catch (err) {
       ScaffoldMessenger.of(context).showSnackBar(
