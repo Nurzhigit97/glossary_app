@@ -25,18 +25,14 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => GlossaryCubit(_glossaryRepo),
-        ),
-        BlocProvider(
-          create: (context) => IsFavouriteCubit(_glossaryRepo),
-        ),
+        BlocProvider(create: (_) => GlossaryCubit(_glossaryRepo)),
+        BlocProvider(create: (_) => IsFavouriteCubit(_glossaryRepo)),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: showHome ? HomeScreen.route : IntroScreen.route,
         routes: {
-          HomeScreen.route: (context) => HomeScreen(),
+          HomeScreen.route: (_) => HomeScreen(),
           IntroScreen.route: (_) => IntroScreen(),
           HistoryPage.route: (_) => HistoryPage(),
           SignIn.route: (_) => SignIn(),
