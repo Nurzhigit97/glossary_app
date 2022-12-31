@@ -16,7 +16,6 @@ class _AddGlossaryState extends State<AddGlossary> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 22, 82, 131),
         title: Text('Добавить глоссарий'),
       ),
       body: SingleChildScrollView(

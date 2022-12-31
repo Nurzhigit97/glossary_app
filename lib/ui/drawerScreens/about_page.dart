@@ -9,7 +9,6 @@ class AboutPage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text('О проекте'),
-        backgroundColor: Color.fromARGB(255, 22, 82, 131),
       ),
       body: Container(
         margin: EdgeInsets.all(10),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:glossary_app/ui/widgets/bottom_nav_bar_persis.dart';
+import 'package:glossary_app/resources/bottom_nav_bar_persis.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 // ignore: must_be_immutable

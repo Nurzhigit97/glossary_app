@@ -22,7 +22,6 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 22, 82, 131),
         title: Text('${widget.e.title}'),
         actions: [
           IconButton(
@@ -49,6 +48,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 '${widget.e.description}',
                 style: TextStyle(
                   fontSize: 20,
+                  fontFamily: 'Cinzel-VariableFont_wght',
                 ),
               ),
             ],

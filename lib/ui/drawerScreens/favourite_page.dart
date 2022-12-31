@@ -30,7 +30,6 @@ class _FavouritePageState extends State<FavouritePage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 22, 82, 131),
         title: Text('Избранные'),
         actions: [
           IconButton(
