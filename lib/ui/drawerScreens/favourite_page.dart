@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/cubits/favouriteGlossaries/isfavourite_cubit.dart';
 import 'package:glossary_app/cubits/favouriteGlossaries/isfavourite_state.dart';
+import 'package:glossary_app/cubits/glossary_cubit.dart';
 import 'package:glossary_app/ui/globalWidgets/glossary_view.dart';
 
 class FavouritePage extends StatefulWidget {
@@ -19,6 +22,12 @@ class _FavouritePageState extends State<FavouritePage> {
     super.initState();
   }
 
+  refresh() {
+    final resData = context.read<IsFavouriteCubit>();
+    final res = resData.fetchGlossaryFavourites();
+    return res;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +35,14 @@ class _FavouritePageState extends State<FavouritePage> {
         centerTitle: true,
         backgroundColor: Color.fromARGB(255, 22, 82, 131),
         title: Text('Избранные'),
+        actions: [
+          IconButton(
+            onPressed: refresh,
+            icon: Icon(
+              Icons.refresh_rounded,
+            ),
+          )
+        ],
       ),
       body: Column(
         children: [
@@ -35,7 +52,7 @@ class _FavouritePageState extends State<FavouritePage> {
                 if (state is IsfavouriteError) {
                   return Center(
                     child: Text(
-                      '${state.errMsg}',
+                      '${'Сделайте перезагрузку'}',
                       style: TextStyle(fontSize: 20, color: Colors.red),
                     ),
                   );

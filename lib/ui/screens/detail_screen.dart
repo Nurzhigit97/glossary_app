@@ -32,7 +32,6 @@ class _DetailScreenState extends State<DetailScreen> {
                   title: widget.e.title,
                   description: widget.e.description,
                   isFavourite: !widget.e.isFavourite);
-              setState(() {});
             },
             icon: Icon(Icons.star,
                 color: widget.e.isFavourite != true
