@@ -9,51 +9,57 @@ class RegisteredDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
-    return AlertDialog(
-      insetPadding: EdgeInsets.only(bottom: 250),
-      actionsAlignment: MainAxisAlignment.spaceEvenly,
-      title: Row(
-        children: [
-          Text(user?.email != null ? '${user?.email}' : 'Авторизоваться'),
-          TextButton(
-            style: TextButton.styleFrom(
-              textStyle: Theme.of(context).textTheme.labelLarge,
-            ),
-            child: const Text(
-              'Login',
-              style: TextStyle(
-                fontSize: 17,
+    return IconButton(
+      onPressed: () => showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          insetPadding: EdgeInsets.only(bottom: 250),
+          actionsAlignment: MainAxisAlignment.spaceEvenly,
+          title: Row(
+            children: [
+              Text(user?.email != null ? '${user?.email}' : 'Авторизоваться'),
+              TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: Theme.of(context).textTheme.labelLarge,
+                ),
+                child: const Text(
+                  'Login',
+                  style: TextStyle(
+                    fontSize: 17,
+                  ),
+                ),
+                onPressed: () async {
+                  Navigator.of(context).pushNamed(SignIn.route);
+                },
               ),
+            ],
+          ),
+          content: const Text('Welcome to my Glossary App'),
+          actions: <Widget>[
+            ElevatedButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('Выйти'),
+              onPressed: () async {
+                // final prefs = await SharedPreferences.getInstance();
+                // prefs.setBool('showHome', false);
+                await FirebaseAuth.instance.signOut();
+              },
             ),
-            onPressed: () async {
-              Navigator.of(context).pushNamed(SignIn.route);
-            },
-          ),
-        ],
+            ElevatedButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('Закрыть'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        ),
       ),
-      content: const Text('Welcome to my Glossary App'),
-      actions: <Widget>[
-        ElevatedButton(
-          style: TextButton.styleFrom(
-            textStyle: Theme.of(context).textTheme.labelLarge,
-          ),
-          child: const Text('Выйти'),
-          onPressed: () async {
-            // final prefs = await SharedPreferences.getInstance();
-            // prefs.setBool('showHome', false);
-            await FirebaseAuth.instance.signOut();
-          },
-        ),
-        ElevatedButton(
-          style: TextButton.styleFrom(
-            textStyle: Theme.of(context).textTheme.labelLarge,
-          ),
-          child: const Text('Закрыть'),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-      ],
+      icon: Icon(Icons.person),
     );
   }
 }

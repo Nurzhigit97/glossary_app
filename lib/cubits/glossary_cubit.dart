@@ -10,11 +10,12 @@ class GlossaryCubit extends Cubit<GlossaryState> {
 
   GlossaryCubit(this._repository) : super(GlossaryInitial());
 
-  Future<void> fetchGlossary(String? query) async {
+  Future<void> fetchGlossary(String? searchValue) async {
     emit(LoadingGlossaryState());
 
     try {
-      List<GlossaryModel> response = await _repository.getAll(query: query);
+      List<GlossaryModel> response =
+          await _repository.getAll(query: searchValue);
       emit(LoadedGlossaryState(response));
     } on DioError catch (err) {
       emit(ErrorGlossaryState(err.message.toString()));

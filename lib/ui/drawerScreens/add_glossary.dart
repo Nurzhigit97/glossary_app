@@ -36,7 +36,7 @@ class _AddGlossaryState extends State<AddGlossary> {
                 controller: titleController,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.only(left: 10),
-                  hintText: 'Глоссарий...',
+                  hintText: 'Термин...',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                   ),
@@ -49,7 +49,7 @@ class _AddGlossaryState extends State<AddGlossary> {
                 controller: descriptionController,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.only(left: 10),
-                  hintText: 'Значение...',
+                  hintText: 'Описание...',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                   ),

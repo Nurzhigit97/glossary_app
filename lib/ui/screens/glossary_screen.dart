@@ -18,13 +18,7 @@ class GlossaryScreen extends StatelessWidget {
           width: 200,
         ),
         actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context, rootNavigator: true)
-                  .pushNamed(RegisteredDialog.route);
-            },
-            icon: Icon(Icons.person),
-          ),
+          RegisteredDialog(),
         ],
       ),
       body: Container(
