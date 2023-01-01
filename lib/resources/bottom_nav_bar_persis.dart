@@ -17,29 +17,29 @@ class BottomPersist {
     ];
   }
 
-  static List<PersistentBottomNavBarItem> items() {
+  static List<BottomNavigationBarItem> items() {
     return [
-      PersistentBottomNavBarItem(
+      BottomNavigationBarItem(
         icon: Icon(Icons.home),
-        title: 'Главная',
+        label: 'Главная',
       ),
-      PersistentBottomNavBarItem(
+      BottomNavigationBarItem(
         icon: Icon(Icons.favorite_border),
-        title: 'Избранные',
+        label: 'Избранные',
       ),
-      PersistentBottomNavBarItem(
+      BottomNavigationBarItem(
         icon: Icon(Icons.add_box_rounded),
-        title: 'Добавить',
+        label: 'Добавить',
       ),
-      PersistentBottomNavBarItem(
+      BottomNavigationBarItem(
         icon: Icon(
           Icons.text_snippet_outlined,
         ),
-        title: 'О проекте',
+        label: 'О проекте',
       ),
-      PersistentBottomNavBarItem(
+      BottomNavigationBarItem(
         icon: Icon(Icons.checklist_outlined),
-        title: 'Тест',
+        label: 'Тест',
       ),
     ];
   }
