@@ -4,9 +4,8 @@ import 'package:glossary_app/ui/drawerScreens/add_glossary.dart';
 import 'package:glossary_app/ui/drawerScreens/favourite_page.dart';
 import 'package:glossary_app/ui/drawerScreens/test_page.dart';
 import 'package:glossary_app/ui/screens/glossary_screen.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
-class BottomPersist {
+class BottomNavSettings {
   static List<Widget> screens() {
     return [
       GlossaryScreen(),

@@ -61,7 +61,7 @@ class _FavouritePageState extends State<FavouritePage> {
                         ? Center(
                             child: Text('Нету избранных'),
                           )
-                        : GlossaryView.buildList(data: dataFavourites),
+                        : GlossaryView(data: dataFavourites),
                   );
                 }
                 return Center(child: LinearProgressIndicator());

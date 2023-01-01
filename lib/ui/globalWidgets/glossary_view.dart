@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:glossary_app/data/models/glossary_model.dart';
 import 'package:glossary_app/ui/screens/detail_screen.dart';
 
-class GlossaryView {
-  static Widget buildList({required List<GlossaryModel> data}) {
+class GlossaryView extends StatelessWidget {
+  List<GlossaryModel> data;
+  GlossaryView({Key? key, required this.data}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: data.length,
       itemBuilder: (context, index) {

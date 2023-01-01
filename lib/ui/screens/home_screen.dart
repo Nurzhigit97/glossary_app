@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:glossary_app/resources/bottom_nav_bar_persis.dart';
+import 'package:glossary_app/resources/bottom_nav_settings.dart';
 
 // ignore: must_be_immutable
 class HomeScreen extends StatefulWidget {
@@ -22,10 +22,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: BottomPersist.screens().elementAt(_selectedPage),
+        body: BottomNavSettings.screens().elementAt(_selectedPage),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          items: BottomPersist.items(),
+          items: BottomNavSettings.items(),
           currentIndex: _selectedPage,
           selectedItemColor: Colors.blue,
           onTap: _onItemTapped,

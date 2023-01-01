@@ -26,7 +26,7 @@ class App extends StatelessWidget {
         BlocProvider(create: (_) => IsFavouriteCubit(_glossaryRepo)),
       ],
       child: MaterialApp(
-        theme: getTheme(),
+        theme: ThemeSettings.getTheme(),
         debugShowCheckedModeBanner: false,
         initialRoute: showHome ? HomeScreen.route : IntroScreen.route,
         routes: getRoutes(),

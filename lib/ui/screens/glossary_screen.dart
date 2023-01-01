@@ -9,7 +9,7 @@ class GlossaryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: drawer(context),
+      drawer: DrawerPage(),
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Color.fromARGB(255, 0, 0, 0),

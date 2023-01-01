@@ -2,7 +2,6 @@ import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:glossary_app/ui/authScreens/sign_in.dart';
-import 'package:glossary_app/ui/authScreens/verify_email_screen.dart';
 import 'package:passwordfield/passwordfield.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
