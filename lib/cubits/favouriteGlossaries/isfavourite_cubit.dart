@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:glossary_app/cubits/favouriteGlossaries/isfavourite_state.dart';
-import 'package:glossary_app/data/models/glossary_model.dart';
 import 'package:glossary_app/data/repositories/glossary_repo.dart';
 
 class IsFavouriteCubit extends Cubit<IsfavouriteState> {
@@ -12,25 +12,23 @@ class IsFavouriteCubit extends Cubit<IsfavouriteState> {
     emit(IsfavouriteLoading());
 
     try {
-      List<GlossaryModel> response = await _repository.getFavourites();
+      final response = await _repository.getFavourites();
       emit(IsfavouriteLoaded(response));
-    } catch (err) {
-      emit(IsfavouriteError(err.toString()));
+    } on DioError catch (err) {
+      emit(IsfavouriteError(err.message.toString()));
     }
   }
 
-  Future toggleGlossaryFavourites({id, title, description, isFavourite}) async {
+  Future toggleGlossaryFavourites(
+      {required int id, required bool isFavourite}) async {
     emit(IsfavouriteLoading());
 
     try {
-      List<GlossaryModel> response = await _repository.updateFavourite(
-          id: id,
-          title: title,
-          description: description,
-          isFavourite: isFavourite);
+      final response =
+          await _repository.updateFavourite(id: id, isFavourite: isFavourite);
       emit(IsfavouriteLoaded(response));
-    } catch (err) {
-      emit(IsfavouriteError(err.toString()));
+    } on DioError catch (err) {
+      emit(IsfavouriteError(err.message.toString()));
     }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:glossary_app/data/models/glossary_model.dart';
 import 'package:glossary_app/data/repositories/glossary_repo.dart';
 
@@ -15,8 +16,8 @@ class GlossaryCubit extends Cubit<GlossaryState> {
     try {
       List<GlossaryModel> response = await _repository.getAll(query: query);
       emit(LoadedGlossaryState(response));
-    } catch (err) {
-      emit(ErrorGlossaryState(err.toString()));
+    } on DioError catch (err) {
+      emit(ErrorGlossaryState(err.message.toString()));
     }
   }
 }

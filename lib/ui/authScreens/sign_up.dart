@@ -1,6 +1,8 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:glossary_app/ui/authScreens/sign_in.dart';
+import 'package:glossary_app/ui/authScreens/verify_email_screen.dart';
 import 'package:passwordfield/passwordfield.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
@@ -46,7 +48,7 @@ class _SignUpState extends State<SignUp> {
                   SizedBox(
                     height: 10,
                   ),
-                  TextField(
+                  TextFormField(
                     controller: _emailController,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.only(top: 5, left: 10),
@@ -65,7 +67,16 @@ class _SignUpState extends State<SignUp> {
                         ),
                         borderRadius: BorderRadius.circular(12),
                       ),
+                      errorStyle: TextStyle(
+                        fontSize: 14,
+                        color: Colors.red,
+                      ),
                     ),
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (email) =>
+                        email != null && !EmailValidator.validate(email)
+                            ? 'Введите правильный эл. почту'
+                            : null,
                   ),
                   SizedBox(
                     height: 10,
@@ -73,7 +84,7 @@ class _SignUpState extends State<SignUp> {
                   PasswordField(
                     controller: _passwordController,
                     color: Colors.blue,
-                    passwordConstraint: r'.*[@$#.*].*',
+                    passwordConstraint: r'.*[0-9].*',
                     inputDecoration: PasswordDecoration(
                       hintStyle: TextStyle(color: Colors.black26),
                       inputPadding: EdgeInsets.only(top: 5, left: 10),
@@ -98,8 +109,7 @@ class _SignUpState extends State<SignUp> {
                             BorderSide(width: 2, color: Colors.red.shade200),
                       ),
                     ),
-                    errorMessage:
-                        'Должен содержать специальный символ . * @ # \$',
+                    errorMessage: 'Должен содержать хотябы одну цифру',
                   ),
                   SizedBox(
                     height: 10,
@@ -140,6 +150,7 @@ class _SignUpState extends State<SignUp> {
         email: _emailController.text,
         password: _passwordController.text,
       );
+
       Navigator.of(context).pushReplacementNamed(
         SignIn.route,
       );

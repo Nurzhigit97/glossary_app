@@ -164,7 +164,6 @@ class _SignInState extends State<SignIn> {
         email: _emailController.text,
         password: _passwordController.text,
       );
-
       Navigator.of(context).pushReplacementNamed(
         VerifyEmailScreen.route,
       );

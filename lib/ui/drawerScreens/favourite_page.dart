@@ -48,7 +48,7 @@ class _FavouritePageState extends State<FavouritePage> {
                 if (state is IsfavouriteError) {
                   return Center(
                     child: Text(
-                      '${'Сделайте перезагрузку'}',
+                      state.errMsg,
                       style: TextStyle(fontSize: 20, color: Colors.red),
                     ),
                   );
@@ -59,7 +59,7 @@ class _FavouritePageState extends State<FavouritePage> {
                   return Expanded(
                     child: dataFavourites.isEmpty
                         ? Center(
-                            child: Text('Нету избраннных'),
+                            child: Text('Нету избранных'),
                           )
                         : GlossaryView.buildList(data: dataFavourites),
                   );

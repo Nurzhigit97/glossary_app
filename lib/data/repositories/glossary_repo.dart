@@ -31,8 +31,8 @@ class GlossaryRepo {
         // }
         return titleLower!.contains(searchLower);
       }).toList();
-    } catch (e) {
-      throw Exception(e);
+    } on DioError catch (err) {
+      throw Exception(err.message);
     }
   }
 
@@ -45,28 +45,21 @@ class GlossaryRepo {
         final titleLower = glossary.isFavourite;
         return titleLower;
       }).toList();
-    } catch (e) {
-      throw Exception(e);
+    } on DioError catch (err) {
+      throw Exception(err.message);
     }
   }
 
-  Future<List<GlossaryModel>> updateFavourite(
-      {id, title, description, isFavourite}) async {
+  Future updateFavourite({required int id, required bool isFavourite}) async {
     try {
-      Response response = await _dio.put(
+      await _dio.patch(
         endpointDetail + '$id/',
         data: {
-          'title': title,
-          'description': description,
           'isFavourite': isFavourite,
         },
       );
-      final data = await response.data as List;
-      List<GlossaryModel> resData =
-          data.map((json) => GlossaryModel.fromJson(json)).toList();
-      return resData;
-    } catch (e) {
-      throw Exception(e);
+    } on DioError catch (err) {
+      throw Exception(err.message);
     }
   }
 }
