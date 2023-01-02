@@ -19,23 +19,27 @@ class RegisteredDialog extends StatelessWidget {
           content: Container(
             constraints: BoxConstraints(maxHeight: 150),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FirebaseAuth.instance.currentUser != null
                     ? Column(
                         children: [
                           CircleAvatar(
                             radius: 40,
-                            backgroundImage: NetworkImage('${user?.photoURL}'),
+                            backgroundImage: NetworkImage(
+                                '${user?.photoURL ?? 'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'}'),
                           ),
                           SizedBox(
                             height: 10,
                           ),
-                          Text('${user?.displayName}'),
+                          Text('${user?.displayName ?? ''}'),
                           Text('${user?.email}'),
                         ],
                       )
-                    : Text('Пройти авторизацию'),
+                    : Text(
+                        'Пройти авторизацию',
+                        style: TextStyle(fontSize: 20),
+                      ),
               ],
             ),
           ),
