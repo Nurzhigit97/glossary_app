@@ -43,15 +43,13 @@ class AuthService {
     }
   }
 
-  register(
+  Future register(
       {required BuildContext context,
       required TextEditingController emailController,
       required TextEditingController passwordController}) async {
-    final formKey = GlobalKey<FormState>();
     firebase_auth.FirebaseAuth firebaseAuth =
         firebase_auth.FirebaseAuth.instance;
-    final isValid = formKey.currentState!.validate();
-    if (!isValid) return;
+
     try {
       await firebaseAuth.createUserWithEmailAndPassword(
         email: emailController.text,
