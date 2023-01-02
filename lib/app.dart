@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:glossary_app/data/repositories/auth_service.dart';
 import 'package:glossary_app/resources/app_routes.dart';
 import 'package:glossary_app/cubits/Glossary_cubit.dart';
 import 'package:glossary_app/cubits/favouriteGlossaries/isfavourite_cubit.dart';
@@ -28,7 +29,7 @@ class App extends StatelessWidget {
       child: MaterialApp(
         theme: ThemeSettings.getTheme(),
         debugShowCheckedModeBanner: false,
-        initialRoute: showHome ? HomeScreen.route : IntroScreen.route,
+        home: showHome ? AuthService().handleAuthState() : IntroScreen(),
         routes: getRoutes(),
       ),
     );

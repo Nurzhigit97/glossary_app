@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:glossary_app/data/repositories/auth_service.dart';
 import 'package:glossary_app/ui/authScreens/forgot_password_page.dart';
 import 'package:glossary_app/ui/authScreens/sign_up.dart';
-import 'package:glossary_app/ui/authScreens/verify_email_screen.dart';
 import 'package:glossary_app/ui/screens/home_screen.dart';
 import 'package:passwordfield/passwordfield.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
@@ -129,7 +129,11 @@ class _SignInState extends State<SignIn> {
                   ),
                 ),
                 ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () async {
+                    await AuthService().signInWithGoole();
+                    Navigator.of(context)
+                        .pushReplacementNamed(HomeScreen.route);
+                  },
                   icon: Icon(Icons.g_mobiledata_rounded),
                   label: Text('Авторизация с  Google'),
                 ),
@@ -138,15 +142,15 @@ class _SignInState extends State<SignIn> {
                   children: [
                     Text("У вас еще нет учетной записи?"),
                     TextButton(
-                      onPressed: () =>
-                          Navigator.of(context).pushNamed(SignUp.route),
+                      onPressed: () => Navigator.of(context)
+                          .pushReplacementNamed(SignUp.route),
                       child: Text('Sign Up'),
                     ),
                   ],
                 ),
                 TextButton(
                   onPressed: () => Navigator.of(context, rootNavigator: true)
-                      .pushNamed(ForgotPasswordPage.route),
+                      .pushReplacementNamed(ForgotPasswordPage.route),
                   child: Text('Забыли пароль?'),
                 ),
               ],
@@ -164,7 +168,7 @@ class _SignInState extends State<SignIn> {
         email: _emailController.text,
         password: _passwordController.text,
       );
-      Navigator.of(context).pushNamed(
+      Navigator.of(context).pushReplacementNamed(
         HomeScreen.route,
       );
     } on FirebaseAuthException catch (err) {

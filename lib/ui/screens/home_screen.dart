@@ -3,7 +3,7 @@ import 'package:glossary_app/resources/bottom_nav_settings.dart';
 
 // ignore: must_be_immutable
 class HomeScreen extends StatefulWidget {
-  static String route = '/';
+  static String route = '/home';
   HomeScreen({Key? key}) : super(key: key);
 
   @override

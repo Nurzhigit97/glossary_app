@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:glossary_app/ui/authScreens/sign_in.dart';
+import 'package:glossary_app/ui/screens/home_screen.dart';
 
 class RegisteredDialog extends StatelessWidget {
   static String route = 'registeredDialog';
@@ -13,49 +14,60 @@ class RegisteredDialog extends StatelessWidget {
       onPressed: () => showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-          insetPadding: EdgeInsets.only(bottom: 250),
           actionsAlignment: MainAxisAlignment.spaceEvenly,
-          title: Row(
-            children: [
-              Text(user?.email != null ? '${user?.email}' : 'Авторизоваться'),
-              TextButton(
-                style: TextButton.styleFrom(
-                  textStyle: Theme.of(context).textTheme.labelLarge,
-                ),
-                child: const Text(
-                  'Login',
-                  style: TextStyle(
-                    fontSize: 17,
-                  ),
-                ),
-                onPressed: () async {
-                  Navigator.of(context).pushReplacementNamed(SignIn.route);
-                },
-              ),
-            ],
+          content: Container(
+            constraints: BoxConstraints(maxHeight: 150),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                FirebaseAuth.instance.currentUser != null
+                    ? Column(
+                        children: [
+                          CircleAvatar(
+                            radius: 40,
+                            backgroundImage: NetworkImage('${user?.photoURL}'),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text('${user?.displayName}'),
+                          Text('${user?.email}'),
+                        ],
+                      )
+                    : Text('Пройти авторизацию'),
+              ],
+            ),
           ),
-          content: const Text('Welcome to my Glossary App'),
           actions: <Widget>[
-            ElevatedButton(
-              style: TextButton.styleFrom(
-                textStyle: Theme.of(context).textTheme.labelLarge,
-              ),
-              child: const Text('Выйти'),
-              onPressed: () async {
-                // final prefs = await SharedPreferences.getInstance();
-                // prefs.setBool('showHome', false);
-                await FirebaseAuth.instance.signOut();
-              },
-            ),
-            ElevatedButton(
-              style: TextButton.styleFrom(
-                textStyle: Theme.of(context).textTheme.labelLarge,
-              ),
-              child: const Text('Закрыть'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
+            FirebaseAuth.instance.currentUser == null
+                ? ElevatedButton(
+                    style: TextButton.styleFrom(
+                      textStyle: Theme.of(context).textTheme.labelLarge,
+                    ),
+                    child: const Text(
+                      'Логин',
+                      style: TextStyle(
+                        fontSize: 17,
+                      ),
+                    ),
+                    onPressed: () async {
+                      await Navigator.of(context)
+                          .pushReplacementNamed(SignIn.route);
+                    },
+                  )
+                : ElevatedButton(
+                    style: TextButton.styleFrom(
+                      textStyle: Theme.of(context).textTheme.labelLarge,
+                    ),
+                    child: const Text('Выйти'),
+                    onPressed: () async {
+                      // final prefs = await SharedPreferences.getInstance();
+                      // prefs.setBool('showHome', false);
+                      await FirebaseAuth.instance.signOut();
+                      await Navigator.of(context)
+                          .pushReplacementNamed(HomeScreen.route);
+                    },
+                  ),
           ],
         ),
       ),
