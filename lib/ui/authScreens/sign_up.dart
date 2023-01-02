@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:glossary_app/data/repositories/auth_service.dart';
 import 'package:glossary_app/ui/authScreens/sign_in.dart';
 import 'package:passwordfield/passwordfield.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
@@ -16,7 +17,6 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   final formKey = GlobalKey<FormState>();
-  firebase_auth.FirebaseAuth firebaseAuth = firebase_auth.FirebaseAuth.instance;
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   @override
@@ -114,7 +114,10 @@ class _SignUpState extends State<SignUp> {
                     height: 10,
                   ),
                   ElevatedButton(
-                    onPressed: register,
+                    onPressed: AuthService().register(
+                        context: context,
+                        emailController: _emailController,
+                        passwordController: _passwordController),
                     child: Text('Регистрация'),
                   ),
                   SizedBox(
@@ -138,27 +141,5 @@ class _SignUpState extends State<SignUp> {
         ),
       ),
     );
-  }
-
-  // Methods
-  Future register() async {
-    final isValid = formKey.currentState!.validate();
-    if (!isValid) return;
-    try {
-      await firebaseAuth.createUserWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
-
-      Navigator.of(context).pushReplacementNamed(
-        SignIn.route,
-      );
-    } on FirebaseAuthException catch (err) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(err.message.toString()),
-        ),
-      );
-    }
   }
 }

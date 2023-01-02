@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:glossary_app/data/repositories/auth_service.dart';
 import 'package:glossary_app/ui/authScreens/sign_in.dart';
 import 'package:glossary_app/ui/screens/home_screen.dart';
 
@@ -63,7 +64,7 @@ class RegisteredDialog extends StatelessWidget {
                     onPressed: () async {
                       // final prefs = await SharedPreferences.getInstance();
                       // prefs.setBool('showHome', false);
-                      await FirebaseAuth.instance.signOut();
+                      await AuthService().signOut();
                       await Navigator.of(context)
                           .pushReplacementNamed(HomeScreen.route);
                     },

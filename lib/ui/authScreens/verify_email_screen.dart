@@ -1,4 +1,5 @@
 /* import 'dart:async';
+import 'package:glossary_app/data/repositories/auth_service.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -102,7 +103,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                   TextButton(
                     onPressed: () async {
                       try {
-                        await FirebaseAuth.instance.signOut();
+                        await AuthService().signOut();
 
                         Navigator.of(context).pushNamed(SignIn.route);
                       } on FirebaseAuthException catch (err) {

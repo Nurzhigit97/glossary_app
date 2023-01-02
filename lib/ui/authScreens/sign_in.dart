@@ -1,11 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:glossary_app/data/repositories/auth_service.dart';
 import 'package:glossary_app/ui/authScreens/forgot_password_page.dart';
 import 'package:glossary_app/ui/authScreens/sign_up.dart';
 import 'package:glossary_app/ui/screens/home_screen.dart';
 import 'package:passwordfield/passwordfield.dart';
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
 class SignIn extends StatefulWidget {
   static String route = 'signIn';
@@ -16,8 +14,6 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  firebase_auth.FirebaseAuth firebaseAuth = firebase_auth.FirebaseAuth.instance;
-
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
@@ -103,7 +99,10 @@ class _SignInState extends State<SignIn> {
                   height: 10,
                 ),
                 ElevatedButton(
-                  onPressed: login,
+                  onPressed: AuthService().login(
+                      context: context,
+                      emailController: _emailController,
+                      passwordController: _passwordController),
                   child: const Text('Войти'),
                 ),
                 Container(
@@ -159,24 +158,5 @@ class _SignInState extends State<SignIn> {
         ),
       ),
     );
-  }
-
-  // Methods
-  Future login() async {
-    try {
-      await firebaseAuth.signInWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
-      Navigator.of(context).pushReplacementNamed(
-        HomeScreen.route,
-      );
-    } on FirebaseAuthException catch (err) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(err.message.toString()),
-        ),
-      );
-    }
   }
 }
