@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class AddGlossary extends StatefulWidget {
@@ -23,6 +24,9 @@ class _AddGlossaryState extends State<AddGlossary> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
+              FirebaseAuth.instance.currentUser == null
+                  ? Text('Чтобы добавить вам нужно авторизоваться')
+                  : SizedBox.shrink(),
               Container(
                 child: Image(
                   image: AssetImage('assets/addGlossary.png'),
@@ -54,6 +58,23 @@ class _AddGlossaryState extends State<AddGlossary> {
                     borderRadius: BorderRadius.circular(5),
                   ),
                 ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  FirebaseAuth.instance.currentUser == null
+                      ? ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Пройдите авторизацию для отправки'),
+                          ),
+                        )
+                      : ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                                'title: ${titleController.text} description: ${descriptionController.text}'),
+                          ),
+                        );
+                },
+                child: Text('Отправить'),
               ),
             ],
           ),
