@@ -99,7 +99,7 @@ class _SignInState extends State<SignIn> {
                   height: 10,
                 ),
                 ElevatedButton(
-                  onPressed: AuthService().login(
+                  onPressed: () => AuthService().login(
                       context: context,
                       emailController: _emailController,
                       passwordController: _passwordController),
