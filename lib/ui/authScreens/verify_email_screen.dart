@@ -1,7 +1,8 @@
-import 'dart:async';
+/* import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:glossary_app/ui/authScreens/sign_in.dart';
 import 'package:glossary_app/ui/screens/home_screen.dart';
 
 class VerifyEmailScreen extends StatefulWidget {
@@ -33,9 +34,19 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
 
   Future chechEmailVerified() async {
     // call after email verification!
-    await FirebaseAuth.instance.currentUser!.reload();
+    if (await FirebaseAuth.instance.currentUser == null) {
+      Navigator.of(context).pushReplacementNamed(SignIn.route);
+    } else {
+      await FirebaseAuth.instance.currentUser!.reload();
+    }
+
     setState(() {
-      isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
+      if (FirebaseAuth.instance.currentUser?.emailVerified == false ||
+          FirebaseAuth.instance.currentUser?.emailVerified == null) {
+        isEmailVerified = false;
+      } else {
+        isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
+      }
     });
 
     if (isEmailVerified) timer?.cancel();
@@ -89,8 +100,16 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                     label: Text('Повторно отправить электронное письмо'),
                   ),
                   TextButton(
-                    onPressed: () => FirebaseAuth.instance.signOut(),
-                    child: Text('Cancel'),
+                    onPressed: () async {
+                      try {
+                        await FirebaseAuth.instance.signOut();
+
+                        Navigator.of(context).pushNamed(SignIn.route);
+                      } on FirebaseAuthException catch (err) {
+                        print(err);
+                      }
+                    },
+                    child: Text('Выйти'),
                   ),
                 ],
               ),
@@ -98,3 +117,4 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
           );
   }
 }
+ */

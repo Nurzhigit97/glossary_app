@@ -29,7 +29,7 @@ class RegisteredDialog extends StatelessWidget {
                   ),
                 ),
                 onPressed: () async {
-                  Navigator.of(context).pushNamed(SignIn.route);
+                  Navigator.of(context).pushReplacementNamed(SignIn.route);
                 },
               ),
             ],
