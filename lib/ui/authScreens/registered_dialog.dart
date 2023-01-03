@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:glossary_app/data/repositories/auth_service.dart';
+import 'package:glossary_app/data/repositories/firebase_service.dart';
 import 'package:glossary_app/ui/authScreens/sign_in.dart';
 import 'package:glossary_app/ui/screens/home_screen.dart';
 
@@ -10,6 +10,7 @@ class RegisteredDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Получаем текущий пользователь
     User? user = FirebaseAuth.instance.currentUser;
     return IconButton(
       onPressed: () => showDialog(
@@ -21,6 +22,7 @@ class RegisteredDialog extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // Если не авторизован показываем текст "Пройти авторизацию" иначе данные user
                 FirebaseAuth.instance.currentUser != null
                     ? Column(
                         children: [
@@ -44,6 +46,7 @@ class RegisteredDialog extends StatelessWidget {
             ),
           ),
           actions: <Widget>[
+            // Если не авторизован показываем кнопку логин иначе Выйти
             FirebaseAuth.instance.currentUser == null
                 ? ElevatedButton(
                     style: TextButton.styleFrom(
@@ -66,9 +69,10 @@ class RegisteredDialog extends StatelessWidget {
                     ),
                     child: const Text('Выйти'),
                     onPressed: () async {
+                      // Чтобы могли переключать showIntro
                       // final prefs = await SharedPreferences.getInstance();
                       // prefs.setBool('showHome', false);
-                      await AuthService().signOut();
+                      await FirebaseService().signOut();
                       await Navigator.of(context)
                           .pushReplacementNamed(HomeScreen.route);
                     },

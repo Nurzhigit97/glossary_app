@@ -3,9 +3,9 @@ import 'package:glossary_app/data/models/glossary_model.dart';
 import 'package:glossary_app/ui/screens/detail_screen.dart';
 
 // ignore: must_be_immutable
-class GlossaryView extends StatelessWidget {
+class GlossaryList extends StatelessWidget {
   List<GlossaryModel> data;
-  GlossaryView({Key? key, required this.data}) : super(key: key);
+  GlossaryList({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

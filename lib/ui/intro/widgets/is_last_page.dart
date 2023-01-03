@@ -9,6 +9,7 @@ class IsLastPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Future<void> openHomeScreen() async {
       final prefs = await SharedPreferences.getInstance();
+      // В последнем странице Intro переключает на true
       prefs.setBool('showHome', true);
       Navigator.pushReplacementNamed(context, HomeScreen.route);
     }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:glossary_app/data/repositories/auth_service.dart';
+import 'package:glossary_app/data/repositories/firebase_service.dart';
 import 'package:glossary_app/ui/drawerPages/history_page.dart';
 
 class DrawerPage extends StatelessWidget {
@@ -38,7 +38,7 @@ class DrawerPage extends StatelessWidget {
             ),
             Stack(alignment: Alignment.bottomCenter, children: [
               TextButton(
-                onPressed: () => AuthService().deleteUser(context),
+                onPressed: () => FirebaseService().deleteUser(context),
                 child: Text('Удалить аккаунт'),
               ),
             ]),

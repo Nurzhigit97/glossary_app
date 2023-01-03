@@ -5,7 +5,7 @@ import 'package:glossary_app/ui/authScreens/sign_in.dart';
 import 'package:glossary_app/ui/screens/home_screen.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class AuthService {
+class FirebaseService {
   firebase_auth.FirebaseAuth firebaseAuth = firebase_auth.FirebaseAuth.instance;
 
   handleAuthState() {

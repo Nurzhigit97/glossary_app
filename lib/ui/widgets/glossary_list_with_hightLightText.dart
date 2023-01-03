@@ -5,8 +5,8 @@ import 'package:glossary_app/cubits/glossary_state.dart';
 import 'package:glossary_app/ui/globalWidgets/method_highlight.dart';
 import 'package:glossary_app/ui/screens/detail_screen.dart';
 
-class GlossaryList extends StatelessWidget {
-  const GlossaryList({
+class GlossaryListWithHighLightText extends StatelessWidget {
+  const GlossaryListWithHighLightText({
     Key? key,
     required this.textEditingController,
   }) : super(key: key);
@@ -48,6 +48,7 @@ class GlossaryList extends StatelessWidget {
                             child: ListTile(
                               title: RichText(
                                 text: TextSpan(
+                                  // при поиске открашивать задний фон найденных букв или слов на зеленый
                                   children: highlightOccurrences(
                                       source: '${glossary.title}',
                                       query: textEditingController.text),

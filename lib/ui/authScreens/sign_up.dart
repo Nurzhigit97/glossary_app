@@ -1,6 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:glossary_app/data/repositories/auth_service.dart';
+import 'package:glossary_app/data/repositories/firebase_service.dart';
 import 'package:glossary_app/ui/authScreens/sign_in.dart';
 import 'package:passwordfield/passwordfield.dart';
 
@@ -115,8 +115,9 @@ class _SignUpState extends State<SignUp> {
                   ElevatedButton(
                     onPressed: () {
                       final isValid = formKey.currentState!.validate();
+                      // если введенные email и password не верны не даем доступ к регистрации
                       if (!isValid) return;
-                      AuthService().register(
+                      FirebaseService().register(
                           context: context,
                           emailController: _emailController,
                           passwordController: _passwordController);

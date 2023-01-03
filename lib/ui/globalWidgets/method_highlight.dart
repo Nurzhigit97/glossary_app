@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// Получает для сравнения title glossaries и textController.text
 List<TextSpan> highlightOccurrences({String? source, String? query}) {
   if (query == null || query.isEmpty) {
     return [TextSpan(text: source)];

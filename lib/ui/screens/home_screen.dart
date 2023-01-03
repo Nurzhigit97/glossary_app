@@ -22,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        // BottomNavigationBar
         body: BottomNavSettings.screens().elementAt(_selectedPage),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,

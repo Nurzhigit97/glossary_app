@@ -66,6 +66,7 @@ class _AddGlossaryState extends State<AddGlossary> {
               ),
               ElevatedButton(
                 onPressed: () async {
+                  // Если не прошел авторизацию
                   if (FirebaseAuth.instance.currentUser == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
