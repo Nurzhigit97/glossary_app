@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:glossary_app/data/repositories/auth_service.dart';
 import 'package:glossary_app/ui/drawerPages/history_page.dart';
 
 class DrawerPage extends StatelessWidget {
@@ -35,6 +36,12 @@ class DrawerPage extends StatelessWidget {
                 ).pushNamed(HistoryPage.route);
               },
             ),
+            Stack(alignment: Alignment.bottomCenter, children: [
+              TextButton(
+                onPressed: () => AuthService().deleteUser(context),
+                child: Text('Удалить аккаунт'),
+              ),
+            ]),
           ],
         ),
       ),

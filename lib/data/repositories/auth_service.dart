@@ -116,4 +116,19 @@ class AuthService {
   signOut() {
     firebaseAuth.signOut();
   }
+
+  deleteUser(context) {
+    if (firebaseAuth.currentUser == null)
+      return ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Вы вышли из аккаунта или не прошли авторизацию'),
+        ),
+      );
+    firebaseAuth.currentUser?.delete();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Ваш аккаунт успешно удален'),
+      ),
+    );
+  }
 }
