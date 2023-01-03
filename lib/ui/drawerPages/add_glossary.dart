@@ -83,6 +83,11 @@ class _AddGlossaryState extends State<AddGlossary> {
                     );
                     await GlossaryRepo()
                         .addFavourite(modelGlossary: modelGlossary);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Успешно добавлен'),
+                      ),
+                    );
                     titleController.clear();
                     descriptionController.clear();
                   }
