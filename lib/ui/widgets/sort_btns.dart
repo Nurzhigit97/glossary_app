@@ -52,7 +52,6 @@ class SortBtns extends StatelessWidget {
                 alphabet[index],
               ),
               onPressed: () {
-                print(alphabet[index]);
                 resData.fetchGlossary(alphabet[index]);
               },
             ),

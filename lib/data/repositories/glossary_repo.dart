@@ -45,8 +45,6 @@ class GlossaryRepo {
     try {
       Response userData = await _dio.get(endpointDetail + id);
 
-      print('User Info: ${userData.data}');
-
       user = GlossaryModel.fromJson(userData.data);
     } on DioError catch (err) {
       if (err.response != null) {
@@ -68,6 +66,7 @@ class GlossaryRepo {
     } on DioError catch (err) {
       throw Exception(err.message);
     }
+    return null;
   }
 
   Future<List<GlossaryModel>> getFavourites() async {
