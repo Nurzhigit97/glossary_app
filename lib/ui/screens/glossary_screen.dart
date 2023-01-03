@@ -4,6 +4,7 @@ import 'package:glossary_app/cubits/Glossary_cubit.dart';
 import 'package:glossary_app/ui/authScreens/registered_dialog.dart';
 import 'package:glossary_app/ui/drawerPages/drawer_page.dart';
 import 'package:glossary_app/ui/widgets/glossary_list.dart';
+import 'package:glossary_app/ui/widgets/sort_btns.dart';
 
 class GlossaryScreen extends StatefulWidget {
   GlossaryScreen({super.key});
