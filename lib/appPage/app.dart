@@ -9,7 +9,6 @@ import 'package:glossary_app/data/repositories/glossary_repo.dart';
 import 'package:glossary_app/appPage/widgets/app_theme.dart';
 import 'package:glossary_app/ui/intro/intro_app.dart';
 
-//! question its true or not
 final _dio = Dio();
 
 // ignore: must_be_immutable

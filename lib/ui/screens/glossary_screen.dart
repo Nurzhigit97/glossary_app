@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:glossary_app/ui/authScreens/registered_dialog.dart';
-import 'package:glossary_app/ui/drawerScreens/drawer_page.dart';
+import 'package:glossary_app/ui/drawerPages/drawer_page.dart';
 import 'package:glossary_app/ui/widgets/glossary_ui.dart';
 import 'package:glossary_app/ui/widgets/search_glossary.dart';
 

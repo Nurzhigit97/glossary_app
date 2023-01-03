@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:glossary_app/ui/drawerScreens/history_page.dart';
+import 'package:glossary_app/ui/drawerPages/history_page.dart';
 
 class DrawerPage extends StatelessWidget {
   const DrawerPage({Key? key}) : super(key: key);
