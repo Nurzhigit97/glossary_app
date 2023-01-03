@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/cubits/Glossary_cubit.dart';
 import 'package:glossary_app/cubits/glossary_state.dart';
-import 'package:glossary_app/resources/method_highlight.dart';
+import 'package:glossary_app/ui/globalWidgets/method_highlight.dart';
 import 'package:glossary_app/ui/screens/detail_screen.dart';
 import 'package:glossary_app/ui/widgets/search_glossary.dart';
 
