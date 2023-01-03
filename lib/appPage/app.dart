@@ -2,13 +2,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/data/repositories/auth_service.dart';
-import 'package:glossary_app/resources/app_routes.dart';
+import 'package:glossary_app/appPage/widgets/app_routes.dart';
 import 'package:glossary_app/cubits/Glossary_cubit.dart';
 import 'package:glossary_app/cubits/favouriteGlossaries/isfavourite_cubit.dart';
 import 'package:glossary_app/data/repositories/glossary_repo.dart';
-import 'package:glossary_app/resources/theme_app.dart';
+import 'package:glossary_app/appPage/widgets/app_theme.dart';
 import 'package:glossary_app/ui/intro/intro_app.dart';
-import 'package:glossary_app/ui/screens/home_screen.dart';
 
 //! question its true or not
 final _dio = Dio();

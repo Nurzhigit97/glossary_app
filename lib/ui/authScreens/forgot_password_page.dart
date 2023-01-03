@@ -47,7 +47,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   style: ElevatedButton.styleFrom(
                     minimumSize: Size.fromHeight(50),
                   ),
-                  onPressed: AuthService().resetPassword(
+                  onPressed: () => AuthService().resetPassword(
                       context: context, emailController: emailController),
                   icon: Icon(Icons.email_outlined),
                   label: Text('Сбросить пароль'))
