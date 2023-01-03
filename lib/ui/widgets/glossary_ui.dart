@@ -4,10 +4,10 @@ import 'package:glossary_app/cubits/Glossary_cubit.dart';
 import 'package:glossary_app/cubits/glossary_state.dart';
 import 'package:glossary_app/ui/globalWidgets/method_highlight.dart';
 import 'package:glossary_app/ui/screens/detail_screen.dart';
-import 'package:glossary_app/ui/widgets/search_glossary.dart';
 
 class GlossaryUi extends StatefulWidget {
-  const GlossaryUi({Key? key}) : super(key: key);
+  TextEditingController controller;
+  GlossaryUi({Key? key, required this.controller}) : super(key: key);
 
   @override
   State<GlossaryUi> createState() => _GlossaryUiState();
@@ -42,8 +42,7 @@ class _GlossaryUiState extends State<GlossaryUi> {
                     itemCount: state.glossary.length,
                     itemBuilder: (context, index) {
                       final glossary = state.glossary[index];
-                      final getSearchValue =
-                          SearchGlossary.textEditingController.text;
+                      final getSearchValue = widget.controller.text;
                       return InkWell(
                         onTap: () => Navigator.of(context).push(
                           MaterialPageRoute(
