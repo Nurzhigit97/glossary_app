@@ -5,21 +5,13 @@ import 'package:glossary_app/cubits/glossary_state.dart';
 import 'package:glossary_app/ui/globalWidgets/method_highlight.dart';
 import 'package:glossary_app/ui/screens/detail_screen.dart';
 
-class GlossaryUi extends StatefulWidget {
-  TextEditingController controller;
-  GlossaryUi({Key? key, required this.controller}) : super(key: key);
+class GlossaryList extends StatelessWidget {
+  const GlossaryList({
+    Key? key,
+    required this.textEditingController,
+  }) : super(key: key);
 
-  @override
-  State<GlossaryUi> createState() => _GlossaryUiState();
-}
-
-class _GlossaryUiState extends State<GlossaryUi> {
-  @override
-  void initState() {
-    final resData = context.read<GlossaryCubit>();
-    resData.fetchGlossary('');
-    super.initState();
-  }
+  final TextEditingController textEditingController;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +34,6 @@ class _GlossaryUiState extends State<GlossaryUi> {
                     itemCount: state.glossary.length,
                     itemBuilder: (context, index) {
                       final glossary = state.glossary[index];
-                      final getSearchValue = widget.controller.text;
                       return InkWell(
                         onTap: () => Navigator.of(context).push(
                           MaterialPageRoute(
@@ -59,7 +50,7 @@ class _GlossaryUiState extends State<GlossaryUi> {
                                 text: TextSpan(
                                   children: highlightOccurrences(
                                       source: '${glossary.title}',
-                                      query: getSearchValue),
+                                      query: textEditingController.text),
                                   style: TextStyle(
                                       color: Color.fromARGB(255, 0, 0, 0)),
                                 ),

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/cubits/Glossary_cubit.dart';
 import 'package:glossary_app/ui/authScreens/registered_dialog.dart';
 import 'package:glossary_app/ui/drawerPages/drawer_page.dart';
-import 'package:glossary_app/ui/widgets/glossary_ui.dart';
+import 'package:glossary_app/ui/widgets/glossary_list.dart';
 
 class GlossaryScreen extends StatefulWidget {
   GlossaryScreen({super.key});
@@ -14,6 +14,12 @@ class GlossaryScreen extends StatefulWidget {
 
 class _GlossaryScreenState extends State<GlossaryScreen> {
   TextEditingController textEditingController = TextEditingController();
+  @override
+  void initState() {
+    final resData = context.read<GlossaryCubit>();
+    resData.fetchGlossary('');
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +42,7 @@ class _GlossaryScreenState extends State<GlossaryScreen> {
         margin: EdgeInsets.only(left: 10, top: 15, right: 10),
         child: Column(
           children: [
-            // sortBtns(context),
+            // SortBtns(),
             //! Search
             Padding(
               padding: const EdgeInsets.only(bottom: 10),
@@ -54,7 +60,7 @@ class _GlossaryScreenState extends State<GlossaryScreen> {
                 ),
               ),
             ),
-            GlossaryUi(controller: textEditingController),
+            GlossaryList(textEditingController: textEditingController),
           ],
         ),
       ),
