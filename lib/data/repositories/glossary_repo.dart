@@ -2,17 +2,20 @@ import 'package:dio/dio.dart';
 import 'package:glossary_app/data/models/glossary_model.dart';
 
 class GlossaryRepo {
-  Dio _dio;
-
-  GlossaryRepo(this._dio);
-  // String endpoint = 'http://192.168.43.127:8000/api/glossary/view/all/';
-  String endpoint = 'http://192.168.43.127:8000/api/glossary/view/all/';
-  String endpointDetail = 'http://192.168.43.127:8000/api/glossary/detail/';
+  final Dio _dio = Dio(
+    BaseOptions(
+      baseUrl: 'http://192.168.43.127:8000/',
+      connectTimeout: 5000,
+      receiveTimeout: 3000,
+    ),
+  );
+  final String endpointAll = 'api/glossary/view/all/';
+  final String endpointDetail = 'api/glossary/detail/';
 //   //! for emulator http://10.0.2.2:8000/
 //   //!real device http://192.168.43.127:8000/
 
   Future<List<GlossaryModel>> getAll({String? query}) async {
-    final response = await _dio.get(endpoint);
+    final response = await _dio.get(endpointAll);
     try {
       final data = await response.data as List;
       final resData = data.map((json) => GlossaryModel.fromJson(json));
@@ -36,8 +39,39 @@ class GlossaryRepo {
     }
   }
 
+  Future<GlossaryModel?> getGlossary({required String id}) async {
+    GlossaryModel? user;
+
+    try {
+      Response userData = await _dio.get(endpointDetail + id);
+
+      print('User Info: ${userData.data}');
+
+      user = GlossaryModel.fromJson(userData.data);
+    } on DioError catch (err) {
+      if (err.response != null) {
+      } else {
+        throw Exception(err.message);
+      }
+    }
+
+    return user;
+  }
+
+  Future<GlossaryModel?> addFavourite(
+      {required GlossaryModel modelGlossary}) async {
+    try {
+      await _dio.post(
+        endpointAll,
+        data: modelGlossary,
+      );
+    } on DioError catch (err) {
+      throw Exception(err.message);
+    }
+  }
+
   Future<List<GlossaryModel>> getFavourites() async {
-    Response response = await _dio.get(endpoint);
+    Response response = await _dio.get(endpointAll);
     try {
       final data = await response.data as List;
       final resData = data.map((json) => GlossaryModel.fromJson(json));

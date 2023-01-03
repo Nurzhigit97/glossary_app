@@ -1,10 +1,10 @@
 class GlossaryModel {
-  final int id;
+  late final int? id;
   late final String? title;
   late final String? description;
   final bool isFavourite;
   GlossaryModel({
-    required this.id,
+    this.id,
     this.title,
     this.description,
     required this.isFavourite,

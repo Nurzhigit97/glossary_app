@@ -9,13 +9,11 @@ import 'package:glossary_app/data/repositories/glossary_repo.dart';
 import 'package:glossary_app/appPage/widgets/app_theme.dart';
 import 'package:glossary_app/ui/intro/intro_app.dart';
 
-final _dio = Dio();
-
 // ignore: must_be_immutable
 class App extends StatelessWidget {
   bool showHome;
   App(this.showHome, {Key? key}) : super(key: key);
-  GlossaryRepo _glossaryRepo = GlossaryRepo(_dio);
+  GlossaryRepo _glossaryRepo = GlossaryRepo();
 
   @override
   Widget build(BuildContext context) {

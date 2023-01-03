@@ -48,7 +48,7 @@ class _GlossaryUiState extends State<GlossaryUi> {
                         onTap: () => Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => DetailScreen(
-                              e: glossary,
+                              id: glossary.id,
                             ),
                           ),
                         ),

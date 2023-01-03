@@ -17,7 +17,7 @@ class GlossaryView extends StatelessWidget {
           onTap: () => Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => DetailScreen(
-                e: glossary,
+                id: glossary.id,
               ),
             ),
           ),

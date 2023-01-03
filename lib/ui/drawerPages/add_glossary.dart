@@ -1,5 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:glossary_app/data/models/glossary_model.dart';
+import 'package:glossary_app/data/repositories/glossary_repo.dart';
+
+Dio? dio;
 
 class AddGlossary extends StatefulWidget {
   const AddGlossary({Key? key}) : super(key: key);
@@ -60,19 +65,27 @@ class _AddGlossaryState extends State<AddGlossary> {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {
-                  FirebaseAuth.instance.currentUser == null
-                      ? ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('Пройдите авторизацию для отправки'),
-                          ),
-                        )
-                      : ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                                'title: ${titleController.text} description: ${descriptionController.text}'),
-                          ),
-                        );
+                onPressed: () async {
+                  if (FirebaseAuth.instance.currentUser == null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Пройдите авторизацию для отправки'),
+                      ),
+                    );
+                  }
+                  if (FirebaseAuth.instance.currentUser == null) return;
+                  if (titleController.text != '' &&
+                      descriptionController.text != '') {
+                    GlossaryModel modelGlossary = GlossaryModel(
+                      title: titleController.text,
+                      description: descriptionController.text,
+                      isFavourite: false,
+                    );
+                    await GlossaryRepo()
+                        .addFavourite(modelGlossary: modelGlossary);
+                    titleController.clear();
+                    descriptionController.clear();
+                  }
                 },
                 child: Text('Отправить'),
               ),
