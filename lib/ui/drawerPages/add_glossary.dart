@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:glossary_app/data/models/glossary_model.dart';
+import 'package:glossary_app/data/repositories/check_glossary_repo.dart';
 import 'package:glossary_app/data/repositories/glossary_repo.dart';
 
 Dio? dio;
@@ -81,12 +82,13 @@ class _AddGlossaryState extends State<AddGlossary> {
                       title: titleController.text,
                       description: descriptionController.text,
                       isFavourite: false,
+                      isChecked: false,
                     );
-                    await GlossaryRepo()
-                        .addFavourite(modelGlossary: modelGlossary);
+                    await CheckGlossaryRepo()
+                        .addToAdminPanel(modelGlossary: modelGlossary);
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('Успешно добавлен'),
+                        content: Text('Ваш Глоссарий отправлен на проверку'),
                       ),
                     );
                     titleController.clear();

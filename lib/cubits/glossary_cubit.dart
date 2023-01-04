@@ -15,7 +15,7 @@ class GlossaryCubit extends Cubit<GlossaryState> {
 
     try {
       List<GlossaryModel> response =
-          await _repository.getAll(query: searchValue);
+          await _repository.searchGlossary(query: searchValue);
       emit(LoadedGlossaryState(response));
     } on DioError catch (err) {
       emit(ErrorGlossaryState(err.message.toString()));

@@ -60,6 +60,7 @@ class _GlossaryScreenState extends State<GlossaryScreen> {
                 ),
               ),
             ),
+
             // Glossaries List
             GlossaryListWithHighLightText(
                 textEditingController: textEditingController),

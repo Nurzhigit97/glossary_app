@@ -3,11 +3,13 @@ class GlossaryModel {
   late final String? title;
   late final String? description;
   final bool isFavourite;
+  final bool isChecked;
   GlossaryModel({
     this.id,
     this.title,
     this.description,
     required this.isFavourite,
+    required this.isChecked,
   });
 
   factory GlossaryModel.fromJson(Map<String, dynamic> json) {
@@ -16,6 +18,7 @@ class GlossaryModel {
       title: json['title'],
       description: json['description'],
       isFavourite: json['isFavourite'],
+      isChecked: json['isChecked'],
     );
   }
 
@@ -24,5 +27,6 @@ class GlossaryModel {
         'title': title,
         'description': description,
         'isFavourite': isFavourite,
+        'isChecked': isChecked,
       };
 }

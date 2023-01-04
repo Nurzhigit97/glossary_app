@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:glossary_app/ui/admin_panel/admin_panel.dart';
 
 import 'package:glossary_app/ui/authScreens/forgot_password_page.dart';
 import 'package:glossary_app/ui/authScreens/registered_dialog.dart';
@@ -17,5 +18,6 @@ Map<String, WidgetBuilder> getRoutes() => <String, WidgetBuilder>{
       SignUp.route: (_) => SignUp(),
       RegisteredDialog.route: (_) => RegisteredDialog(),
       ForgotPasswordPage.route: (_) => ForgotPasswordPage(),
+      AdminPanel.route: (_) => AdminPanel(),
       // VerifyEmailScreen.route: (_) => VerifyEmailScreen(),
     };

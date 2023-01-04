@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:glossary_app/data/repositories/firebase_service.dart';
+import 'package:glossary_app/ui/admin_panel/admin_panel.dart';
 import 'package:glossary_app/ui/drawerPages/history_page.dart';
 
 class DrawerPage extends StatelessWidget {
@@ -34,6 +35,15 @@ class DrawerPage extends StatelessWidget {
                   context,
                   rootNavigator: true,
                 ).pushNamed(HistoryPage.route);
+              },
+            ),
+            ListTile(
+              title: const Text('Admin'),
+              onTap: () {
+                Navigator.of(
+                  context,
+                  rootNavigator: true,
+                ).pushNamed(AdminPanel.route);
               },
             ),
             Stack(alignment: Alignment.bottomCenter, children: [

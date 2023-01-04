@@ -14,7 +14,7 @@ class GlossaryRepo {
 //   //! for emulator http://10.0.2.2:8000/
 //   //!real device http://192.168.43.127:8000/
 
-  Future<List<GlossaryModel>> getAll({String? query}) async {
+  Future<List<GlossaryModel>> searchGlossary({String? query}) async {
     final response = await _dio.get(endpointAll);
     try {
       final data = await response.data as List;
@@ -39,6 +39,17 @@ class GlossaryRepo {
     }
   }
 
+  Future<List<GlossaryModel>> getGlossaries() async {
+    final response = await _dio.get(endpointAll);
+    try {
+      final data = await response.data;
+      final List<dynamic> result = data;
+      return result.map(((e) => GlossaryModel.fromJson(e))).toList();
+    } on DioError catch (err) {
+      throw Exception(err.message);
+    }
+  }
+
   Future<GlossaryModel?> getGlossary({required String id}) async {
     GlossaryModel? user;
 
@@ -56,7 +67,7 @@ class GlossaryRepo {
     return user;
   }
 
-  Future<GlossaryModel?> addFavourite(
+  Future<GlossaryModel?> addGlossary(
       {required GlossaryModel modelGlossary}) async {
     try {
       await _dio.post(
