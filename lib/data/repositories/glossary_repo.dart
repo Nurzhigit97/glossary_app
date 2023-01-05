@@ -13,11 +13,14 @@ class GlossaryRepo {
   final String endpointDetail = 'api/glossary/detail/';
 //   //! for emulator http://10.0.2.2:8000/
 //   //!real device http://192.168.43.127:8000/
+  static late int lenData;
 
   Future<List<GlossaryModel>> searchGlossary({String? query}) async {
     final response = await _dio.get(endpointAll);
     try {
       final data = await response.data as List;
+      lenData = data.length;
+
       final resData = data.map((json) => GlossaryModel.fromJson(json));
       return resData.where((glossary) {
         final titleLower = glossary.title?.toLowerCase().trim();
@@ -44,6 +47,7 @@ class GlossaryRepo {
     try {
       final data = await response.data;
       final List<dynamic> result = data;
+
       return result.map(((e) => GlossaryModel.fromJson(e))).toList();
     } on DioError catch (err) {
       throw Exception(err.message);
