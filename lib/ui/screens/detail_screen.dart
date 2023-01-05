@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:glossary_app/data/models/glossary_model.dart';
 import 'package:glossary_app/data/repositories/glossary_repo.dart';
 
-class DetailScreen extends StatelessWidget {
+class DetailScreen extends StatefulWidget {
   final int? id;
   DetailScreen({
     Key? key,
@@ -11,9 +11,14 @@ class DetailScreen extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<DetailScreen> createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends State<DetailScreen> {
+  @override
   Widget build(BuildContext context) {
     return FutureBuilder<GlossaryModel?>(
-      future: GlossaryRepo().getGlossary(id: '$id'),
+      future: GlossaryRepo().getGlossary(id: '${widget.id}'),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           GlossaryModel? glossary = snapshot.data;
