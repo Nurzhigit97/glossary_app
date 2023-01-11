@@ -1,8 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:glossary_app/data/repositories/firebase_service.dart';
 import 'package:glossary_app/ui/authScreens/sign_in.dart';
-import 'package:glossary_app/ui/screens/home_screen.dart';
 
 class RegisteredDialog extends StatelessWidget {
   static String route = 'registeredDialog';
@@ -46,37 +44,20 @@ class RegisteredDialog extends StatelessWidget {
             ),
           ),
           actions: <Widget>[
-            // Если не авторизован показываем кнопку логин иначе Выйти
-            FirebaseAuth.instance.currentUser == null
-                ? ElevatedButton(
-                    style: TextButton.styleFrom(
-                      textStyle: Theme.of(context).textTheme.labelLarge,
-                    ),
-                    child: const Text(
-                      'Логин',
-                      style: TextStyle(
-                        fontSize: 17,
-                      ),
-                    ),
-                    onPressed: () async {
-                      await Navigator.of(context)
-                          .pushReplacementNamed(SignIn.route);
-                    },
-                  )
-                : ElevatedButton(
-                    style: TextButton.styleFrom(
-                      textStyle: Theme.of(context).textTheme.labelLarge,
-                    ),
-                    child: const Text('Выйти'),
-                    onPressed: () async {
-                      // Чтобы могли переключать showIntro
-                      // final prefs = await SharedPreferences.getInstance();
-                      // prefs.setBool('showHome', false);
-                      await FirebaseService().signOut();
-                      await Navigator.of(context)
-                          .pushReplacementNamed(HomeScreen.route);
-                    },
-                  ),
+            ElevatedButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text(
+                'Логин',
+                style: TextStyle(
+                  fontSize: 17,
+                ),
+              ),
+              onPressed: () async {
+                await Navigator.of(context).pushReplacementNamed(SignIn.route);
+              },
+            ),
           ],
         ),
       ),

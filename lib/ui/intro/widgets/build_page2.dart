@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:glossary_app/ui/intro/widgets/is_last_page.dart';
 
 class IntroPage2 extends StatelessWidget {
   const IntroPage2({Key? key}) : super(key: key);
@@ -46,7 +47,8 @@ class IntroPage2 extends StatelessWidget {
                 ),
               ],
             ),
-          )
+          ),
+          IsLastPage(),
         ],
       ),
     );

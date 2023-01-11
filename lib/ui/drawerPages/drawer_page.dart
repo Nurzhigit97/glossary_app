@@ -48,8 +48,8 @@ class DrawerPage extends StatelessWidget {
             ),
             Stack(alignment: Alignment.bottomCenter, children: [
               TextButton(
-                onPressed: () => FirebaseService().deleteUser(context),
-                child: Text('Удалить аккаунт'),
+                onPressed: () => FirebaseService().signOut(),
+                child: Text('Выйти'),
               ),
             ]),
           ],

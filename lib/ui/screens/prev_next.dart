@@ -1,11 +1,13 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:number_paginator/number_paginator.dart';
 
 import 'package:glossary_app/data/models/glossary_model.dart';
 import 'package:glossary_app/data/repositories/glossary_repo.dart';
-import 'package:number_paginator/number_paginator.dart';
 
 class PrevNext extends StatefulWidget {
   int id;
+
   PrevNext({
     Key? key,
     required this.id,
@@ -20,6 +22,9 @@ class _PrevNextState extends State<PrevNext> {
   final _controllerNumber = NumberPaginatorController();
   int _numPages = GlossaryRepo.lenData;
   late int _currentPage;
+  late int indexGlossary = _currentPage;
+  late String prevTitle;
+  late String nextTitle;
 
   @override
   void initState() {
@@ -81,10 +86,6 @@ class _PrevNextState extends State<PrevNext> {
                           ],
                         ),
                       ),
-                      PrevNextGlossary(
-                          currentPage: _currentPage,
-                          controllerNumber: _controllerNumber),
-                      SizedBox(height: 30),
                     ],
                   ),
                 ),
@@ -95,10 +96,45 @@ class _PrevNextState extends State<PrevNext> {
                 elevation: 4,
                 child: NumberPaginator(
                   controller: _controllerNumber,
+                  config:
+                      NumberPaginatorUIConfig(mode: ContentDisplayMode.numbers),
+                  contentBuilder: (index) {
+                    return Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          //prev Button
+                          FutureBuilder<GlossaryModel?>(
+                            future: GlossaryRepo()
+                                .getGlossary(id: '${_currentPage - 1}'),
+                            builder: ((context, snapshot) {
+                              GlossaryModel? glossary = snapshot.data;
+                              return Text(
+                                '${glossary?.title != null ? glossary?.title!.split('—').first : '-'}',
+                                style: TextStyle(color: Colors.blue),
+                              );
+                            }),
+                          ),
+                          //next Button
+                          FutureBuilder<GlossaryModel?>(
+                            future: GlossaryRepo()
+                                .getGlossary(id: '${_currentPage + 1}'),
+                            builder: ((context, snapshot) {
+                              GlossaryModel? glossary = snapshot.data;
+                              return Text(
+                                '${glossary?.title != null ? glossary?.title!.split('—').first : '-'}',
+                                style: TextStyle(color: Colors.blue),
+                              );
+                            }),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                   numberPages: _numPages,
                   onPageChange: (int index) {
                     setState(() {
-                      if (index <= 0) return;
+                      if (indexGlossary <= 1) return;
                       _currentPage = index;
                     });
                   },
@@ -109,82 +145,6 @@ class _PrevNextState extends State<PrevNext> {
         }
         return Center(child: CircularProgressIndicator());
       },
-    );
-  }
-}
-
-class PrevNextGlossary extends StatelessWidget {
-  const PrevNextGlossary({
-    Key? key,
-    required int currentPage,
-    required NumberPaginatorController controllerNumber,
-  })  : _currentPage = currentPage,
-        _controllerNumber = controllerNumber,
-        super(key: key);
-
-  final int _currentPage;
-  final NumberPaginatorController _controllerNumber;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        //prev Button
-        FutureBuilder<GlossaryModel?>(
-          future: GlossaryRepo().getGlossary(id: '${_currentPage - 1}'),
-          builder: ((context, snapshot) {
-            GlossaryModel? glossary = snapshot.data;
-            return Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.blueAccent),
-                ),
-                child: ListTile(
-                  onTap: () async {
-                    if (glossary?.title == null) return;
-                    _controllerNumber.prev();
-                  },
-                  title: Text(
-                    '${glossary?.title != null ? glossary?.title!.split('—').first : '-'}',
-                    style: TextStyle(color: Colors.blue),
-                  ),
-                  leading: Icon(Icons.arrow_circle_left_outlined,
-                      color: Colors.blue),
-                ),
-              ),
-            );
-          }),
-        ),
-        //next Button
-        FutureBuilder<GlossaryModel?>(
-          future: GlossaryRepo().getGlossary(id: '${_currentPage + 1}'),
-          builder: ((context, snapshot) {
-            GlossaryModel? glossary = snapshot.data;
-            return Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.blueAccent),
-                ),
-                child: ListTile(
-                  onTap: () async {
-                    if (glossary?.title == null) return;
-                    _controllerNumber.next();
-                  },
-                  title: Text(
-                    '${glossary?.title != null ? glossary?.title!.split('—').first : '-'}',
-                    style: TextStyle(color: Colors.blue),
-                  ),
-                  trailing: Icon(
-                    Icons.arrow_circle_right_outlined,
-                    color: Colors.blue,
-                  ),
-                ),
-              ),
-            );
-          }),
-        ),
-      ],
     );
   }
 }

@@ -15,7 +15,7 @@ class ActionsIntro extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           TextButton(
-            onPressed: () => pageController.jumpToPage(2),
+            onPressed: () => pageController.jumpToPage(1),
             child: Text(
               'Пропустить',
               style: TextStyle(
@@ -27,7 +27,7 @@ class ActionsIntro extends StatelessWidget {
           Center(
             child: SmoothPageIndicator(
               controller: pageController,
-              count: 3,
+              count: 2,
               effect: WormEffect(
                 dotWidth: 12,
                 dotHeight: 12,

@@ -14,17 +14,15 @@ class IsLastPage extends StatelessWidget {
       Navigator.pushReplacementNamed(context, HomeScreen.route);
     }
 
-    return Container(
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Color.fromARGB(255, 44, 136, 148),
-          minimumSize: const Size.fromHeight(800),
-        ),
-        onPressed: openHomeScreen,
-        child: Text(
-          'Войти',
-          style: TextStyle(fontSize: 30),
-        ),
+    return IconButton(
+      style: ElevatedButton.styleFrom(
+        minimumSize: const Size.fromHeight(800),
+      ),
+      onPressed: openHomeScreen,
+      icon: Icon(
+        Icons.arrow_circle_right_outlined,
+        color: Colors.white,
+        size: 70,
       ),
     );
   }

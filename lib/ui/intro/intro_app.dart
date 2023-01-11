@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:glossary_app/ui/intro/widgets/actions_intro.dart';
 import 'package:glossary_app/ui/intro/widgets/build_pages.dart';
 import 'package:glossary_app/ui/intro/widgets/build_page2.dart';
-import 'package:glossary_app/ui/intro/widgets/is_last_page.dart';
-import 'package:glossary_app/ui/intro/widgets/build_last_page.dart';
 
 class IntroScreen extends StatefulWidget {
   static String route = 'introScreen';
@@ -17,16 +15,11 @@ class IntroScreen extends StatefulWidget {
 class _IntroScreenState extends State<IntroScreen> {
   final controller = PageController();
 
-  bool isLastPage = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
         controller: controller,
-        onPageChanged: (index) {
-          setState(() => isLastPage = index == 2);
-        },
         children: [
           BuildPages(
             colorIntro: Color.fromARGB(255, 44, 136, 148),
@@ -35,11 +28,9 @@ class _IntroScreenState extends State<IntroScreen> {
             urlImg: 'assets/addGlossary.png',
           ),
           IntroPage2(),
-          BuildLastPage(),
         ],
       ),
-      bottomSheet:
-          isLastPage ? IsLastPage() : ActionsIntro(pageController: controller),
+      bottomSheet: ActionsIntro(pageController: controller),
     );
   }
 }
