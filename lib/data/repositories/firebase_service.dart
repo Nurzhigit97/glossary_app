@@ -13,11 +13,10 @@ class FirebaseService {
         stream: firebaseAuth.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
+            //  final res= firebaseAuth.currentUser.;
             return HomeScreen();
           } else {
-            return HomeScreen();
-            // Если нужно сделаем вход через email
-            // return SignIn();
+            return SignIn();
           }
         });
   }

@@ -331,6 +331,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  number_pagination:
+    dependency: "direct main"
+    description:
+      name: number_pagination
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.3+2"
   number_paginator:
     dependency: "direct main"
     description:

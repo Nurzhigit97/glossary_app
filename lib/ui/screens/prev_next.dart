@@ -5,6 +5,7 @@ import 'package:number_paginator/number_paginator.dart';
 import 'package:glossary_app/data/models/glossary_model.dart';
 import 'package:glossary_app/data/repositories/glossary_repo.dart';
 
+// ignore: must_be_immutable
 class PrevNext extends StatefulWidget {
   int id;
 
@@ -20,7 +21,7 @@ class PrevNext extends StatefulWidget {
 class _PrevNextState extends State<PrevNext> {
   GlossaryModel? data;
   final _controllerNumber = NumberPaginatorController();
-  int _numPages = GlossaryRepo.lenData;
+  int _numPages = GlossaryRepo.lenData - 1;
   late int _currentPage;
   late int indexGlossary = _currentPage;
   late String prevTitle;
@@ -134,7 +135,8 @@ class _PrevNextState extends State<PrevNext> {
                   numberPages: _numPages,
                   onPageChange: (int index) {
                     setState(() {
-                      if (indexGlossary <= 1) return;
+                      if (index == _numPages) return;
+                      if (index < 1) return;
                       _currentPage = index;
                     });
                   },

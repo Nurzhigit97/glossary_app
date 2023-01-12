@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:glossary_app/data/models/glossary_model.dart';
 import 'package:glossary_app/data/repositories/check_glossary_repo.dart';
-import 'package:glossary_app/data/repositories/glossary_repo.dart';
 
 Dio? dio;
 
