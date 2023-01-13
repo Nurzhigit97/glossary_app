@@ -1,8 +1,13 @@
 import 'package:email_validator/email_validator.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/data/repositories/firebase_service.dart';
+import 'package:glossary_app/data/repositories/user_service.dart';
 import 'package:glossary_app/ui/authScreens/sign_in.dart';
 import 'package:passwordfield/passwordfield.dart';
+
+import '../../data/models/user_model.dart';
 
 class SignUp extends StatefulWidget {
   static String route = 'signUp';
@@ -113,14 +118,30 @@ class _SignUpState extends State<SignUp> {
                     height: 10,
                   ),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       final isValid = formKey.currentState!.validate();
                       // если введенные email и password не верны не даем доступ к регистрации
                       if (!isValid) return;
-                      FirebaseService().register(
-                          context: context,
-                          emailController: _emailController,
-                          passwordController: _passwordController);
+
+                      /// cоздаем пользователя в Firebase Auth
+                      final uid =
+                          await context.read<FirebaseService>().register(
+                                context: context,
+                                emailController: _emailController,
+                                passwordController: _passwordController,
+                              );
+
+                      if (uid == null) return;
+
+                      /// cоздаем документ пользователя в Firebase Firestore
+                      final userModel = UserModel(
+                        id: uid,
+                        email: _emailController.text,
+                        role: UserRole.user,
+                      );
+
+                      UserService().addUser(userModel, uid);
+                      setState(() {});
                     },
                     child: Text('Регистрация'),
                   ),

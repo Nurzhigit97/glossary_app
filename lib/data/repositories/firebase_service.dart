@@ -1,6 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
+import 'package:glossary_app/data/models/user_model.dart';
+import 'package:glossary_app/ui/admin_panel/admin_panel.dart';
 import 'package:glossary_app/ui/authScreens/sign_in.dart';
 import 'package:glossary_app/ui/screens/home_screen.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -8,23 +12,57 @@ import 'package:google_sign_in/google_sign_in.dart';
 class FirebaseService {
   firebase_auth.FirebaseAuth firebaseAuth = firebase_auth.FirebaseAuth.instance;
 
-  handleAuthState() {
-    return StreamBuilder(
+  Widget handleAuthState() {
+    return StreamBuilder<firebase_auth.User?>(
         stream: firebaseAuth.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            //  final res= firebaseAuth.currentUser.;
-            return HomeScreen();
+            /// получаем id пользователя
+            final userUid = snapshot.data!.uid;
+
+            /// получаем данные пользователя из firestore по id
+            return FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+              future: FirebaseFirestore.instance.doc('users/$userUid').get(),
+              builder: (context, snapshot) {
+                /// проверяем произошла ли ошибка при получении
+                if (snapshot.hasError) {
+                  return Text(snapshot.error.toString());
+                }
+
+                /// проверяем получили ли данные
+                if (snapshot.hasData) {
+                  /// получаем тип роли пользователя
+                  if (snapshot.data!.data() == null) {
+                    return HomeScreen();
+                  }
+                  final firestoreDocJson = snapshot.data!.data()!;
+                  final userModel = UserModel.fromJson(firestoreDocJson);
+                  final role = userModel.role;
+
+                  /// это админ ?
+                  if (role == UserRole.admin) {
+                    return AdminPanel();
+                  }
+
+                  /// иначе это пользователь
+                  return HomeScreen();
+                }
+
+                /// иначе загрузка
+                return Center(child: CircularProgressIndicator());
+              },
+            );
           } else {
             return SignIn();
           }
         });
   }
 
-  login(
-      {required BuildContext context,
-      required TextEditingController emailController,
-      required TextEditingController passwordController}) async {
+  Future<void> login({
+    required BuildContext context,
+    required TextEditingController emailController,
+    required TextEditingController passwordController,
+  }) async {
     try {
       await firebaseAuth.signInWithEmailAndPassword(
         email: emailController.text,
@@ -42,15 +80,17 @@ class FirebaseService {
     }
   }
 
-  Future register(
-      {required BuildContext context,
-      required TextEditingController emailController,
-      required TextEditingController passwordController}) async {
+  /// метод вернет uid только что зарегистрированного пользователя
+  Future<String?> register({
+    required BuildContext context,
+    required TextEditingController emailController,
+    required TextEditingController passwordController,
+  }) async {
     firebase_auth.FirebaseAuth firebaseAuth =
         firebase_auth.FirebaseAuth.instance;
 
     try {
-      await firebaseAuth.createUserWithEmailAndPassword(
+      final userData = await firebaseAuth.createUserWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );
@@ -58,16 +98,22 @@ class FirebaseService {
       Navigator.of(context).pushReplacementNamed(
         SignIn.route,
       );
+
+      /// если регистрация прошла успешно - возвращаем uid
+      return userData.user?.uid;
     } on firebase_auth.FirebaseAuthException catch (err) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(err.message.toString()),
         ),
       );
+
+      /// если произошла ошибка - возвращаем null
+      return null;
     }
   }
 
-  signInWithGoole() async {
+  Future<UserCredential> signInWithGoole() async {
     // Trigger the authentification flow
     final GoogleSignInAccount? googleUser =
         await GoogleSignIn(scopes: <String>["email"]).signIn();
@@ -83,9 +129,10 @@ class FirebaseService {
     return await firebaseAuth.signInWithCredential(credential);
   }
 
-  resetPassword(
-      {required BuildContext context,
-      required TextEditingController emailController}) async {
+  Future<void> resetPassword({
+    required BuildContext context,
+    required TextEditingController emailController,
+  }) async {
     showDialog(
       context: context,
       builder: ((context) => Center(
@@ -112,18 +159,20 @@ class FirebaseService {
     }
   }
 
-  signOut() {
+  Future<void> signOut() async {
     firebaseAuth.signOut();
   }
 
-  deleteUser(context) {
-    if (firebaseAuth.currentUser == null)
+  Future deleteUser(context) async {
+    if (firebaseAuth.currentUser == null) {
       return ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Вы вышли из аккаунта или не прошли авторизацию'),
         ),
       );
-    firebaseAuth.currentUser?.delete();
+    }
+
+    await firebaseAuth.currentUser?.delete();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Ваш аккаунт успешно удален'),
