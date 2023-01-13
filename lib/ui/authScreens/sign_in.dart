@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:glossary_app/data/repositories/firebase_service.dart';
 import 'package:glossary_app/ui/authScreens/forgot_password_page.dart';
 import 'package:glossary_app/ui/authScreens/sign_up.dart';
@@ -99,10 +101,12 @@ class _SignInState extends State<SignIn> {
                   height: 10,
                 ),
                 ElevatedButton(
-                  onPressed: () => FirebaseService().login(
-                      context: context,
-                      emailController: _emailController,
-                      passwordController: _passwordController),
+                  onPressed: () {
+                    context.read<FirebaseService>().login(
+                        context: context,
+                        emailController: _emailController,
+                        passwordController: _passwordController);
+                  },
                   child: const Text('Войти'),
                 ),
                 Container(
@@ -129,7 +133,7 @@ class _SignInState extends State<SignIn> {
                 ),
                 ElevatedButton.icon(
                   onPressed: () async {
-                    await FirebaseService().signInWithGoole();
+                    await context.read<FirebaseService>().signInWithGoole();
                     Navigator.of(context)
                         .pushReplacementNamed(HomeScreen.route);
                   },

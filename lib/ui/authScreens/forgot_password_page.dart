@@ -1,5 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/data/repositories/firebase_service.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
@@ -47,8 +48,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   style: ElevatedButton.styleFrom(
                     minimumSize: Size.fromHeight(50),
                   ),
-                  onPressed: () => FirebaseService().resetPassword(
-                      context: context, emailController: emailController),
+                  onPressed: () =>
+                      context.read<FirebaseService>().resetPassword(
+                            context: context,
+                            emailController: emailController,
+                          ),
                   icon: Icon(Icons.email_outlined),
                   label: Text('Сбросить пароль'))
             ],

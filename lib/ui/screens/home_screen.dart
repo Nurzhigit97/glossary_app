@@ -4,7 +4,9 @@ import 'package:glossary_app/ui/bottomNavBar/bottom_nav_settings.dart';
 // ignore: must_be_immutable
 class HomeScreen extends StatefulWidget {
   static String route = '/home';
-  HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();

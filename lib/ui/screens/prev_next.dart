@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:number_paginator/number_paginator.dart';
 
 import 'package:glossary_app/data/models/glossary_model.dart';
@@ -19,6 +20,8 @@ class PrevNext extends StatefulWidget {
 }
 
 class _PrevNextState extends State<PrevNext> {
+  late final GlossaryRepo _glossaryRepo;
+
   GlossaryModel? data;
   final _controllerNumber = NumberPaginatorController();
   int _numPages = GlossaryRepo.lenData - 1;
@@ -30,13 +33,14 @@ class _PrevNextState extends State<PrevNext> {
   @override
   void initState() {
     _currentPage = widget.id;
+    _glossaryRepo = context.read<GlossaryRepo>();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<GlossaryModel?>(
-      future: GlossaryRepo().getGlossary(id: '${_currentPage}'),
+      future: _glossaryRepo.getGlossary(id: '${_currentPage}'),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           GlossaryModel? glossary = snapshot.data;
@@ -48,7 +52,7 @@ class _PrevNextState extends State<PrevNext> {
                 actions: [
                   IconButton(
                     onPressed: () {
-                      GlossaryRepo().updateFavourite(
+                      _glossaryRepo.updateFavourite(
                           id: glossary.id!, isFavourite: !glossary.isFavourite);
                     },
                     icon: Icon(Icons.star,

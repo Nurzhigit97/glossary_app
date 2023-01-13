@@ -9,25 +9,40 @@ import 'package:glossary_app/ui/appPage/widgets/app_theme.dart';
 import 'package:glossary_app/ui/intro/intro_app.dart';
 
 // ignore: must_be_immutable
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   bool showHome;
   App(this.showHome, {Key? key}) : super(key: key);
-  GlossaryRepo _glossaryRepo = GlossaryRepo();
+
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  final _glossaryRepo = GlossaryRepo();
+  final _firebaseService = FirebaseService();
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
+    return MultiRepositoryProvider(
       providers: [
-        BlocProvider(create: (_) => GlossaryCubit(_glossaryRepo)),
-        BlocProvider(create: (_) => IsFavouriteCubit(_glossaryRepo)),
+        RepositoryProvider.value(value: _glossaryRepo),
+        RepositoryProvider.value(value: _firebaseService),
       ],
-      child: MaterialApp(
-        theme: ThemeSettings.getTheme(),
-        debugShowCheckedModeBanner: false,
-        // при каждой установке приложения показывает IntroPage
-        // В последнем странице IntroPage() переключает на true
-        home: showHome ? FirebaseService().handleAuthState() : IntroScreen(),
-        routes: getRoutes(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (_) => GlossaryCubit(_glossaryRepo)),
+          BlocProvider(create: (_) => IsFavouriteCubit(_glossaryRepo)),
+        ],
+        child: MaterialApp(
+          theme: ThemeSettings.getTheme(),
+          debugShowCheckedModeBanner: false,
+          // при каждой установке приложения показывает IntroPage
+          // В последнем странице IntroPage() переключает на true
+          home: widget.showHome
+              ? _firebaseService.handleAuthState()
+              : IntroScreen(),
+          routes: getRoutes(),
+        ),
       ),
     );
   }

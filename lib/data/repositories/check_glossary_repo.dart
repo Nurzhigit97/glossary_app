@@ -17,6 +17,7 @@ class CheckGlossaryRepo {
     try {
       final data = await response.data;
       final List<dynamic> result = data;
+
       return result.map(((e) => GlossaryModel.fromJson(e))).toList();
     } on DioError catch (err) {
       throw Exception(err.message);
@@ -40,8 +41,9 @@ class CheckGlossaryRepo {
     return user;
   }
 
-  Future<GlossaryModel?> addToAdminPanel(
-      {required GlossaryModel modelGlossary}) async {
+  Future<void> addToAdminPanel({
+    required GlossaryModel modelGlossary,
+  }) async {
     try {
       await _dio.post(
         endpointAll,
@@ -53,7 +55,7 @@ class CheckGlossaryRepo {
     return null;
   }
 
-  Future deleteGlossaryAafterChecked({required id}) async {
+  Future<void> deleteGlossaryAafterChecked({required id}) async {
     try {
       await _dio.delete(
         endpointDetail + '${id}/',
