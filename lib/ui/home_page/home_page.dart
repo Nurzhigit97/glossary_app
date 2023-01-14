@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/cubits/Glossary_cubit.dart';
 import 'package:glossary_app/ui/auth_screens/registered_dialog.dart';
 import 'package:glossary_app/ui/drawer_pages/drawer_page.dart';
-import 'package:glossary_app/ui/home_page/widgets/detail_home_list_glossary_with_hightLightText.dart';
+import 'package:glossary_app/ui/home_page/home_list_glossary_with_hightLightText.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
             ),
 
             // Glossaries List
-            GlossaryListWithHighLightText(
+            HomeListListWithHighLightText(
                 textEditingController: textEditingController),
           ],
         ),

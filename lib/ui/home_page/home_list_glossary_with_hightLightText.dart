@@ -5,8 +5,8 @@ import 'package:glossary_app/cubits/glossary_state.dart';
 import 'package:glossary_app/ui/global_widgets/method_highlight.dart';
 import 'package:glossary_app/ui/home_page/widgets/home_detail_screen%20copy.dart';
 
-class GlossaryListWithHighLightText extends StatelessWidget {
-  const GlossaryListWithHighLightText({
+class HomeListListWithHighLightText extends StatelessWidget {
+  const HomeListListWithHighLightText({
     Key? key,
     required this.textEditingController,
   }) : super(key: key);
