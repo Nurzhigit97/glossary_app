@@ -21,8 +21,7 @@ class _FavouritePageState extends State<FavouritePage> {
 
   refresh() {
     final resData = context.read<IsFavouriteCubit>();
-    final res = resData.fetchGlossaryFavourites();
-    return res;
+    return resData.fetchGlossaryFavourites();
   }
 
   @override
@@ -34,10 +33,8 @@ class _FavouritePageState extends State<FavouritePage> {
         actions: [
           IconButton(
             onPressed: refresh,
-            icon: Icon(
-              Icons.refresh_rounded,
-            ),
-          )
+            icon: Icon(Icons.refresh_rounded),
+          ),
         ],
       ),
       body: Column(
@@ -58,9 +55,7 @@ class _FavouritePageState extends State<FavouritePage> {
                   final dataFavourites = state.glossaryFavourite;
                   return Expanded(
                     child: dataFavourites.isEmpty
-                        ? Center(
-                            child: Text('Нету избранных'),
-                          )
+                        ? Center(child: Text('Нету избранных'))
                         : GlossaryList(data: dataFavourites),
                   );
                 }
