@@ -14,12 +14,17 @@ class IntroScreen extends StatefulWidget {
 
 class _IntroScreenState extends State<IntroScreen> {
   final controller = PageController();
-
+  bool isLastPage = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
         controller: controller,
+        onPageChanged: (value) {
+          setState(() {
+            isLastPage = value == 1;
+          });
+        },
         children: [
           BuildPages(
             colorIntro: Color.fromARGB(255, 44, 136, 148),
@@ -30,7 +35,8 @@ class _IntroScreenState extends State<IntroScreen> {
           IntroPage2(),
         ],
       ),
-      bottomSheet: ActionsIntro(pageController: controller),
+      bottomSheet:
+          ActionsIntro(pageController: controller, isLastPage: isLastPage),
     );
   }
 }

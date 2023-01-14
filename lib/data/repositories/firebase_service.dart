@@ -1,10 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
-import 'package:glossary_app/data/models/user_model.dart';
-import 'package:glossary_app/ui/admin_panel/admin_panel.dart';
 import 'package:glossary_app/ui/authScreens/sign_in.dart';
 import 'package:glossary_app/ui/screens/home_screen.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -16,8 +13,10 @@ class FirebaseService {
     return StreamBuilder<firebase_auth.User?>(
         stream: firebaseAuth.authStateChanges(),
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            /// получаем id пользователя
+          return HomeScreen();
+          /* if (snapshot.hasData) {
+            return HomeScreen();
+            /*  /// получаем id пользователя
             final userUid = snapshot.data!.uid;
 
             /// получаем данные пользователя из firestore по id
@@ -51,10 +50,11 @@ class FirebaseService {
                 /// иначе загрузка
                 return Center(child: CircularProgressIndicator());
               },
-            );
-          } else {
-            return SignIn();
+            ); */
           }
+           else {
+            return SignIn();
+          } */
         });
   }
 

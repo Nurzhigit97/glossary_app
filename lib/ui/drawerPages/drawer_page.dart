@@ -1,12 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:glossary_app/data/models/user_model.dart';
 import 'package:glossary_app/data/repositories/firebase_service.dart';
 import 'package:glossary_app/ui/admin_panel/admin_panel.dart';
 import 'package:glossary_app/ui/drawerPages/history_page.dart';
 
 class DrawerPage extends StatelessWidget {
-  const DrawerPage({Key? key}) : super(key: key);
+  DrawerPage({Key? key}) : super(key: key);
+  final userUid = FirebaseAuth.instance.currentUser?.uid;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +42,40 @@ class DrawerPage extends StatelessWidget {
                 ).pushNamed(HistoryPage.route);
               },
             ),
+
+            /// получаем данные пользователя из firestore по id
+            FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+              future: FirebaseFirestore.instance.doc('users/$userUid').get(),
+              builder: (context, snapshot) {
+                /// проверяем получили ли данные
+                if (snapshot.hasData) {
+                  // for fix: data() == null
+                  if (snapshot.data?.data() == null) {
+                    return SizedBox.shrink();
+                  }
+                  final firestoreDocJson = snapshot.data!.data()!;
+                  final userModel = UserModel.fromJson(firestoreDocJson);
+                  final role = userModel.role;
+
+                  /// это админ ?
+                  if (role == UserRole.admin) {
+                    return ListTile(
+                      title: const Text('Admin Panel'),
+                      onTap: () {
+                        Navigator.of(
+                          context,
+                          rootNavigator: true,
+                        ).pushNamed(AdminPanel.route);
+                      },
+                    );
+                  }
+                }
+
+                /// иначе загрузка
+                return SizedBox.shrink();
+              },
+            ),
+
             FirebaseAuth.instance.currentUser?.email == null
                 ? SizedBox.shrink()
                 : Stack(alignment: Alignment.bottomCenter, children: [

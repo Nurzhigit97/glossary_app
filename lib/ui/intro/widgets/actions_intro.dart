@@ -4,7 +4,10 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 // ignore: must_be_immutable
 class ActionsIntro extends StatelessWidget {
   PageController pageController;
-  ActionsIntro({Key? key, required this.pageController}) : super(key: key);
+  bool isLastPage;
+  ActionsIntro(
+      {Key? key, required this.pageController, required this.isLastPage})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,16 +17,18 @@ class ActionsIntro extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          TextButton(
-            onPressed: () => pageController.jumpToPage(1),
-            child: Text(
-              'Пропустить',
-              style: TextStyle(
-                  color: Color.fromARGB(255, 44, 136, 148),
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold),
-            ),
-          ),
+          isLastPage == false
+              ? TextButton(
+                  onPressed: () => pageController.jumpToPage(1),
+                  child: Text(
+                    'Пропустить',
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 44, 136, 148),
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                  ),
+                )
+              : SizedBox.shrink(),
           Center(
             child: SmoothPageIndicator(
               controller: pageController,
@@ -39,19 +44,21 @@ class ActionsIntro extends StatelessWidget {
                   duration: Duration(microseconds: 500), curve: Curves.easeIn),
             ),
           ),
-          TextButton(
-            onPressed: () => pageController.nextPage(
-              duration: Duration(microseconds: 500),
-              curve: Curves.easeInOut,
-            ),
-            child: Text(
-              'Далее',
-              style: TextStyle(
-                  fontSize: 16,
-                  color: Color.fromARGB(255, 44, 136, 148),
-                  fontWeight: FontWeight.bold),
-            ),
-          ),
+          isLastPage == false
+              ? TextButton(
+                  onPressed: () => pageController.nextPage(
+                    duration: Duration(microseconds: 500),
+                    curve: Curves.easeInOut,
+                  ),
+                  child: Text(
+                    'Далее',
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: Color.fromARGB(255, 44, 136, 148),
+                        fontWeight: FontWeight.bold),
+                  ),
+                )
+              : SizedBox.shrink(),
         ],
       ),
     );
