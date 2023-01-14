@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:glossary_app/data/models/glossary_model.dart';
 import 'package:glossary_app/data/repositories/check_glossary_repo.dart';
@@ -30,7 +31,9 @@ class CheckDetailGlossary extends StatelessWidget {
               actions: [
                 TextButton(
                   onPressed: () {
-                    GlossaryRepo().addGlossary(modelGlossary: checked);
+                    context
+                        .read<GlossaryRepo>()
+                        .addGlossary(modelGlossary: checked);
                     CheckGlossaryRepo().deleteGlossaryAafterChecked(
                       id: glossary.id.toString(),
                     );

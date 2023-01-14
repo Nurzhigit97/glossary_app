@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:glossary_app/data/models/glossary_model.dart';
 import 'package:glossary_app/data/repositories/glossary_repo.dart';
@@ -17,8 +18,9 @@ class DetailScreen extends StatefulWidget {
 class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
+    final detailGlossary = context.watch<GlossaryRepo>();
     return FutureBuilder<GlossaryModel?>(
-      future: GlossaryRepo().getGlossary(id: '${widget.id}'),
+      future: detailGlossary.getGlossary(id: '${widget.id}'),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           GlossaryModel? glossary = snapshot.data;
@@ -30,7 +32,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 actions: [
                   IconButton(
                     onPressed: () {
-                      GlossaryRepo().updateFavourite(
+                      detailGlossary.updateFavourite(
                           id: glossary.id!, isFavourite: !glossary.isFavourite);
                       Navigator.of(context).pop();
                     },
