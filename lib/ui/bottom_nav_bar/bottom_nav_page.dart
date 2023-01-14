@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:glossary_app/ui/bottom_nav_bar/bottom_nav_settings.dart';
 
 // ignore: must_be_immutable
-class HomeScreen extends StatefulWidget {
+class BottomNavPage extends StatefulWidget {
   static String route = '/home';
-  HomeScreen({
+  BottomNavPage({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<BottomNavPage> createState() => _BottomNavPageState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _BottomNavPageState extends State<BottomNavPage> {
   int _selectedPage = 0;
   void _onItemTapped(int index) {
     setState(() {

@@ -6,7 +6,7 @@ import 'package:glossary_app/data/repositories/firebase_service.dart';
 import 'package:glossary_app/data/repositories/user_service.dart';
 import 'package:glossary_app/ui/auth_screens/forgot_password_page.dart';
 import 'package:glossary_app/ui/auth_screens/sign_up.dart';
-import 'package:glossary_app/ui/screens/home_screen.dart';
+import 'package:glossary_app/ui/bottom_nav_bar/bottom_nav_page.dart';
 import 'package:passwordfield/passwordfield.dart';
 
 class SignIn extends StatefulWidget {
@@ -149,7 +149,7 @@ class _SignInState extends State<SignIn> {
                     UserService().addUser(userModel);
                     setState(() {});
                     Navigator.of(context)
-                        .pushReplacementNamed(HomeScreen.route);
+                        .pushReplacementNamed(BottomNavPage.route);
                   },
                   icon: Icon(Icons.g_mobiledata_rounded),
                   label: Text('Авторизация с  Google'),

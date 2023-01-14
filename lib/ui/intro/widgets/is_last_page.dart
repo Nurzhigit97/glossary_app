@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:glossary_app/ui/screens/home_screen.dart';
+import 'package:glossary_app/ui/bottom_nav_bar/bottom_nav_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class IsLastPage extends StatelessWidget {
@@ -11,7 +11,7 @@ class IsLastPage extends StatelessWidget {
       final prefs = await SharedPreferences.getInstance();
       // В последнем странице Intro переключает на true
       prefs.setBool('showHome', true);
-      Navigator.pushReplacementNamed(context, HomeScreen.route);
+      Navigator.pushReplacementNamed(context, BottomNavPage.route);
     }
 
     return IconButton(

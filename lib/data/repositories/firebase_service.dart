@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:glossary_app/ui/auth_screens/sign_in.dart';
-import 'package:glossary_app/ui/screens/home_screen.dart';
+import 'package:glossary_app/ui/bottom_nav_bar/bottom_nav_page.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseService {
@@ -13,7 +13,7 @@ class FirebaseService {
     return StreamBuilder<firebase_auth.User?>(
         stream: firebaseAuth.authStateChanges(),
         builder: (context, snapshot) {
-          return HomeScreen();
+          return BottomNavPage();
           /* if (snapshot.hasData) {
             return HomeScreen();
             /*  /// получаем id пользователя
@@ -70,7 +70,7 @@ class FirebaseService {
       );
 
       Navigator.of(context).pushReplacementNamed(
-        HomeScreen.route,
+        BottomNavPage.route,
       );
     } on firebase_auth.FirebaseAuthException catch (err) {
       ScaffoldMessenger.of(context).showSnackBar(

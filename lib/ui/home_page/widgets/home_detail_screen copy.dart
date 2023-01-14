@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:glossary_app/ui/screens/prev_next.dart';
+import 'package:glossary_app/ui/home_page/widgets/prev_next.dart';
 import 'package:number_paginator/number_paginator.dart';
 
 import 'package:glossary_app/data/models/glossary_model.dart';
@@ -49,6 +49,7 @@ class _PrevNextState extends State<HomeDetailScreen> {
           return SafeArea(
             child: Scaffold(
               appBar: AppBar(
+                centerTitle: true,
                 title: Text('Глоссарий'),
                 actions: [
                   IconButton(

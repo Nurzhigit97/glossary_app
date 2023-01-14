@@ -3,12 +3,12 @@ import 'package:glossary_app/ui/drawer_pages/about_page.dart';
 import 'package:glossary_app/ui/drawer_pages/add_glossary.dart';
 import 'package:glossary_app/ui/drawer_pages/favourite_page.dart';
 import 'package:glossary_app/ui/drawer_pages/test_page.dart';
-import 'package:glossary_app/ui/screens/glossary_screen.dart';
+import 'package:glossary_app/ui/home_page/home_page.dart';
 
 class BottomNavSettings {
   static List<Widget> screens() {
     return [
-      GlossaryScreen(),
+      HomePage(),
       FavouritePage(),
       AddGlossary(),
       AboutPage(),

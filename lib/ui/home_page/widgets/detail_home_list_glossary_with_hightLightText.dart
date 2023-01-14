@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/cubits/Glossary_cubit.dart';
 import 'package:glossary_app/cubits/glossary_state.dart';
 import 'package:glossary_app/ui/global_widgets/method_highlight.dart';
-import 'package:glossary_app/ui/screens/home_detail_screen%20copy.dart';
+import 'package:glossary_app/ui/home_page/widgets/home_detail_screen%20copy.dart';
 
 class GlossaryListWithHighLightText extends StatelessWidget {
   const GlossaryListWithHighLightText({
@@ -43,20 +43,21 @@ class GlossaryListWithHighLightText extends StatelessWidget {
                           ),
                         ),
                         child: Card(
-                            elevation: 4,
-                            margin: const EdgeInsets.symmetric(vertical: 3),
-                            child: ListTile(
-                              title: RichText(
-                                text: TextSpan(
-                                  // при поиске открашивать задний фон найденных букв или слов на зеленый
-                                  children: highlightOccurrences(
-                                      source: '${glossary.title}',
-                                      query: textEditingController.text),
-                                  style: TextStyle(
-                                      color: Color.fromARGB(255, 0, 0, 0)),
-                                ),
+                          elevation: 4,
+                          margin: const EdgeInsets.symmetric(vertical: 3),
+                          child: ListTile(
+                            title: RichText(
+                              text: TextSpan(
+                                // при поиске открашивать задний фон найденных букв или слов на зеленый
+                                children: highlightOccurrences(
+                                    source: '${glossary.title}',
+                                    query: textEditingController.text),
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 0, 0, 0)),
                               ),
-                            )),
+                            ),
+                          ),
+                        ),
                       );
                     },
                   ),
