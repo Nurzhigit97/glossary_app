@@ -1,4 +1,5 @@
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -124,12 +125,24 @@ class _SignUpState extends State<SignUp> {
                       if (!isValid) return;
 
                       /// cоздаем пользователя в Firebase Auth
+                      final uid =
+                          await context.read<FirebaseService>().register(
+                                context: context,
+                                emailController: _emailController,
+                                passwordController: _passwordController,
+                              );
 
-                      await context.read<FirebaseService>().register(
-                            context: context,
-                            emailController: _emailController,
-                            passwordController: _passwordController,
-                          );
+                      if (uid == null) return;
+
+                      /// cоздаем документ пользователя в Firebase Firestore
+                      final userModel = UserModel(
+                        id: uid,
+                        email: _emailController.text,
+                        role: UserRole.user,
+                      );
+
+                      UserService().addUser(userModel);
+                      setState(() {});
                     },
                     child: Text('Регистрация'),
                   ),

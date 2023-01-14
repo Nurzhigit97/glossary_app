@@ -109,16 +109,6 @@ class _SignInState extends State<SignIn> {
                         context: context,
                         emailController: _emailController,
                         passwordController: _passwordController);
-
-                    /// cоздаем документ пользователя в Firebase Firestore
-                    final userModel = UserModel(
-                      id: FirebaseAuth.instance.currentUser?.uid,
-                      email: _emailController.text,
-                      role: UserRole.user,
-                    );
-
-                    UserService().addUser(userModel);
-                    setState(() {});
                   },
                   child: const Text('Войти'),
                 ),
