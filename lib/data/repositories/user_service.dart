@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:glossary_app/data/models/user_model.dart';
 
 class UserService {
@@ -22,11 +23,10 @@ class UserService {
 
   Future addUser(
     UserModel todoModel,
-    String userUid,
   ) async {
     //! local todosList
     // todos.add(todoModel);
-    final docTodo = _userTodosRef().doc(userUid);
+    final docTodo = _userTodosRef().doc(todoModel.id);
 
     final json = todoModel.toJson();
     await docTodo.set(json);

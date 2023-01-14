@@ -7,8 +7,14 @@ import 'package:glossary_app/data/repositories/firebase_service.dart';
 import 'package:glossary_app/ui/admin_panel/admin_panel.dart';
 import 'package:glossary_app/ui/drawerPages/history_page.dart';
 
-class DrawerPage extends StatelessWidget {
+class DrawerPage extends StatefulWidget {
   DrawerPage({Key? key}) : super(key: key);
+
+  @override
+  State<DrawerPage> createState() => _DrawerPageState();
+}
+
+class _DrawerPageState extends State<DrawerPage> {
   final userUid = FirebaseAuth.instance.currentUser?.uid;
 
   @override
@@ -66,8 +72,11 @@ class DrawerPage extends StatelessWidget {
                           context,
                           rootNavigator: true,
                         ).pushNamed(AdminPanel.route);
+                        setState(() {});
                       },
                     );
+                  } else {
+                    return SizedBox.shrink();
                   }
                 }
 

@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
+import 'package:glossary_app/data/models/user_model.dart';
+import 'package:glossary_app/ui/admin_panel/admin_panel.dart';
 import 'package:glossary_app/ui/authScreens/sign_in.dart';
 import 'package:glossary_app/ui/screens/home_screen.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -58,19 +61,23 @@ class FirebaseService {
         });
   }
 
-  Future<void> login({
+  Future<String?> login({
     required BuildContext context,
     required TextEditingController emailController,
     required TextEditingController passwordController,
   }) async {
     try {
-      await firebaseAuth.signInWithEmailAndPassword(
+      final userData = await firebaseAuth.signInWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );
+
       Navigator.of(context).pushReplacementNamed(
         HomeScreen.route,
       );
+
+      /// если регистрация прошла успешно - возвращаем uid
+      return userData.user?.uid;
     } on firebase_auth.FirebaseAuthException catch (err) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -81,7 +88,7 @@ class FirebaseService {
   }
 
   /// метод вернет uid только что зарегистрированного пользователя
-  Future<String?> register({
+  Future<void> register({
     required BuildContext context,
     required TextEditingController emailController,
     required TextEditingController passwordController,
@@ -90,7 +97,7 @@ class FirebaseService {
         firebase_auth.FirebaseAuth.instance;
 
     try {
-      final userData = await firebaseAuth.createUserWithEmailAndPassword(
+      await firebaseAuth.createUserWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );
@@ -98,9 +105,6 @@ class FirebaseService {
       Navigator.of(context).pushReplacementNamed(
         SignIn.route,
       );
-
-      /// если регистрация прошла успешно - возвращаем uid
-      return userData.user?.uid;
     } on firebase_auth.FirebaseAuthException catch (err) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

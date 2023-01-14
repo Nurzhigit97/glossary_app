@@ -124,24 +124,12 @@ class _SignUpState extends State<SignUp> {
                       if (!isValid) return;
 
                       /// cоздаем пользователя в Firebase Auth
-                      final uid =
-                          await context.read<FirebaseService>().register(
-                                context: context,
-                                emailController: _emailController,
-                                passwordController: _passwordController,
-                              );
 
-                      if (uid == null) return;
-
-                      /// cоздаем документ пользователя в Firebase Firestore
-                      final userModel = UserModel(
-                        id: uid,
-                        email: _emailController.text,
-                        role: UserRole.user,
-                      );
-
-                      UserService().addUser(userModel, uid);
-                      setState(() {});
+                      await context.read<FirebaseService>().register(
+                            context: context,
+                            emailController: _emailController,
+                            passwordController: _passwordController,
+                          );
                     },
                     child: Text('Регистрация'),
                   ),

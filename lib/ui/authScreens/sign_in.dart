@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:glossary_app/data/models/user_model.dart';
 
 import 'package:glossary_app/data/repositories/firebase_service.dart';
+import 'package:glossary_app/data/repositories/user_service.dart';
 import 'package:glossary_app/ui/authScreens/forgot_password_page.dart';
 import 'package:glossary_app/ui/authScreens/sign_up.dart';
 import 'package:glossary_app/ui/screens/home_screen.dart';
@@ -101,11 +104,21 @@ class _SignInState extends State<SignIn> {
                   height: 10,
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    context.read<FirebaseService>().login(
+                  onPressed: () async {
+                    await context.read<FirebaseService>().login(
                         context: context,
                         emailController: _emailController,
                         passwordController: _passwordController);
+
+                    /// cоздаем документ пользователя в Firebase Firestore
+                    final userModel = UserModel(
+                      id: FirebaseAuth.instance.currentUser?.uid,
+                      email: _emailController.text,
+                      role: UserRole.user,
+                    );
+
+                    UserService().addUser(userModel);
+                    setState(() {});
                   },
                   child: const Text('Войти'),
                 ),
@@ -133,7 +146,19 @@ class _SignInState extends State<SignIn> {
                 ),
                 ElevatedButton.icon(
                   onPressed: () async {
-                    await context.read<FirebaseService>().signInWithGoole();
+                    final authGoogle =
+                        await context.read<FirebaseService>().signInWithGoole();
+
+                    /// cоздаем документ пользователя в Firebase Firestore
+                    final userModel = UserModel(
+                      id: authGoogle.user?.uid,
+                      name: authGoogle.user?.displayName,
+                      email: authGoogle.user!.email,
+                      role: UserRole.user,
+                    );
+
+                    UserService().addUser(userModel);
+                    setState(() {});
                     Navigator.of(context)
                         .pushReplacementNamed(HomeScreen.route);
                   },
