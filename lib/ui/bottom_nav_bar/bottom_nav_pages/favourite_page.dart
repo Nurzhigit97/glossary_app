@@ -56,7 +56,10 @@ class _FavouritePageState extends State<FavouritePage> {
                   return Expanded(
                     child: dataFavourites.isEmpty
                         ? Center(child: Text('Нету избранных'))
-                        : GlossaryList(data: dataFavourites),
+                        : Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 7),
+                            child: GlossaryList(data: dataFavourites),
+                          ),
                   );
                 }
                 return Center(child: LinearProgressIndicator());

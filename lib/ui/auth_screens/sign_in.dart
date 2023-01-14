@@ -32,7 +32,6 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(left: 20, right: 20),
@@ -115,14 +114,7 @@ class _SignInState extends State<SignIn> {
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
-                      Divider(
-                        color: Color.fromARGB(255, 21, 72, 212),
-                        indent: 50,
-                        endIndent: 50,
-                        thickness: 1.5,
-                      ),
                       Container(
-                        color: Colors.white,
                         child: Padding(
                           padding: const EdgeInsets.all(4.0),
                           child: Text(

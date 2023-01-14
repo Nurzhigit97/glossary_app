@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class ThemeSettings {
-  static ThemeData getTheme() {
-    return ThemeData(
-      appBarTheme: AppBarTheme(
-        backgroundColor: Color.fromARGB(255, 22, 82, 131),
-        titleTextStyle: TextStyle(fontSize: 20),
-      ),
-    );
-  }
+  static ThemeData lightTheme() => ThemeData(
+        brightness: Brightness.light,
+        appBarTheme: AppBarTheme(
+          backgroundColor: Color.fromARGB(255, 22, 82, 131),
+        ),
+      );
+
+  static ThemeData darkTheme() => ThemeData(
+        brightness: Brightness.dark,
+      );
 }

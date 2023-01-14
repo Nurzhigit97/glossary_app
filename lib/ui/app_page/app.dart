@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:glossary_app/cubits/theme_cubit.dart';
 import 'package:glossary_app/data/repositories/check_glossary_repo.dart';
 import 'package:glossary_app/data/repositories/firebase_service.dart';
 import 'package:glossary_app/data/repositories/user_service.dart';
@@ -36,16 +37,24 @@ class _AppState extends State<App> {
         providers: [
           BlocProvider(create: (_) => GlossaryCubit(_glossaryRepo)),
           BlocProvider(create: (_) => IsFavouriteCubit(_glossaryRepo)),
+          BlocProvider(create: (_) => ThemeCubit()),
         ],
-        child: MaterialApp(
-          theme: ThemeSettings.getTheme(),
-          debugShowCheckedModeBanner: false,
-          // при каждой установке приложения показывает IntroPage
-          // В последнем странице IntroPage() переключает на true
-          home: widget.showHome
-              ? _firebaseService.handleAuthState()
-              : IntroScreen(),
-          routes: getRoutes(),
+        child: BlocBuilder<ThemeCubit, bool>(
+          builder: (context, state) {
+            final cubit = context.watch<ThemeCubit>();
+            return MaterialApp(
+              theme: cubit.isDark
+                  ? ThemeSettings.darkTheme()
+                  : ThemeSettings.lightTheme(),
+              debugShowCheckedModeBanner: false,
+              // при каждой установке приложения показывает IntroPage
+              // В последнем странице IntroPage() переключает на true
+              home: widget.showHome
+                  ? _firebaseService.handleAuthState()
+                  : IntroScreen(),
+              routes: getRoutes(),
+            );
+          },
         ),
       ),
     );

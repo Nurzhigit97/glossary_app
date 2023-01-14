@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/cubits/Glossary_cubit.dart';
 import 'package:glossary_app/cubits/glossary_state.dart';
+import 'package:glossary_app/cubits/theme_cubit.dart';
 import 'package:glossary_app/ui/global_widgets/method_highlight.dart';
-import 'package:glossary_app/ui/home_page/widgets/home_detail_screen%20copy.dart';
+import 'package:glossary_app/ui/home_page/widgets/home_detail_screen.dart';
 
 class HomeListListWithHighLightText extends StatelessWidget {
   const HomeListListWithHighLightText({
@@ -48,12 +49,15 @@ class HomeListListWithHighLightText extends StatelessWidget {
                           child: ListTile(
                             title: RichText(
                               text: TextSpan(
+                                style: TextStyle(
+                                  color: context.read<ThemeCubit>().isDark
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
                                 // при поиске открашивать задний фон найденных букв или слов на зеленый
                                 children: highlightOccurrences(
                                     source: '${glossary.title}',
                                     query: textEditingController.text),
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 0, 0, 0)),
                               ),
                             ),
                           ),
