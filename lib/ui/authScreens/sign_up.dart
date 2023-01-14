@@ -22,6 +22,7 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   final formKey = GlobalKey<FormState>();
 
+  TextEditingController _nameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   @override
@@ -48,6 +49,35 @@ class _SignUpState extends State<SignUp> {
                       image: AssetImage('assets/auth/signUp.webp'),
                       width: 250,
                     ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  TextFormField(
+                    controller: _nameController,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(top: 5, left: 10),
+                      suffixIcon: Icon(Icons.person),
+                      hintText: 'Введите имя...',
+                      hintStyle: TextStyle(color: Colors.black26),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.blue.shade100,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.blue.shade100,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      errorStyle: TextStyle(
+                        fontSize: 14,
+                        color: Colors.red,
+                      ),
+                    ),
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                   ),
                   SizedBox(
                     height: 10,
@@ -137,6 +167,7 @@ class _SignUpState extends State<SignUp> {
                       /// cоздаем документ пользователя в Firebase Firestore
                       final userModel = UserModel(
                         id: uid,
+                        name: _nameController.text,
                         email: _emailController.text,
                         role: UserRole.user,
                       );
