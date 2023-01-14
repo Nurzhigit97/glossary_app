@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:glossary_app/data/repositories/check_glossary_repo.dart';
 import 'package:glossary_app/data/repositories/firebase_service.dart';
+import 'package:glossary_app/data/repositories/user_service.dart';
 import 'package:glossary_app/ui/app_page/widgets/app_routes.dart';
 import 'package:glossary_app/cubits/Glossary_cubit.dart';
 import 'package:glossary_app/cubits/favouriteGlossaries/isfavourite_cubit.dart';
@@ -27,6 +29,8 @@ class _AppState extends State<App> {
       providers: [
         RepositoryProvider.value(value: _glossaryRepo),
         RepositoryProvider.value(value: _firebaseService),
+        RepositoryProvider(create: ((_) => CheckGlossaryRepo())),
+        RepositoryProvider(create: ((_) => UserService())),
       ],
       child: MultiBlocProvider(
         providers: [

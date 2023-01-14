@@ -146,7 +146,7 @@ class _SignInState extends State<SignIn> {
                       role: UserRole.user,
                     );
 
-                    UserService().addUser(userModel);
+                    context.read<UserService>().addUser(userModel);
                     setState(() {});
                     Navigator.of(context)
                         .pushReplacementNamed(BottomNavPage.route);

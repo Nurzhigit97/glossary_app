@@ -14,8 +14,9 @@ class CheckDetailGlossary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final checkDetailRepo = context.read<CheckGlossaryRepo>();
     return FutureBuilder<GlossaryModel?>(
-      future: CheckGlossaryRepo().getGlossary(id: '$id'),
+      future: checkDetailRepo.getGlossary(id: '$id'),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           GlossaryModel? glossary = snapshot.data;
@@ -34,7 +35,7 @@ class CheckDetailGlossary extends StatelessWidget {
                     context
                         .read<GlossaryRepo>()
                         .addGlossary(modelGlossary: checked);
-                    CheckGlossaryRepo().deleteGlossaryAafterChecked(
+                    checkDetailRepo.deleteGlossaryAafterChecked(
                       id: glossary.id.toString(),
                     );
                     Navigator.pop(context);
@@ -43,9 +44,10 @@ class CheckDetailGlossary extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () {
-                    CheckGlossaryRepo().deleteGlossaryAafterChecked(
+                    checkDetailRepo.deleteGlossaryAafterChecked(
                       id: glossary.id.toString(),
                     );
+
                     Navigator.pop(context);
                   },
                   child: Text('Отменить'),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/data/models/glossary_model.dart';
 import 'package:glossary_app/data/repositories/check_glossary_repo.dart';
 import 'package:glossary_app/ui/admin_panel/widgets/check_detail_glossary.dart';
@@ -16,7 +17,7 @@ class _AdminPanelState extends State<AdminPanel> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<GlossaryModel>>(
-      future: CheckGlossaryRepo().getGlossariesAddedByUser(),
+      future: context.read<CheckGlossaryRepo>().getGlossariesAddedByUser(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<GlossaryModel>? glossary = snapshot.data;

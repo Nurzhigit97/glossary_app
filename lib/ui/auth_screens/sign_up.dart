@@ -171,7 +171,7 @@ class _SignUpState extends State<SignUp> {
                         role: UserRole.user,
                       );
 
-                      UserService().addUser(userModel);
+                      context.read<UserService>().addUser(userModel);
                       setState(() {});
                     },
                     child: Text('Регистрация'),
