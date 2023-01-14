@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:glossary_app/ui/drawer_pages/about_page.dart';
-import 'package:glossary_app/ui/drawer_pages/add_glossary.dart';
-import 'package:glossary_app/ui/drawer_pages/favourite_page.dart';
-import 'package:glossary_app/ui/drawer_pages/test_page.dart';
+import 'package:glossary_app/ui/bottom_nav_bar/bottom_nav_pages/about_page.dart';
+import 'package:glossary_app/ui/bottom_nav_bar/bottom_nav_pages/add_glossary.dart';
+import 'package:glossary_app/ui/bottom_nav_bar/bottom_nav_pages/favourite_page.dart';
+import 'package:glossary_app/ui/bottom_nav_bar/bottom_nav_pages/test_page.dart';
 import 'package:glossary_app/ui/home_page/home_page.dart';
 
 class BottomNavSettings {

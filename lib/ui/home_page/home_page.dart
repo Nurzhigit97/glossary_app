@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/cubits/Glossary_cubit.dart';
 import 'package:glossary_app/ui/auth_screens/registered_dialog.dart';
-import 'package:glossary_app/ui/drawer_pages/drawer_page.dart';
+import 'package:glossary_app/ui/drawer_page/drawer_page.dart';
 import 'package:glossary_app/ui/home_page/home_list_glossary_with_hightLightText.dart';
 
 class HomePage extends StatefulWidget {

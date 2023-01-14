@@ -6,7 +6,7 @@ import 'package:glossary_app/ui/auth_screens/registered_dialog.dart';
 import 'package:glossary_app/ui/auth_screens/sign_in.dart';
 import 'package:glossary_app/ui/auth_screens/sign_up.dart';
 // import 'package:glossary_app/ui/authScreens/verify_email_screen.dart';
-import 'package:glossary_app/ui/drawer_pages/history_page.dart';
+import 'package:glossary_app/ui/drawer_page/drawer_pages/history_page.dart';
 import 'package:glossary_app/ui/intro/intro_app.dart';
 import 'package:glossary_app/ui/bottom_nav_bar/bottom_nav_page.dart';
 
