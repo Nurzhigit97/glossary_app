@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/data/repositories/firebase_service.dart';
 import 'package:glossary_app/data/repositories/user_service.dart';
-import 'package:glossary_app/ui/authScreens/sign_in.dart';
+import 'package:glossary_app/ui/auth_screens/sign_in.dart';
 import 'package:passwordfield/passwordfield.dart';
 
 import '../../data/models/user_model.dart';

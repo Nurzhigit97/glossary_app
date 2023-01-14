@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/data/models/user_model.dart';
 import 'package:glossary_app/data/repositories/firebase_service.dart';
 import 'package:glossary_app/ui/admin_panel/admin_panel.dart';
-import 'package:glossary_app/ui/drawerPages/history_page.dart';
+import 'package:glossary_app/ui/drawer_pages/history_page.dart';
 
 class DrawerPage extends StatefulWidget {
   DrawerPage({Key? key}) : super(key: key);

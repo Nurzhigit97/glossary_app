@@ -4,7 +4,7 @@ import 'package:glossary_app/data/repositories/firebase_service.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:glossary_app/ui/authScreens/sign_in.dart';
+import 'package:glossary_app/ui/auth_screens/sign_in.dart';
 import 'package:glossary_app/ui/screens/home_screen.dart';
 
 class VerifyEmailScreen extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:glossary_app/ui/bottomNavBar/bottom_nav_settings.dart';
+import 'package:glossary_app/ui/bottom_nav_bar/bottom_nav_settings.dart';
 
 // ignore: must_be_immutable
 class HomeScreen extends StatefulWidget {

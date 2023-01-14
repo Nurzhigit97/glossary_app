@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/cubits/Glossary_cubit.dart';
-import 'package:glossary_app/ui/authScreens/registered_dialog.dart';
-import 'package:glossary_app/ui/drawerPages/drawer_page.dart';
+import 'package:glossary_app/ui/auth_screens/registered_dialog.dart';
+import 'package:glossary_app/ui/drawer_pages/drawer_page.dart';
 import 'package:glossary_app/ui/widgets/glossary_list_with_hightLightText.dart';
 
 class GlossaryScreen extends StatefulWidget {

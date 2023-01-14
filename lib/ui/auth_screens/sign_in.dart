@@ -4,8 +4,8 @@ import 'package:glossary_app/data/models/user_model.dart';
 
 import 'package:glossary_app/data/repositories/firebase_service.dart';
 import 'package:glossary_app/data/repositories/user_service.dart';
-import 'package:glossary_app/ui/authScreens/forgot_password_page.dart';
-import 'package:glossary_app/ui/authScreens/sign_up.dart';
+import 'package:glossary_app/ui/auth_screens/forgot_password_page.dart';
+import 'package:glossary_app/ui/auth_screens/sign_up.dart';
 import 'package:glossary_app/ui/screens/home_screen.dart';
 import 'package:passwordfield/passwordfield.dart';
 
