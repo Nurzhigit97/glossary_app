@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:glossary_app/generated/locale_keys.g.dart';
 import 'package:glossary_app/ui/auth_screens/sign_in.dart';
 
 class RegisteredDialog extends StatelessWidget {
@@ -37,7 +39,7 @@ class RegisteredDialog extends StatelessWidget {
                         ],
                       )
                     : Text(
-                        'Пройти авторизацию',
+                        LocaleKeys.signIn.tr(),
                         style: TextStyle(fontSize: 20),
                       ),
               ],
@@ -48,8 +50,8 @@ class RegisteredDialog extends StatelessWidget {
               style: TextButton.styleFrom(
                 textStyle: Theme.of(context).textTheme.labelLarge,
               ),
-              child: const Text(
-                'Логин',
+              child: Text(
+                LocaleKeys.login.tr(),
                 style: TextStyle(
                   fontSize: 17,
                 ),

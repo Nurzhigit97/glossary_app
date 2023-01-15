@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/cubits/favouriteGlossaries/isfavourite_cubit.dart';
 import 'package:glossary_app/cubits/favouriteGlossaries/isfavourite_state.dart';
+import 'package:glossary_app/generated/locale_keys.g.dart';
 import 'package:glossary_app/ui/global_widgets/glossary_list.dart';
 
 class FavouritePage extends StatefulWidget {
@@ -29,7 +31,7 @@ class _FavouritePageState extends State<FavouritePage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Избранные'),
+        title: Text(LocaleKeys.favourite.tr()),
         actions: [
           IconButton(
             onPressed: refresh,
@@ -55,7 +57,9 @@ class _FavouritePageState extends State<FavouritePage> {
                   final dataFavourites = state.glossaryFavourite;
                   return Expanded(
                     child: dataFavourites.isEmpty
-                        ? Center(child: Text('Нету избранных'))
+                        ? Center(
+                            child:
+                                Text(LocaleKeys.dontHaveFavouriteGlossary.tr()))
                         : Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 7),
                             child: GlossaryList(data: dataFavourites),

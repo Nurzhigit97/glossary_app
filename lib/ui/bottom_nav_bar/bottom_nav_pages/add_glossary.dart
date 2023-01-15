@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/data/models/glossary_model.dart';
 import 'package:glossary_app/data/repositories/check_glossary_repo.dart';
+import 'package:glossary_app/generated/locale_keys.g.dart';
 
 Dio? dio;
 
@@ -23,7 +25,7 @@ class _AddGlossaryState extends State<AddGlossary> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Добавить глоссарий'),
+        title: Text(LocaleKeys.addGlossary.tr()),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -31,7 +33,7 @@ class _AddGlossaryState extends State<AddGlossary> {
           child: Column(
             children: [
               FirebaseAuth.instance.currentUser == null
-                  ? Text('Чтобы добавить вам нужно авторизоваться')
+                  ? Text(LocaleKeys.ifDontAuthed.tr())
                   : SizedBox.shrink(),
               Container(
                 child: Image(
@@ -46,7 +48,7 @@ class _AddGlossaryState extends State<AddGlossary> {
                 controller: titleController,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.only(left: 10),
-                  hintText: 'Термин...',
+                  hintText: LocaleKeys.titleGlossary.tr(),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                   ),
@@ -59,7 +61,7 @@ class _AddGlossaryState extends State<AddGlossary> {
                 controller: descriptionController,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.only(left: 10),
-                  hintText: 'Описание...',
+                  hintText: LocaleKeys.descriptionGlossary.tr(),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                   ),
@@ -71,7 +73,7 @@ class _AddGlossaryState extends State<AddGlossary> {
                   if (FirebaseAuth.instance.currentUser == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('Пройдите авторизацию для отправки'),
+                        content: Text(LocaleKeys.forSendAuth.tr()),
                       ),
                     );
                   }
@@ -89,14 +91,14 @@ class _AddGlossaryState extends State<AddGlossary> {
                         .addToAdminPanel(modelGlossary: modelGlossary);
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('Ваш Глоссарий отправлен на проверку'),
+                        content: Text(LocaleKeys.sendGlossaryToCheck.tr()),
                       ),
                     );
                     titleController.clear();
                     descriptionController.clear();
                   }
                 },
-                child: Text('Отправить'),
+                child: Text(LocaleKeys.send.tr()),
               ),
             ],
           ),

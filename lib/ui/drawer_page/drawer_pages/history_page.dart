@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:glossary_app/generated/locale_keys.g.dart';
 
 class HistoryPage extends StatelessWidget {
   static String route = 'historyScreen';
@@ -8,7 +10,7 @@ class HistoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('История'),
+        title: Text(LocaleKeys.historyTitle.tr()),
       ),
       body: Container(
         margin: EdgeInsets.all(10),

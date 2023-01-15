@@ -1,12 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/cubits/theme_cubit.dart';
 import 'package:glossary_app/data/models/user_model.dart';
 import 'package:glossary_app/data/repositories/firebase_service.dart';
+import 'package:glossary_app/generated/locale_keys.g.dart';
 import 'package:glossary_app/ui/admin_panel/admin_panel.dart';
 import 'package:glossary_app/ui/drawer_page/drawer_pages/history_page.dart';
+import 'package:glossary_app/ui/widgets/choose_app_lang.dart';
+import 'package:glossary_app/ui/widgets/toggle_theme.dart';
 
 class DrawerPage extends StatefulWidget {
   DrawerPage({Key? key}) : super(key: key);
@@ -35,13 +39,21 @@ class _DrawerPageState extends State<DrawerPage> {
                 ),
               ),
               child: Text(
-                'Глоссарий информатика',
+                LocaleKeys.drawerTitle.tr(),
                 style: TextStyle(
                     color: Color.fromARGB(255, 255, 255, 255), fontSize: 20),
               ),
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ChooseAppLang(),
+                toggleTheme(),
+              ],
+            ),
+
             ListTile(
-              title: const Text('История'),
+              title: Text(LocaleKeys.historyTitle.tr()),
               onTap: () {
                 Navigator.of(
                   context,
@@ -67,7 +79,7 @@ class _DrawerPageState extends State<DrawerPage> {
                   /// это админ ?
                   if (role == UserRole.admin) {
                     return ListTile(
-                      title: const Text('Admin Panel'),
+                      title: Text(LocaleKeys.adminTitle.tr()),
                       onTap: () {
                         Navigator.of(
                           context,
@@ -92,7 +104,7 @@ class _DrawerPageState extends State<DrawerPage> {
                     TextButton(
                       onPressed: () =>
                           context.read<FirebaseService>().signOut(),
-                      child: Text('Выйти'),
+                      child: Text(LocaleKeys.signOut.tr()),
                     ),
                   ]),
           ],

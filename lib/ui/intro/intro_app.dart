@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:glossary_app/generated/locale_keys.g.dart';
 import 'package:glossary_app/ui/intro/widgets/actions_intro.dart';
 import 'package:glossary_app/ui/intro/widgets/build_pages.dart';
 import 'package:glossary_app/ui/intro/widgets/build_page2.dart';
@@ -28,7 +30,7 @@ class _IntroScreenState extends State<IntroScreen> {
         children: [
           BuildPages(
             colorIntro: Color.fromARGB(255, 44, 136, 148),
-            title: 'Добро пожаловать ',
+            title: LocaleKeys.welcome.tr(),
             subTitle: '',
             urlImg: 'assets/addGlossary.png',
           ),

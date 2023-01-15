@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:glossary_app/generated/locale_keys.g.dart';
 import 'package:glossary_app/ui/bottom_nav_bar/bottom_nav_pages/about_page.dart';
 import 'package:glossary_app/ui/bottom_nav_bar/bottom_nav_pages/add_glossary.dart';
 import 'package:glossary_app/ui/bottom_nav_bar/bottom_nav_pages/favourite_page.dart';
@@ -20,25 +22,25 @@ class BottomNavSettings {
     return [
       BottomNavigationBarItem(
         icon: Icon(Icons.home),
-        label: 'Главная',
+        label: LocaleKeys.home.tr(),
       ),
       BottomNavigationBarItem(
         icon: Icon(Icons.favorite_border),
-        label: 'Избранные',
+        label: LocaleKeys.favourite.tr(),
       ),
       BottomNavigationBarItem(
         icon: Icon(Icons.add_box_rounded),
-        label: 'Добавить',
+        label: LocaleKeys.add.tr(),
       ),
       BottomNavigationBarItem(
         icon: Icon(
           Icons.text_snippet_outlined,
         ),
-        label: 'О проекте',
+        label: LocaleKeys.about.tr(),
       ),
       BottomNavigationBarItem(
         icon: Icon(Icons.checklist_outlined),
-        label: 'Тест',
+        label: LocaleKeys.test.tr(),
       ),
     ];
   }

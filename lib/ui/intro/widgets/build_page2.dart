@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:glossary_app/generated/locale_keys.g.dart';
 import 'package:glossary_app/ui/intro/widgets/is_last_page.dart';
 
 class IntroPage2 extends StatelessWidget {
@@ -12,7 +14,7 @@ class IntroPage2 extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Text(
-            'Глоссарий',
+            LocaleKeys.nameApp.tr(),
             style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.bold,
@@ -29,21 +31,21 @@ class IntroPage2 extends StatelessWidget {
                     Icons.star,
                     color: Colors.amber,
                   ),
-                  text: 'Добавление в избранные',
+                  text: LocaleKeys.addFavourite.tr(),
                 ),
                 rowWidgets(
                   iconInfo: Icon(
                     Icons.task_outlined,
                     color: Color.fromARGB(255, 19, 201, 34),
                   ),
-                  text: 'Пройти тест на знание глоссариев',
+                  text: LocaleKeys.testGlossary.tr(),
                 ),
                 rowWidgets(
                   iconInfo: Icon(
                     Icons.search,
                     color: Color.fromARGB(255, 13, 50, 214),
                   ),
-                  text: 'Найти интересующие вас глоссарии',
+                  text: LocaleKeys.searchLikeGlosssary.tr(),
                 ),
               ],
             ),

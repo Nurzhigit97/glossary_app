@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/cubits/Glossary_cubit.dart';
 import 'package:glossary_app/cubits/theme_cubit.dart';
+import 'package:glossary_app/generated/locale_keys.g.dart';
 import 'package:glossary_app/ui/auth_screens/registered_dialog.dart';
 import 'package:glossary_app/ui/drawer_page/drawer_page.dart';
 import 'package:glossary_app/ui/home_page/home_list_glossary_with_hightLightText.dart';
@@ -37,19 +39,16 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [
           RegisteredDialog(),
-          BlocBuilder<ThemeCubit, bool>(
-            builder: (context, state) {
-              return IconButton(
-                onPressed: () {
-                  final cubit = context.read<ThemeCubit>();
-                  cubit.toggleTheme(value: cubit.isDark);
-                },
-                icon: context.read<ThemeCubit>().isDark
-                    ? Icon(Icons.dark_mode_outlined)
-                    : Icon(Icons.light_mode_outlined),
-              );
-            },
-          ),
+          // PopupMenuButton(
+          //   itemBuilder: ((context) => [
+          //         PopupMenuItem(
+          //           child: toggleTheme(),
+          //         ),
+          //         PopupMenuItem(
+          //           child: ChooseAppLang(),
+          //         ),
+          //       ]),
+          // ),
         ],
       ),
       body: Container(
@@ -67,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                 },
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.only(left: 10),
-                  hintText: 'Поиск...',
+                  hintText: LocaleKeys.search.tr(),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                   ),

@@ -1,9 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:glossary_app/data/models/glossary_model.dart';
 import 'package:glossary_app/data/repositories/check_glossary_repo.dart';
 import 'package:glossary_app/data/repositories/glossary_repo.dart';
+import 'package:glossary_app/generated/locale_keys.g.dart';
 
 class CheckDetailGlossary extends StatelessWidget {
   final int? id;
@@ -40,7 +42,7 @@ class CheckDetailGlossary extends StatelessWidget {
                     );
                     Navigator.pop(context);
                   },
-                  child: Text('Добавить'),
+                  child: Text(LocaleKeys.add.tr()),
                 ),
                 TextButton(
                   onPressed: () {
@@ -50,7 +52,7 @@ class CheckDetailGlossary extends StatelessWidget {
 
                     Navigator.pop(context);
                   },
-                  child: Text('Отменить'),
+                  child: Text(LocaleKeys.cancel.tr()),
                 ),
               ],
             ),

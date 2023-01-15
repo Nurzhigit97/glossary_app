@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/data/repositories/firebase_service.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:glossary_app/generated/locale_keys.g.dart';
 import 'package:glossary_app/ui/auth_screens/sign_in.dart';
 import 'package:glossary_app/ui/bottom_nav_bar/bottom_nav_page.dart';
 
@@ -83,7 +85,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
         ? BottomNavPage()
         : Scaffold(
             appBar: AppBar(
-              title: Text('Verify Page'),
+              title: Text(LocaleKeys.verifyPage.tr()),
             ),
             body: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -91,7 +93,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Отправлен сообщение на вашу почту для верификации.',
+                    LocaleKeys.sendVerifyToEmail.tr(),
                     style: TextStyle(fontSize: 20),
                     textAlign: TextAlign.center,
                   ),
@@ -99,7 +101,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                   ElevatedButton.icon(
                     onPressed: canResentEmail ? sendVerificationEmail : null,
                     icon: Icon(Icons.email),
-                    label: Text('Повторно отправить электронное письмо'),
+                    label: Text(LocaleKeys.repeatSendVerify.tr()),
                   ),
                   TextButton(
                     onPressed: () async {
@@ -111,7 +113,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                         print(err);
                       }
                     },
-                    child: Text('Выйти'),
+                    child: Text(LocaleKeys.signOut.tr()),
                   ),
                 ],
               ),

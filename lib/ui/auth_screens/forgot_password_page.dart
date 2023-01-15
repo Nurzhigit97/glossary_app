@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/data/repositories/firebase_service.dart';
+import 'package:glossary_app/generated/locale_keys.g.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   static String route = 'forgotPassword';
@@ -29,18 +31,18 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Введите почту для сброса пароля'),
+              Text(LocaleKeys.enterEmailForResetPassword.tr()),
               SizedBox(height: 20),
               TextFormField(
                 controller: emailController,
                 textInputAction: TextInputAction.done,
                 decoration: InputDecoration(
-                  labelText: 'Введите почту...',
+                  labelText: LocaleKeys.enterEmail.tr(),
                 ),
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (email) =>
                     email != null && EmailValidator.validate(email)
-                        ? 'Введите правильную почту '
+                        ? LocaleKeys.errorTextFieldEmail.tr()
                         : null,
               ),
               SizedBox(height: 20),
@@ -54,7 +56,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                             emailController: emailController,
                           ),
                   icon: Icon(Icons.email_outlined),
-                  label: Text('Сбросить пароль'))
+                  label: Text(LocaleKeys.resetPassword.tr()))
             ],
           ),
         ),

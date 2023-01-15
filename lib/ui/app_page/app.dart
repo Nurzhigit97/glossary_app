@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/cubits/theme_cubit.dart';
@@ -41,9 +42,12 @@ class _AppState extends State<App> {
         ],
         child: BlocBuilder<ThemeCubit, bool>(
           builder: (context, state) {
-            final cubit = context.watch<ThemeCubit>();
+            final themeCubit = context.watch<ThemeCubit>();
             return MaterialApp(
-              theme: cubit.isDark
+              localizationsDelegates: context.localizationDelegates,
+              supportedLocales: context.supportedLocales,
+              locale: context.locale,
+              theme: themeCubit.isDark
                   ? ThemeSettings.darkTheme()
                   : ThemeSettings.lightTheme(),
               debugShowCheckedModeBanner: false,

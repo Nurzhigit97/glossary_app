@@ -1,9 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/data/models/user_model.dart';
 
 import 'package:glossary_app/data/repositories/firebase_service.dart';
 import 'package:glossary_app/data/repositories/user_service.dart';
+import 'package:glossary_app/generated/locale_keys.g.dart';
 import 'package:glossary_app/ui/auth_screens/forgot_password_page.dart';
 import 'package:glossary_app/ui/auth_screens/sign_up.dart';
 import 'package:glossary_app/ui/bottom_nav_bar/bottom_nav_page.dart';
@@ -49,7 +51,7 @@ class _SignInState extends State<SignIn> {
                     hintStyle: TextStyle(color: Colors.black26),
                     contentPadding: EdgeInsets.only(top: 5, left: 10),
                     suffixIcon: Icon(Icons.alternate_email_sharp),
-                    hintText: 'Введите почту...',
+                    hintText: LocaleKeys.enterEmail.tr(),
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.blue.shade100,
@@ -75,7 +77,7 @@ class _SignInState extends State<SignIn> {
                     hintStyle: TextStyle(color: Colors.black26),
                     inputPadding: EdgeInsets.only(top: 5, left: 10),
                   ),
-                  hintText: 'Введите пароль...',
+                  hintText: LocaleKeys.enterPassword.tr(),
                   border: PasswordBorder(
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -95,8 +97,7 @@ class _SignInState extends State<SignIn> {
                           BorderSide(width: 2, color: Colors.red.shade200),
                     ),
                   ),
-                  errorMessage:
-                      'Должен содержать специальный символ . * @ # \$',
+                  errorMessage: LocaleKeys.ifErrorTextField.tr(),
                 ),
                 SizedBox(
                   height: 10,
@@ -108,7 +109,9 @@ class _SignInState extends State<SignIn> {
                         emailController: _emailController,
                         passwordController: _passwordController);
                   },
-                  child: const Text('Войти'),
+                  child: Text(
+                    LocaleKeys.login.tr(),
+                  ),
                 ),
                 Container(
                   child: Stack(
@@ -118,7 +121,7 @@ class _SignInState extends State<SignIn> {
                         child: Padding(
                           padding: const EdgeInsets.all(4.0),
                           child: Text(
-                            'Или',
+                            LocaleKeys.or.tr(),
                           ),
                         ),
                       ),
@@ -144,23 +147,27 @@ class _SignInState extends State<SignIn> {
                         .pushReplacementNamed(BottomNavPage.route);
                   },
                   icon: Icon(Icons.g_mobiledata_rounded),
-                  label: Text('Авторизация с  Google'),
+                  label: Text(
+                    LocaleKeys.signInWithGoogle.tr(),
+                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("У вас еще нет учетной записи?"),
+                    Text(
+                      LocaleKeys.ifHaveAccaunt.tr(),
+                    ),
                     TextButton(
                       onPressed: () => Navigator.of(context)
                           .pushReplacementNamed(SignUp.route),
-                      child: Text('Sign Up'),
+                      child: Text(LocaleKeys.register.tr()),
                     ),
                   ],
                 ),
                 TextButton(
                   onPressed: () => Navigator.of(context, rootNavigator: true)
                       .pushReplacementNamed(ForgotPasswordPage.route),
-                  child: Text('Забыли пароль?'),
+                  child: Text(LocaleKeys.forgotPassword.tr()),
                 ),
               ],
             ),

@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:glossary_app/generated/locale_keys.g.dart';
 import 'package:glossary_app/ui/home_page/widgets/prev_next.dart';
 import 'package:number_paginator/number_paginator.dart';
 
@@ -50,12 +52,13 @@ class _PrevNextState extends State<HomeDetailScreen> {
             child: Scaffold(
               appBar: AppBar(
                 centerTitle: true,
-                title: Text('Глоссарий'),
+                title: Text(LocaleKeys.nameApp.tr()),
                 actions: [
                   IconButton(
                     onPressed: () {
                       _glossaryRepo.updateFavourite(
                           id: glossary.id!, isFavourite: !glossary.isFavourite);
+                      Navigator.pop(context);
                     },
                     icon: Icon(Icons.star,
                         color: glossary!.isFavourite != true

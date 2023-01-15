@@ -1,9 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:email_validator/email_validator.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/data/repositories/firebase_service.dart';
 import 'package:glossary_app/data/repositories/user_service.dart';
+import 'package:glossary_app/generated/locale_keys.g.dart';
 import 'package:glossary_app/ui/auth_screens/sign_in.dart';
 import 'package:passwordfield/passwordfield.dart';
 
@@ -56,7 +58,7 @@ class _SignUpState extends State<SignUp> {
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.only(top: 5, left: 10),
                       suffixIcon: Icon(Icons.person),
-                      hintText: 'Введите имя...',
+                      hintText: LocaleKeys.enterName.tr(),
                       hintStyle: TextStyle(color: Colors.black26),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
@@ -85,7 +87,7 @@ class _SignUpState extends State<SignUp> {
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.only(top: 5, left: 10),
                       suffixIcon: Icon(Icons.alternate_email_sharp),
-                      hintText: 'Введите почту...',
+                      hintText: LocaleKeys.errorTextFieldEmail.tr(),
                       hintStyle: TextStyle(color: Colors.black26),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
@@ -114,35 +116,34 @@ class _SignUpState extends State<SignUp> {
                     height: 10,
                   ),
                   PasswordField(
-                    controller: _passwordController,
-                    color: Colors.blue,
-                    passwordConstraint: r'.*[0-9].*',
-                    inputDecoration: PasswordDecoration(
-                      hintStyle: TextStyle(color: Colors.black26),
-                      inputPadding: EdgeInsets.only(top: 5, left: 10),
-                    ),
-                    hintText: 'Введите пароль...',
-                    border: PasswordBorder(
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.blue.shade100,
+                      controller: _passwordController,
+                      color: Colors.blue,
+                      passwordConstraint: r'.*[0-9].*',
+                      inputDecoration: PasswordDecoration(
+                        hintStyle: TextStyle(color: Colors.black26),
+                        inputPadding: EdgeInsets.only(top: 5, left: 10),
+                      ),
+                      hintText: LocaleKeys.enterPassword.tr(),
+                      border: PasswordBorder(
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.blue.shade100,
+                          ),
+                          borderRadius: BorderRadius.circular(12),
                         ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.blue.shade100,
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.blue.shade100,
+                          ),
+                          borderRadius: BorderRadius.circular(12),
                         ),
-                        borderRadius: BorderRadius.circular(12),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide:
+                              BorderSide(width: 2, color: Colors.red.shade200),
+                        ),
                       ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide:
-                            BorderSide(width: 2, color: Colors.red.shade200),
-                      ),
-                    ),
-                    errorMessage: 'Должен содержать хотябы одну цифру',
-                  ),
+                      errorMessage: LocaleKeys.ifErrorTextField.tr()),
                   SizedBox(
                     height: 10,
                   ),
@@ -173,7 +174,9 @@ class _SignUpState extends State<SignUp> {
                       context.read<UserService>().addUser(userModel);
                       setState(() {});
                     },
-                    child: Text('Регистрация'),
+                    child: Text(
+                      LocaleKeys.register.tr(),
+                    ),
                   ),
                   SizedBox(
                     height: 50,
@@ -181,11 +184,15 @@ class _SignUpState extends State<SignUp> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Уже есть учетная запись?'),
+                      Text(
+                        LocaleKeys.ifHaveAccaunt.tr(),
+                      ),
                       TextButton(
                         onPressed: () => Navigator.of(context)
                             .pushReplacementNamed(SignIn.route),
-                        child: Text('Sign In'),
+                        child: Text(
+                          LocaleKeys.login.tr(),
+                        ),
                       ),
                     ],
                   ),

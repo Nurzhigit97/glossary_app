@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:glossary_app/generated/locale_keys.g.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 // ignore: must_be_immutable
@@ -21,7 +23,7 @@ class ActionsIntro extends StatelessWidget {
               ? TextButton(
                   onPressed: () => pageController.jumpToPage(1),
                   child: Text(
-                    'Пропустить',
+                    LocaleKeys.skip.tr(),
                     style: TextStyle(
                         color: Color.fromARGB(255, 44, 136, 148),
                         fontSize: 16,
@@ -51,7 +53,7 @@ class ActionsIntro extends StatelessWidget {
                     curve: Curves.easeInOut,
                   ),
                   child: Text(
-                    'Далее',
+                    LocaleKeys.next.tr(),
                     style: TextStyle(
                         fontSize: 16,
                         color: Color.fromARGB(255, 44, 136, 148),
