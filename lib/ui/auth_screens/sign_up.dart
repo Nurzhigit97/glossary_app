@@ -39,15 +39,15 @@ class _SignUpState extends State<SignUp> {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20),
+            padding: const EdgeInsets.only(left: 20, top: 10, right: 20),
             child: Form(
               key: formKey,
               child: Column(
                 children: [
                   Container(
                     child: Image(
-                      image: AssetImage('assets/auth/signUp.webp'),
-                      width: 250,
+                      image: AssetImage('assets/auth/register.png'),
+                      width: 300,
                     ),
                   ),
                   SizedBox(
@@ -59,7 +59,6 @@ class _SignUpState extends State<SignUp> {
                       contentPadding: EdgeInsets.only(top: 5, left: 10),
                       suffixIcon: Icon(Icons.person),
                       hintText: LocaleKeys.enterName.tr(),
-                      hintStyle: TextStyle(color: Colors.black26),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.blue.shade100,
@@ -88,7 +87,6 @@ class _SignUpState extends State<SignUp> {
                       contentPadding: EdgeInsets.only(top: 5, left: 10),
                       suffixIcon: Icon(Icons.alternate_email_sharp),
                       hintText: LocaleKeys.errorTextFieldEmail.tr(),
-                      hintStyle: TextStyle(color: Colors.black26),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.blue.shade100,
@@ -120,7 +118,7 @@ class _SignUpState extends State<SignUp> {
                       color: Colors.blue,
                       passwordConstraint: r'.*[0-9].*',
                       inputDecoration: PasswordDecoration(
-                        hintStyle: TextStyle(color: Colors.black26),
+                        hintStyle: TextStyle(color: null),
                         inputPadding: EdgeInsets.only(top: 5, left: 10),
                       ),
                       hintText: LocaleKeys.enterPassword.tr(),

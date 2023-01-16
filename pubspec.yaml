@@ -60,6 +60,6 @@ flutter:
     - assets/introImages/intro11.png
     - assets/introImages/intro22.png
     - assets/introImages/intro33.png
-    - assets/auth/signIn.webp
-    - assets/auth/signUp.webp
+    - assets/auth/login.png
+    - assets/auth/register.png
     - assets/auth/fakeUser.png

@@ -36,19 +36,18 @@ class _SignInState extends State<SignIn> {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20),
+            padding: const EdgeInsets.only(left: 20, top: 10, right: 20),
             child: Column(
               children: [
                 Container(
                   child: Image(
-                    image: AssetImage('assets/auth/signIn.webp'),
-                    width: 200,
+                    image: AssetImage('assets/auth/login.png'),
+                    width: 300,
                   ),
                 ),
                 TextField(
                   controller: _emailController,
                   decoration: InputDecoration(
-                    hintStyle: TextStyle(color: Colors.black26),
                     contentPadding: EdgeInsets.only(top: 5, left: 10),
                     suffixIcon: Icon(Icons.alternate_email_sharp),
                     hintText: LocaleKeys.enterEmail.tr(),
@@ -74,7 +73,7 @@ class _SignInState extends State<SignIn> {
                   color: Colors.blue,
                   passwordConstraint: r'.*[@$#.*].*',
                   inputDecoration: PasswordDecoration(
-                    hintStyle: TextStyle(color: Colors.black26),
+                    hintStyle: TextStyle(color: null),
                     inputPadding: EdgeInsets.only(top: 5, left: 10),
                   ),
                   hintText: LocaleKeys.enterPassword.tr(),
