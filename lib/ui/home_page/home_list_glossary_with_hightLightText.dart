@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/cubits/Glossary_cubit.dart';
 import 'package:glossary_app/cubits/glossary_state.dart';
 import 'package:glossary_app/cubits/theme_cubit.dart';
+import 'package:glossary_app/generated/locale_keys.g.dart';
 import 'package:glossary_app/ui/global_widgets/method_highlight.dart';
 import 'package:glossary_app/ui/home_page/widgets/home_detail_screen.dart';
 
@@ -20,11 +22,16 @@ class HomeListListWithHighLightText extends StatelessWidget {
       builder: ((context, state) {
         if (state is ErrorGlossaryState) {
           return Center(
-            child: Text(
-              '${state.errMsg}',
-              style: TextStyle(fontSize: 20, color: Colors.red),
-            ),
-          );
+              child: Column(
+            children: [
+              Text(
+                state.errMsg.contains('Connecting timed out')
+                    ? LocaleKeys.serverError.tr()
+                    : LocaleKeys.serverErrorElse.tr(),
+                style: TextStyle(fontSize: 20, color: Colors.red),
+              ),
+            ],
+          ));
         }
         if (state is LoadedGlossaryState) {
           return Expanded(

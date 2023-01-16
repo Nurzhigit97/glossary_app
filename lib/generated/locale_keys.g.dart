@@ -18,6 +18,8 @@ abstract class  LocaleKeys {
   static const cancel = 'cancel';
   static const about = 'about';
   static const test = 'test';
+  static const serverError = 'serverError';
+  static const serverErrorElse = 'serverErrorElse';
   static const testTitle = 'testTitle';
   static const dontHaveFavouriteGlossary = 'dontHaveFavouriteGlossary';
   static const addGlossary = 'addGlossary';

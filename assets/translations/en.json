@@ -16,6 +16,8 @@
   "cancel": "Cancel",
   "about": "About",
   "test": "Test",
+  "serverError": "Connection to server was interrupted",
+  "serverErrorElse": "Server Error",
   "testTitle": "Glossary Quiz",
   "dontHaveFavouriteGlossary": "No favorite",
   "addGlossary": "Add glossary",

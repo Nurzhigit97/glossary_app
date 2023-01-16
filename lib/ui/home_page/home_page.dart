@@ -6,6 +6,7 @@ import 'package:glossary_app/cubits/theme_cubit.dart';
 import 'package:glossary_app/generated/locale_keys.g.dart';
 import 'package:glossary_app/ui/auth_screens/registered_dialog.dart';
 import 'package:glossary_app/ui/drawer_page/drawer_page.dart';
+import 'package:glossary_app/ui/home_page/check_internet.dart';
 import 'package:glossary_app/ui/home_page/home_list_glossary_with_hightLightText.dart';
 
 class HomePage extends StatefulWidget {
@@ -38,17 +39,8 @@ class _HomePageState extends State<HomePage> {
           width: 200,
         ),
         actions: [
+          CheckInternet(),
           RegisteredDialog(),
-          // PopupMenuButton(
-          //   itemBuilder: ((context) => [
-          //         PopupMenuItem(
-          //           child: toggleTheme(),
-          //         ),
-          //         PopupMenuItem(
-          //           child: ChooseAppLang(),
-          //         ),
-          //       ]),
-          // ),
         ],
       ),
       body: Container(

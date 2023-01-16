@@ -16,6 +16,8 @@
   "cancel": "Отменить",
   "about": "О проекте",
   "test": "Тест",
+  "serverError": "Прерван соединение с сервером",
+  "serverErrorElse": "Ошибка сервера",
   "testTitle": "Тест на знание",
   "dontHaveFavouriteGlossary": "Нету избранных",
   "addGlossary": "Добавить глоссарий",

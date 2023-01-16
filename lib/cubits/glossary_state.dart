@@ -13,5 +13,6 @@ class LoadedGlossaryState extends GlossaryState {
 
 class ErrorGlossaryState extends GlossaryState {
   final String errMsg;
+
   ErrorGlossaryState(this.errMsg);
 }

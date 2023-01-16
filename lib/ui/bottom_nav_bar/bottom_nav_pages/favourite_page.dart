@@ -5,6 +5,7 @@ import 'package:glossary_app/cubits/favouriteGlossaries/isfavourite_cubit.dart';
 import 'package:glossary_app/cubits/favouriteGlossaries/isfavourite_state.dart';
 import 'package:glossary_app/generated/locale_keys.g.dart';
 import 'package:glossary_app/ui/global_widgets/glossary_list.dart';
+import 'package:glossary_app/ui/home_page/check_internet.dart';
 
 class FavouritePage extends StatefulWidget {
   const FavouritePage({Key? key}) : super(key: key);
@@ -45,11 +46,15 @@ class _FavouritePageState extends State<FavouritePage> {
             child: BlocBuilder<IsFavouriteCubit, IsfavouriteState>(
               builder: ((context, state) {
                 if (state is IsfavouriteError) {
-                  return Center(
-                    child: Text(
-                      state.errMsg,
-                      style: TextStyle(fontSize: 20, color: Colors.red),
-                    ),
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CheckInternet(),
+                      Text(
+                        "DataBase Closed",
+                        style: TextStyle(fontSize: 20, color: Colors.red),
+                      ),
+                    ],
                   );
                 }
 
