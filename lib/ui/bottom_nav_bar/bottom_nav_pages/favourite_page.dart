@@ -6,6 +6,7 @@ import 'package:glossary_app/cubits/favouriteGlossaries/isfavourite_state.dart';
 import 'package:glossary_app/generated/locale_keys.g.dart';
 import 'package:glossary_app/ui/global_widgets/glossary_list.dart';
 import 'package:glossary_app/ui/home_page/check_internet.dart';
+import 'package:glossary_app/ui/widgets/server_error.dart';
 
 class FavouritePage extends StatefulWidget {
   const FavouritePage({Key? key}) : super(key: key);
@@ -50,10 +51,7 @@ class _FavouritePageState extends State<FavouritePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CheckInternet(),
-                      Text(
-                        "DataBase Closed",
-                        style: TextStyle(fontSize: 20, color: Colors.red),
-                      ),
+                      serverError(state.errMsg),
                     ],
                   );
                 }

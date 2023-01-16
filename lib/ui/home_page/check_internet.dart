@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 
@@ -10,11 +12,11 @@ class CheckInternet extends StatefulWidget {
 
 class _CheckInternetState extends State<CheckInternet> {
   bool hideUi = false;
-  final Connectivity _connectivity = Connectivity();
 
+  late StreamSubscription subscription;
   @override
   void initState() {
-    _connectivity.onConnectivityChanged.listen((event) {
+    subscription = Connectivity().onConnectivityChanged.listen((event) {
       if (event == ConnectivityResult.none) {
         if (mounted) {
           setState(() {
@@ -30,6 +32,12 @@ class _CheckInternetState extends State<CheckInternet> {
       }
     });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    subscription.cancel();
   }
 
   @override

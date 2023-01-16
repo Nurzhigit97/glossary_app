@@ -7,6 +7,7 @@ import 'package:glossary_app/cubits/theme_cubit.dart';
 import 'package:glossary_app/generated/locale_keys.g.dart';
 import 'package:glossary_app/ui/global_widgets/method_highlight.dart';
 import 'package:glossary_app/ui/home_page/widgets/home_detail_screen.dart';
+import 'package:glossary_app/ui/widgets/server_error.dart';
 
 class HomeListListWithHighLightText extends StatelessWidget {
   const HomeListListWithHighLightText({
@@ -24,12 +25,7 @@ class HomeListListWithHighLightText extends StatelessWidget {
           return Center(
               child: Column(
             children: [
-              Text(
-                state.errMsg.contains('Connecting timed out')
-                    ? LocaleKeys.serverError.tr()
-                    : LocaleKeys.serverErrorElse.tr(),
-                style: TextStyle(fontSize: 20, color: Colors.red),
-              ),
+              serverError(state.errMsg),
             ],
           ));
         }
