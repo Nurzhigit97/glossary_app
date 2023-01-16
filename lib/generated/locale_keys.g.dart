@@ -44,10 +44,10 @@ abstract class  LocaleKeys {
   static const signInWithGoogle = 'signInWithGoogle';
   static const dontHaveAccount = 'dontHaveAccount';
   static const forgotPassword = 'forgotPassword';
-  static const errorTextFieldEmail = 'errorTextFieldEmail';
-  static const ifErrorTextField = 'ifErrorTextField';
-  static const errorTextFieldPassword = 'errorTextFieldPassword';
   static const enterEmailForResetPassword = 'enterEmailForResetPassword';
   static const resetPassword = 'resetPassword';
+  static const nameIsValid = 'nameIsValid';
+  static const emailIsValid = 'emailIsValid';
+  static const passwordIsValid = 'passwordIsValid';
 
 }

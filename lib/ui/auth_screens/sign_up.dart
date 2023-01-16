@@ -7,7 +7,6 @@ import 'package:glossary_app/data/repositories/firebase_service.dart';
 import 'package:glossary_app/data/repositories/user_service.dart';
 import 'package:glossary_app/generated/locale_keys.g.dart';
 import 'package:glossary_app/ui/auth_screens/sign_in.dart';
-import 'package:passwordfield/passwordfield.dart';
 
 import '../../data/models/user_model.dart';
 
@@ -24,12 +23,15 @@ class _SignUpState extends State<SignUp> {
   final formKey = GlobalKey<FormState>();
 
   TextEditingController _nameController = TextEditingController();
+
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _nameController.dispose();
     super.dispose();
   }
 
@@ -42,6 +44,7 @@ class _SignUpState extends State<SignUp> {
             padding: const EdgeInsets.only(left: 20, top: 10, right: 20),
             child: Form(
               key: formKey,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               child: Column(
                 children: [
                   Container(
@@ -57,7 +60,7 @@ class _SignUpState extends State<SignUp> {
                     controller: _nameController,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.only(top: 5, left: 10),
-                      suffixIcon: Icon(Icons.person),
+                      prefixIcon: Icon(Icons.person),
                       hintText: LocaleKeys.enterName.tr(),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
@@ -76,7 +79,13 @@ class _SignUpState extends State<SignUp> {
                         color: Colors.red,
                       ),
                     ),
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (name) {
+                      if (name != null && name.length > 20) {
+                        return LocaleKeys.nameIsValid.tr();
+                      } else {
+                        return null;
+                      }
+                    },
                   ),
                   SizedBox(
                     height: 10,
@@ -85,8 +94,8 @@ class _SignUpState extends State<SignUp> {
                     controller: _emailController,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.only(top: 5, left: 10),
-                      suffixIcon: Icon(Icons.alternate_email_sharp),
-                      hintText: LocaleKeys.errorTextFieldEmail.tr(),
+                      prefixIcon: Icon(Icons.email_outlined),
+                      hintText: LocaleKeys.enterEmail.tr(),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.blue.shade100,
@@ -99,78 +108,71 @@ class _SignUpState extends State<SignUp> {
                         ),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      errorStyle: TextStyle(
-                        fontSize: 14,
-                        color: Colors.red,
-                      ),
                     ),
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: (email) =>
                         email != null && !EmailValidator.validate(email)
-                            ? 'Введите правильный эл. почту'
+                            ? LocaleKeys.emailIsValid.tr()
                             : null,
                   ),
                   SizedBox(
                     height: 10,
                   ),
-                  PasswordField(
-                      controller: _passwordController,
-                      color: Colors.blue,
-                      passwordConstraint: r'.*[0-9].*',
-                      inputDecoration: PasswordDecoration(
-                        hintStyle: TextStyle(color: null),
-                        inputPadding: EdgeInsets.only(top: 5, left: 10),
-                      ),
+                  TextFormField(
+                    controller: _passwordController,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(top: 5, left: 10),
+                      prefixIcon: Icon(Icons.lock),
                       hintText: LocaleKeys.enterPassword.tr(),
-                      border: PasswordBorder(
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.blue.shade100,
-                          ),
-                          borderRadius: BorderRadius.circular(12),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.blue.shade100,
                         ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.blue.shade100,
-                          ),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide:
-                              BorderSide(width: 2, color: Colors.red.shade200),
-                        ),
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      errorMessage: LocaleKeys.ifErrorTextField.tr()),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.blue.shade100,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value != null && value.length < 7) {
+                        return LocaleKeys.passwordIsValid.tr();
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
                   SizedBox(
                     height: 10,
                   ),
                   ElevatedButton(
                     onPressed: () async {
                       final isValid = formKey.currentState!.validate();
-                      // если введенные email и password не верны не даем доступ к регистрации
-                      if (!isValid) return;
+                      // если введенные email и password верны даем доступ к регистрации
+                      if (isValid) {
+                        /// cоздаем пользователя в Firebase Auth
+                        final uid =
+                            await context.read<FirebaseService>().register(
+                                  context: context,
+                                  emailController: _emailController,
+                                  passwordController: _passwordController,
+                                );
 
-                      /// cоздаем пользователя в Firebase Auth
-                      final uid =
-                          await context.read<FirebaseService>().register(
-                                context: context,
-                                emailController: _emailController,
-                                passwordController: _passwordController,
-                              );
+                        if (uid == null) return;
 
-                      if (uid == null) return;
+                        /// cоздаем документ пользователя в Firebase Firestore
+                        final userModel = UserModel(
+                          id: uid,
+                          name: _nameController.text,
+                          email: _emailController.text,
+                          role: UserRole.user,
+                        );
 
-                      /// cоздаем документ пользователя в Firebase Firestore
-                      final userModel = UserModel(
-                        id: uid,
-                        name: _nameController.text,
-                        email: _emailController.text,
-                        role: UserRole.user,
-                      );
-
-                      context.read<UserService>().addUser(userModel);
-                      setState(() {});
+                        await context.read<UserService>().addUser(userModel);
+                      }
                     },
                     child: Text(
                       LocaleKeys.register.tr(),

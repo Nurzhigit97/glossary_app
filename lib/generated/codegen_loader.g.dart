@@ -58,11 +58,11 @@ class CodegenLoader extends AssetLoader{
   "signInWithGoogle": "Login with Google",
   "dontHaveAccount": "Don't have an account yet?",
   "forgotPassword": "Forgot password?",
-  "errorTextFieldEmail": "Please enter a valid email address",
-  "ifErrorTextField": "Must contain at least one number.",
-  "errorTextFieldPassword": "Please enter the correct password",
   "enterEmailForResetPassword": "Enter your email to reset your password",
-  "resetPassword": "Reset password"
+  "resetPassword": "Reset password",
+  "nameIsValid": "Enter less than 15 characters",
+  "emailIsValid": "Enter a valid email",
+  "passwordIsValid": "Enter min. 7 characters"
 };
 static const Map<String,dynamic> ky = {
   "nameApp": "Глоссарий",
@@ -108,11 +108,11 @@ static const Map<String,dynamic> ky = {
   "signInWithGoogle": "Google аркылуу кирүү",
   "dontHaveAccount": "Аккаунтуңуз жок болсо",
   "forgotPassword": "Сырсөзүңүздү унутуп калдыңызбы?",
-  "errorTextFieldEmail": "Сураныч, туура электрондук почта дарегин киргизиңиз",
-  "ifErrorTextField": "Жок дегенде бир сан болушу керек.",
-  "errorTextFieldPassword": "Сураныч, туура сырсөздү киргизиңиз.",
   "enterEmailForResetPassword": "Сырсөздү кайра орнотуу үчүн электрондук почтаңызды киргизиңиз",
-  "resetPassword": "Сырсөздү кайра орнотуу"
+  "resetPassword": "Сырсөздү кайра орнотуу",
+  "nameIsValid": "15 белгиден азыраак киргизиңиз",
+  "emailIsValid": "Жарактуу электрондук почта дарегин киргизиңиз",
+  "passwordIsValid": "Кеминде 7 белги киргизиңиз"
 };
 static const Map<String,dynamic> ru = {
   "nameApp": "Глоссарий",
@@ -158,11 +158,11 @@ static const Map<String,dynamic> ru = {
   "signInWithGoogle": "Войти через Google",
   "dontHaveAccount": "У вас еще нет учетной записи?",
   "forgotPassword": "Забыли пароль?",
-  "errorTextFieldEmail": "Пожалуйста, введите правильный адрес электронной почты.",
-  "ifErrorTextField": "Должен содержать хотя бы одно число.",
-  "errorTextFieldPassword": "Пожалуйста, введите правильный пароль.",
   "enterEmailForResetPassword": "Введите почту для сброса пароля",
-  "resetPassword": "Сбросить пароль"
+  "resetPassword": "Сбросить пароль",
+  "nameIsValid": "Введите менее 15 символов",
+  "emailIsValid": "Введите действительный адрес электронной почты",
+  "passwordIsValid": "Введите не менее 7 символов"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ky": ky, "ru": ru};
 }

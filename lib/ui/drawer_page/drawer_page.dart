@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:glossary_app/cubits/theme_cubit.dart';
 import 'package:glossary_app/data/models/user_model.dart';
 import 'package:glossary_app/data/repositories/firebase_service.dart';
 import 'package:glossary_app/generated/locale_keys.g.dart';

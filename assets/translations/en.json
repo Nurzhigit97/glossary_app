@@ -42,9 +42,9 @@
   "signInWithGoogle": "Login with Google",
   "dontHaveAccount": "Don't have an account yet?",
   "forgotPassword": "Forgot password?",
-  "errorTextFieldEmail": "Please enter a valid email address",
-  "ifErrorTextField": "Must contain at least one number.",
-  "errorTextFieldPassword": "Please enter the correct password",
   "enterEmailForResetPassword": "Enter your email to reset your password",
-  "resetPassword": "Reset password"
+  "resetPassword": "Reset password",
+  "nameIsValid": "Enter less than 15 characters",
+  "emailIsValid": "Enter a valid email",
+  "passwordIsValid": "Enter min. 7 characters"
 }

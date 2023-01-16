@@ -42,9 +42,9 @@
   "signInWithGoogle": "Google аркылуу кирүү",
   "dontHaveAccount": "Аккаунтуңуз жок болсо",
   "forgotPassword": "Сырсөзүңүздү унутуп калдыңызбы?",
-  "errorTextFieldEmail": "Сураныч, туура электрондук почта дарегин киргизиңиз",
-  "ifErrorTextField": "Жок дегенде бир сан болушу керек.",
-  "errorTextFieldPassword": "Сураныч, туура сырсөздү киргизиңиз.",
   "enterEmailForResetPassword": "Сырсөздү кайра орнотуу үчүн электрондук почтаңызды киргизиңиз",
-  "resetPassword": "Сырсөздү кайра орнотуу"
+  "resetPassword": "Сырсөздү кайра орнотуу",
+  "nameIsValid": "15 белгиден азыраак киргизиңиз",
+  "emailIsValid": "Жарактуу электрондук почта дарегин киргизиңиз",
+  "passwordIsValid": "Кеминде 7 белги киргизиңиз"
 }
