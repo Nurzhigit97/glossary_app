@@ -7,6 +7,7 @@ import 'package:glossary_app/data/repositories/firebase_service.dart';
 import 'package:glossary_app/data/repositories/user_service.dart';
 import 'package:glossary_app/generated/locale_keys.g.dart';
 import 'package:glossary_app/ui/auth_screens/sign_in.dart';
+import 'package:glossary_app/ui/auth_screens/widgets/sign_up_methods.dart';
 
 import '../../data/models/user_model.dart';
 
@@ -56,94 +57,25 @@ class _SignUpState extends State<SignUp> {
                   SizedBox(
                     height: 10,
                   ),
-                  TextFormField(
-                    controller: _nameController,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(top: 5, left: 10),
-                      prefixIcon: Icon(Icons.person),
-                      hintText: LocaleKeys.enterName.tr(),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.blue.shade100,
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.blue.shade100,
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      errorStyle: TextStyle(
-                        fontSize: 14,
-                        color: Colors.red,
-                      ),
-                    ),
-                    validator: (name) {
-                      if (name != null && name.length > 20) {
-                        return LocaleKeys.nameIsValid.tr();
-                      } else {
-                        return null;
-                      }
-                    },
+                  SignUpMethods.buildName(
+                      nameController: _nameController,
+                      enterName: LocaleKeys.enterName.tr(),
+                      nameIsValid: LocaleKeys.nameIsValid.tr()),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  SignUpMethods.buildEmail(
+                    emailController: _emailController,
+                    emailIsValid: LocaleKeys.emailIsValid.tr(),
+                    enterEmail: LocaleKeys.enterEmail.tr(),
                   ),
                   SizedBox(
                     height: 10,
                   ),
-                  TextFormField(
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(top: 5, left: 10),
-                      prefixIcon: Icon(Icons.email_outlined),
-                      hintText: LocaleKeys.enterEmail.tr(),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.blue.shade100,
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.blue.shade100,
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    validator: (email) =>
-                        email != null && !EmailValidator.validate(email)
-                            ? LocaleKeys.emailIsValid.tr()
-                            : null,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextFormField(
-                    controller: _passwordController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(top: 5, left: 10),
-                      prefixIcon: Icon(Icons.lock),
-                      hintText: LocaleKeys.enterPassword.tr(),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.blue.shade100,
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.blue.shade100,
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value != null && value.length < 7) {
-                        return LocaleKeys.passwordIsValid.tr();
-                      } else {
-                        return null;
-                      }
-                    },
+                  SignUpMethods.buildPassword(
+                    passwordController: _passwordController,
+                    enterPassword: LocaleKeys.enterPassword.tr(),
+                    passwordIsValid: LocaleKeys.passwordIsValid.tr(),
                   ),
                   SizedBox(
                     height: 10,
@@ -181,20 +113,11 @@ class _SignUpState extends State<SignUp> {
                   SizedBox(
                     height: 50,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        LocaleKeys.ifHaveAccaunt.tr(),
-                      ),
-                      TextButton(
-                        onPressed: () => Navigator.of(context)
-                            .pushReplacementNamed(SignIn.route),
-                        child: Text(
-                          LocaleKeys.login.tr(),
-                        ),
-                      ),
-                    ],
+                  SignUpMethods.goToSignInOrRegisterPage(
+                    context: context,
+                    hanveAccauntOrNot: LocaleKeys.ifHaveAccaunt.tr(),
+                    routeName: SignIn.route,
+                    loginOrRegister: LocaleKeys.login.tr(),
                   ),
                 ],
               ),

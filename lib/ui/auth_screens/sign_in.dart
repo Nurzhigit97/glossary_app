@@ -7,8 +7,9 @@ import 'package:glossary_app/data/models/user_model.dart';
 import 'package:glossary_app/data/repositories/firebase_service.dart';
 import 'package:glossary_app/data/repositories/user_service.dart';
 import 'package:glossary_app/generated/locale_keys.g.dart';
-import 'package:glossary_app/ui/auth_screens/forgot_password_page.dart';
+import 'package:glossary_app/ui/auth_screens/widgets/forgot_password_page.dart';
 import 'package:glossary_app/ui/auth_screens/sign_up.dart';
+import 'package:glossary_app/ui/auth_screens/widgets/sign_up_methods.dart';
 import 'package:glossary_app/ui/bottom_nav_bar/bottom_nav_page.dart';
 
 class SignIn extends StatefulWidget {
@@ -49,60 +50,18 @@ class _SignInState extends State<SignIn> {
                       width: 300,
                     ),
                   ),
-                  TextFormField(
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(top: 5, left: 10),
-                      prefixIcon: Icon(Icons.alternate_email_sharp),
-                      hintText: LocaleKeys.enterEmail.tr(),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.blue.shade100,
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.blue.shade100,
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    validator: (email) =>
-                        email != null && !EmailValidator.validate(email)
-                            ? LocaleKeys.emailIsValid.tr()
-                            : null,
+                  SignUpMethods.buildEmail(
+                    emailController: _emailController,
+                    emailIsValid: LocaleKeys.emailIsValid.tr(),
+                    enterEmail: LocaleKeys.enterEmail.tr(),
                   ),
                   SizedBox(
                     height: 10,
                   ),
-                  TextFormField(
-                    controller: _passwordController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(top: 5, left: 10),
-                      prefixIcon: Icon(Icons.lock),
-                      hintText: LocaleKeys.enterPassword.tr(),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.blue.shade100,
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.blue.shade100,
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value != null && value.length < 7) {
-                        return LocaleKeys.passwordIsValid.tr();
-                      } else {
-                        return null;
-                      }
-                    },
+                  SignUpMethods.buildPassword(
+                    passwordController: _passwordController,
+                    enterPassword: LocaleKeys.enterPassword.tr(),
+                    passwordIsValid: LocaleKeys.passwordIsValid.tr(),
                   ),
                   SizedBox(
                     height: 10,
@@ -165,11 +124,11 @@ class _SignInState extends State<SignIn> {
                       Text(
                         LocaleKeys.ifHaveAccaunt.tr(),
                       ),
-                      TextButton(
-                        onPressed: () => Navigator.of(context)
-                            .pushReplacementNamed(SignUp.route),
-                        child: Text(LocaleKeys.register.tr()),
-                      ),
+                      SignUpMethods.goToSignInOrRegisterPage(
+                          context: context,
+                          hanveAccauntOrNot: LocaleKeys.ifHaveAccaunt.tr(),
+                          routeName: SignUp.route,
+                          loginOrRegister: LocaleKeys.register.tr()),
                     ],
                   ),
                   TextButton(
