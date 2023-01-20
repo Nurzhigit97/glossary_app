@@ -49,5 +49,6 @@ abstract class  LocaleKeys {
   static const nameIsValid = 'nameIsValid';
   static const emailIsValid = 'emailIsValid';
   static const passwordIsValid = 'passwordIsValid';
+  static const removeGlossary = 'removeGlossary';
 
 }

@@ -52,7 +52,7 @@ class CheckDetailGlossary extends StatelessWidget {
 
                     Navigator.pop(context);
                   },
-                  child: Text(LocaleKeys.cancel.tr()),
+                  child: Text(LocaleKeys.removeGlossary.tr()),
                 ),
               ],
             ),

@@ -46,5 +46,6 @@
   "resetPassword": "Reset password",
   "nameIsValid": "Enter less than 15 characters",
   "emailIsValid": "Enter a valid email",
-  "passwordIsValid": "Enter min. 7 characters"
+  "passwordIsValid": "Enter min. 7 characters",
+  "removeGlossary": "Remove"
 }

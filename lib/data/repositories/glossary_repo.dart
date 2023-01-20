@@ -14,7 +14,6 @@ class GlossaryRepo {
 //   //! for emulator http://10.0.2.2:8000/
 //   //!real device http://192.168.43.127:8000/
   static late int lenData;
-
   Future<List<GlossaryModel>> searchGlossary({String? query}) async {
     final response = await _dio.get(endpointAll);
     try {

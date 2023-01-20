@@ -46,5 +46,6 @@
   "resetPassword": "Сбросить пароль",
   "nameIsValid": "Введите менее 15 символов",
   "emailIsValid": "Введите действительный адрес электронной почты",
-  "passwordIsValid": "Введите не менее 7 символов"
+  "passwordIsValid": "Введите не менее 7 символов",
+  "removeGlossary": "Удалить"
 }

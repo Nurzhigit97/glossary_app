@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:glossary_app/ui/admin_panel/admin_panel.dart';
 
-import 'package:glossary_app/ui/auth_screens/forgot_password_page.dart';
+import 'package:glossary_app/ui/auth_screens/widgets/forgot_password_page.dart';
 import 'package:glossary_app/ui/auth_screens/registered_dialog.dart';
 import 'package:glossary_app/ui/auth_screens/sign_in.dart';
 import 'package:glossary_app/ui/auth_screens/sign_up.dart';

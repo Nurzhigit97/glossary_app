@@ -62,7 +62,8 @@ class CodegenLoader extends AssetLoader{
   "resetPassword": "Reset password",
   "nameIsValid": "Enter less than 15 characters",
   "emailIsValid": "Enter a valid email",
-  "passwordIsValid": "Enter min. 7 characters"
+  "passwordIsValid": "Enter min. 7 characters",
+  "removeGlossary": "Remove"
 };
 static const Map<String,dynamic> ky = {
   "nameApp": "Глоссарий",
@@ -112,7 +113,8 @@ static const Map<String,dynamic> ky = {
   "resetPassword": "Сырсөздү кайра орнотуу",
   "nameIsValid": "15 белгиден азыраак киргизиңиз",
   "emailIsValid": "Жарактуу электрондук почта дарегин киргизиңиз",
-  "passwordIsValid": "Кеминде 7 белги киргизиңиз"
+  "passwordIsValid": "Кеминде 7 белги киргизиңиз",
+  "removeGlossary": "Өчүрүү"
 };
 static const Map<String,dynamic> ru = {
   "nameApp": "Глоссарий",
@@ -162,7 +164,8 @@ static const Map<String,dynamic> ru = {
   "resetPassword": "Сбросить пароль",
   "nameIsValid": "Введите менее 15 символов",
   "emailIsValid": "Введите действительный адрес электронной почты",
-  "passwordIsValid": "Введите не менее 7 символов"
+  "passwordIsValid": "Введите не менее 7 символов",
+  "removeGlossary": "Удалить"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ky": ky, "ru": ru};
 }
