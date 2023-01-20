@@ -1,11 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:glossary_app/data/models/user_model.dart';
-
-import 'package:glossary_app/data/repositories/firebase_service.dart';
-import 'package:glossary_app/data/repositories/user_service.dart';
 import 'package:glossary_app/generated/locale_keys.g.dart';
 import 'package:glossary_app/ui/auth_screens/widgets/forgot_password_page.dart';
 import 'package:glossary_app/ui/auth_screens/sign_up.dart';
@@ -22,6 +16,7 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   final formKey = GlobalKey<FormState>();
+
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
@@ -50,7 +45,7 @@ class _SignInState extends State<SignIn> {
                       width: 300,
                     ),
                   ),
-                  SignUpMethods.buildEmail(
+                  AuthMethods.buildEmail(
                     emailController: _emailController,
                     emailIsValid: LocaleKeys.emailIsValid.tr(),
                     enterEmail: LocaleKeys.enterEmail.tr(),
@@ -58,7 +53,7 @@ class _SignInState extends State<SignIn> {
                   SizedBox(
                     height: 10,
                   ),
-                  SignUpMethods.buildPassword(
+                  AuthMethods.buildPassword(
                     passwordController: _passwordController,
                     enterPassword: LocaleKeys.enterPassword.tr(),
                     passwordIsValid: LocaleKeys.passwordIsValid.tr(),
@@ -66,20 +61,12 @@ class _SignInState extends State<SignIn> {
                   SizedBox(
                     height: 10,
                   ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      final isVaidForm = formKey.currentState!.validate();
-                      if (isVaidForm) {
-                        await context.read<FirebaseService>().login(
-                            context: context,
-                            emailController: _emailController,
-                            passwordController: _passwordController);
-                      }
-                    },
-                    child: Text(
-                      LocaleKeys.login.tr(),
-                    ),
-                  ),
+                  AuthMethods.login(
+                      context: context,
+                      emailController: _emailController,
+                      formKey: formKey,
+                      login: LocaleKeys.login.tr(),
+                      passwordController: _passwordController),
                   Container(
                     child: Stack(
                       alignment: Alignment.center,
@@ -95,47 +82,20 @@ class _SignInState extends State<SignIn> {
                       ],
                     ),
                   ),
-                  ElevatedButton.icon(
-                    onPressed: () async {
-                      final authGoogle = await context
-                          .read<FirebaseService>()
-                          .signInWithGoole();
-
-                      /// cоздаем документ пользователя в Firebase Firestore
-                      final userModel = UserModel(
-                        id: authGoogle.user?.uid,
-                        name: authGoogle.user?.displayName,
-                        email: authGoogle.user!.email,
-                        role: UserRole.user,
-                      );
-
-                      await context.read<UserService>().addUser(userModel);
-                      Navigator.of(context)
-                          .pushReplacementNamed(BottomNavPage.route);
-                    },
-                    icon: Icon(Icons.g_mobiledata_rounded),
-                    label: Text(
-                      LocaleKeys.signInWithGoogle.tr(),
-                    ),
+                  AuthMethods.signInWithGoogle(
+                      context: context,
+                      bottomNavPageRoute: BottomNavPage.route,
+                      signInWithGoogle: LocaleKeys.signInWithGoogle),
+                  AuthMethods.goToSignInOrRegisterPage(
+                    context: context,
+                    hanveAccauntOrNot: LocaleKeys.ifHaveAccaunt.tr(),
+                    routeName: SignUp.route,
+                    loginOrRegister: LocaleKeys.register.tr(),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        LocaleKeys.ifHaveAccaunt.tr(),
-                      ),
-                      SignUpMethods.goToSignInOrRegisterPage(
-                          context: context,
-                          hanveAccauntOrNot: LocaleKeys.ifHaveAccaunt.tr(),
-                          routeName: SignUp.route,
-                          loginOrRegister: LocaleKeys.register.tr()),
-                    ],
-                  ),
-                  TextButton(
-                    onPressed: () => Navigator.of(context, rootNavigator: true)
-                        .pushReplacementNamed(ForgotPasswordPage.route),
-                    child: Text(LocaleKeys.forgotPassword.tr()),
-                  ),
+                  AuthMethods.forgotPassword(
+                      context: context,
+                      forgotRoute: ForgotPasswordPage.route,
+                      forgotText: LocaleKeys.forgotPassword.tr()),
                 ],
               ),
             ),

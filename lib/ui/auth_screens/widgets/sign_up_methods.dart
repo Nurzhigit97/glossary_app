@@ -1,7 +1,71 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:glossary_app/data/models/user_model.dart';
+import 'package:glossary_app/data/repositories/firebase_service.dart';
+import 'package:glossary_app/data/repositories/user_service.dart';
 
-class SignUpMethods {
+class AuthMethods {
+  static ElevatedButton register({
+    required BuildContext context,
+    required GlobalKey<FormState> formKey,
+    required TextEditingController nameController,
+    required TextEditingController emailController,
+    required TextEditingController passwordController,
+    required String register,
+  }) {
+    return ElevatedButton(
+      onPressed: () async {
+        final isValid = formKey.currentState!.validate();
+        // если введенные email и password верны даем доступ к регистрации
+        if (isValid) {
+          // /// cоздаем пользователя в Firebase Auth
+          final uid = await context.read<FirebaseService>().register(
+                context: context,
+                emailController: emailController,
+                passwordController: passwordController,
+              );
+
+          if (uid == null) return;
+
+          /// cоздаем документ пользователя в Firebase Firestore
+          final userModel = UserModel(
+            id: uid,
+            name: nameController.text,
+            email: emailController.text,
+            role: UserRole.user,
+          );
+
+          await context.read<UserService>().addUser(userModel);
+        }
+      },
+      child: Text(register),
+    );
+  }
+
+  static ElevatedButton login({
+    required BuildContext context,
+    required GlobalKey<FormState> formKey,
+    required TextEditingController emailController,
+    required TextEditingController passwordController,
+    required String login,
+  }) {
+    return ElevatedButton(
+      onPressed: () async {
+        final isVaidForm = formKey.currentState!.validate();
+        if (isVaidForm) {
+          await context.read<FirebaseService>().login(
+              context: context,
+              emailController: emailController,
+              passwordController: passwordController);
+        }
+      },
+      child: Text(
+        login,
+      ),
+    );
+  }
+
   static TextFormField buildName({
     required TextEditingController nameController,
     required String enterName,
@@ -126,6 +190,45 @@ class SignUpMethods {
           return null;
         }
       },
+    );
+  }
+
+  static ElevatedButton signInWithGoogle(
+      {required BuildContext context,
+      required String bottomNavPageRoute,
+      required String signInWithGoogle}) {
+    return ElevatedButton.icon(
+      onPressed: () async {
+        final authGoogle =
+            await context.read<FirebaseService>().signInWithGoole();
+
+        /// cоздаем документ пользователя в Firebase Firestore
+        final userModel = UserModel(
+          id: authGoogle.user?.uid,
+          name: authGoogle.user?.displayName,
+          email: authGoogle.user!.email,
+          role: UserRole.user,
+        );
+
+        /// add user to user db
+        await context.read<UserService>().addUser(userModel);
+        Navigator.of(context).pushReplacementNamed(bottomNavPageRoute);
+      },
+      icon: Icon(Icons.g_mobiledata_rounded),
+      label: Text(
+        signInWithGoogle,
+      ),
+    );
+  }
+
+  static TextButton forgotPassword(
+      {required BuildContext context,
+      required String forgotRoute,
+      required String forgotText}) {
+    return TextButton(
+      onPressed: () => Navigator.of(context, rootNavigator: true)
+          .pushReplacementNamed(forgotRoute),
+      child: Text(forgotText),
     );
   }
 }
