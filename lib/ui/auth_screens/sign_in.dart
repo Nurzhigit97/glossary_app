@@ -85,10 +85,10 @@ class _SignInState extends State<SignIn> {
                   AuthMethods.signInWithGoogle(
                       context: context,
                       bottomNavPageRoute: BottomNavPage.route,
-                      signInWithGoogle: LocaleKeys.signInWithGoogle),
+                      signInWithGoogle: LocaleKeys.signInWithGoogle.tr()),
                   AuthMethods.goToSignInOrRegisterPage(
                     context: context,
-                    hanveAccauntOrNot: LocaleKeys.ifHaveAccaunt.tr(),
+                    hanveAccauntOrNot: LocaleKeys.dontHaveAccount.tr(),
                     routeName: SignUp.route,
                     loginOrRegister: LocaleKeys.register.tr(),
                   ),

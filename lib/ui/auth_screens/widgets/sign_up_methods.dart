@@ -36,6 +36,7 @@ class AuthMethods {
             role: UserRole.user,
           );
 
+          /// cоздаем пользователя в Firebase Firestore
           await context.read<UserService>().addUser(userModel);
         }
       },
