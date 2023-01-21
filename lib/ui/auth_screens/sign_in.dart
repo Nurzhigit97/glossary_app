@@ -1,9 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:glossary_app/data/repositories/user_secure_storage.dart';
 import 'package:glossary_app/generated/locale_keys.g.dart';
 import 'package:glossary_app/ui/auth_screens/widgets/forgot_password_page.dart';
 import 'package:glossary_app/ui/auth_screens/sign_up.dart';
-import 'package:glossary_app/ui/auth_screens/widgets/sign_up_methods.dart';
+import 'package:glossary_app/ui/auth_screens/widgets/auth_methods.dart';
 import 'package:glossary_app/ui/bottom_nav_bar/bottom_nav_page.dart';
 
 class SignIn extends StatefulWidget {
@@ -19,6 +20,21 @@ class _SignInState extends State<SignIn> {
 
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    init();
+    super.initState();
+  }
+
+  Future init() async {
+    final email = await UserSecureStorage.getUserEmail() ?? '';
+    final password = await UserSecureStorage.getUserPassword() ?? '';
+    setState(() {
+      this._emailController.text = email;
+      this._passwordController.text = password;
+    });
+  }
 
   @override
   void dispose() {

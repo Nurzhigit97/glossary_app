@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:glossary_app/generated/locale_keys.g.dart';
 import 'package:glossary_app/ui/auth_screens/sign_in.dart';
-import 'package:glossary_app/ui/auth_screens/widgets/sign_up_methods.dart';
+import 'package:glossary_app/ui/auth_screens/widgets/auth_methods.dart';
 
 class SignUp extends StatefulWidget {
   static String route = 'signUp';

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glossary_app/data/models/user_model.dart';
 import 'package:glossary_app/data/repositories/firebase_service.dart';
+import 'package:glossary_app/data/repositories/user_secure_storage.dart';
 import 'package:glossary_app/data/repositories/user_service.dart';
 
 class AuthMethods {
@@ -35,6 +36,11 @@ class AuthMethods {
             email: emailController.text,
             role: UserRole.user,
           );
+
+          // save in FlutterSecureStorage
+          await UserSecureStorage.setUserName(nameController.text);
+          await UserSecureStorage.setUserEmail(emailController.text);
+          await UserSecureStorage.setUserPassword(passwordController.text);
 
           /// cоздаем пользователя в Firebase Firestore
           await context.read<UserService>().addUser(userModel);
@@ -131,9 +137,7 @@ class AuthMethods {
     required TextEditingController emailController,
     required String enterEmail,
     required String emailIsValid,
-  }
-// LocaleKeys.enterEmail.tr(),
-      ) {
+  }) {
     return TextFormField(
       controller: emailController,
       decoration: InputDecoration(

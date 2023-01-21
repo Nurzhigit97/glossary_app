@@ -4,9 +4,33 @@ import 'package:flutter/material.dart';
 import 'package:glossary_app/generated/locale_keys.g.dart';
 import 'package:glossary_app/ui/auth_screens/sign_in.dart';
 
-class RegisteredDialog extends StatelessWidget {
+import '../../data/repositories/user_secure_storage.dart';
+
+class RegisteredDialog extends StatefulWidget {
   static String route = 'registeredDialog';
-  const RegisteredDialog({Key? key}) : super(key: key);
+  String? name;
+  String? email;
+  RegisteredDialog({Key? key, this.name, this.email}) : super(key: key);
+
+  @override
+  State<RegisteredDialog> createState() => _RegisteredDialogState();
+}
+
+class _RegisteredDialogState extends State<RegisteredDialog> {
+  @override
+  void initState() {
+    init();
+    super.initState();
+  }
+
+  Future init() async {
+    final name = await UserSecureStorage.getUserName() ?? '';
+    final email = await UserSecureStorage.getUserEmail() ?? '';
+    setState(() {
+      widget.name = name;
+      widget.name = email;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,25 +47,25 @@ class RegisteredDialog extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // Если не авторизован показываем текст "Пройти авторизацию" иначе данные user
-                FirebaseAuth.instance.currentUser != null
-                    ? Column(
+                user == null
+                    ? Text(
+                        LocaleKeys.signIn.tr(),
+                        style: TextStyle(fontSize: 20),
+                      )
+                    : Column(
                         children: [
                           CircleAvatar(
                             radius: 40,
                             backgroundImage: NetworkImage(
-                                '${user?.photoURL ?? 'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'}'),
+                                '${user.photoURL ?? 'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'}'),
                           ),
                           SizedBox(
                             height: 10,
                           ),
-                          Text('${user?.displayName ?? ''}'),
-                          Text('${user?.email}'),
+                          Text('${user.displayName ?? ''}'),
+                          Text('${user.email}'),
                         ],
                       )
-                    : Text(
-                        LocaleKeys.signIn.tr(),
-                        style: TextStyle(fontSize: 20),
-                      ),
               ],
             ),
           ),
